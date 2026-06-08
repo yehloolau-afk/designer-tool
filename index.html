@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>万花筒-自动化 · 小学语文短视频</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --pr:#007AFF;--pr-l:rgba(0,122,255,.08);--pr-d:#0066CC;
+  --t1:#000000;--t2:#3C3C43;--t3:#6C6C70;--t4:#8E8E93;
+  --bd:rgba(60,60,67,.12);--sep:#E5E5EA;--bg:#F2F2F7;--bg2:#FFFFFF;
+  --r:10px;--sh:0 1px 4px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --sh-h:0 4px 20px rgba(0,0,0,.12);
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','SF Pro Text',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
+
+/* HEADER */
+.hd{background:rgba(255,255,255,.85);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--bd);padding:0 20px;height:52px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100}
+.hd-logo{font-size:16px;font-weight:700;color:var(--t1);letter-spacing:-.3px;white-space:nowrap}
+.hd-sub{font-size:12px;color:var(--t4);border-left:1px solid var(--bd);padding-left:12px}
+.hd-r{margin-left:auto;display:flex;align-items:center;gap:8px}
+.btn-cfg{display:flex;align-items:center;gap:5px;padding:5px 12px;border:none;border-radius:20px;background:var(--pr-l);font-size:12px;color:var(--pr);font-weight:500;cursor:pointer;transition:all .15s;font-family:inherit}
+.btn-cfg:hover{background:rgba(0,122,255,.15)}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#C7C7CC;transition:background .3s}
+.status-dot.ok{background:#34C759}
+.status-dot.err{background:#FF3B30}
+
+/* LAYOUT */
+.main{display:flex;flex:1;min-height:0;gap:0}
+
+/* LEFT PANEL */
+.panel-l{width:280px;min-width:280px;background:var(--bg);display:flex;flex-direction:column;padding:16px 12px;gap:12px;overflow-y:auto}
+.field-label{font-size:11px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.article-area{width:100%;min-height:200px;max-height:360px;padding:12px 14px;border:none;border-radius:var(--r);font-size:14px;line-height:1.7;color:var(--t1);resize:vertical;outline:none;font-family:inherit;background:var(--bg2);transition:box-shadow .15s;box-shadow:var(--sh)}
+.article-area:focus{box-shadow:inset 0 0 0 2px var(--pr)}
+.select-row{display:flex;gap:8px}
+.sel{flex:1;height:36px;padding:0 28px 0 10px;border:none;border-radius:var(--r);font-size:13px;color:var(--t1);background:var(--bg2);outline:none;cursor:pointer;font-family:inherit;box-shadow:var(--sh);-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238E8E93'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.sel:focus{box-shadow:inset 0 0 0 2px var(--pr)}
+.btn-parse{width:100%;height:44px;background:var(--pr);color:#fff;border:none;border-radius:var(--r);font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .15s;font-family:inherit}
+.btn-parse:hover{background:var(--pr-d)}
+.btn-parse:active{transform:scale(.98)}
+.btn-parse:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.hint-box{background:var(--bg2);border-radius:var(--r);padding:12px 14px;font-size:12px;color:var(--t3);line-height:1.75;box-shadow:var(--sh)}
+.hint-box strong{color:var(--t2);font-weight:600}
+
+/* RIGHT PANEL */
+.panel-r{flex:1;display:flex;flex-direction:column;min-width:0;background:var(--bg)}
+.panel-r-top{padding:12px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bd);background:rgba(255,255,255,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.panel-title{font-size:13px;font-weight:600;color:var(--t1)}
+.scene-count{font-size:11px;color:var(--t4);padding:2px 9px;background:var(--bg);border-radius:20px}
+.batch-btns{margin-left:auto;display:flex;gap:6px}
+.btn-batch{height:32px;padding:0 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;display:flex;align-items:center;gap:5px;border:none}
+.btn-batch-img{background:var(--pr);color:#fff}
+.btn-batch-img:hover{background:var(--pr-d)}
+.btn-batch-vid{background:rgba(114,46,209,.1);color:#722ED1}
+.btn-batch-vid:hover{background:rgba(114,46,209,.18)}
+.btn-batch:disabled{opacity:.4;cursor:not-allowed}
+.btn-dl-all{height:32px;padding:0 14px;border-radius:20px;font-size:12px;cursor:pointer;font-family:inherit;background:rgba(52,199,89,.1);color:#34C759;border:none;font-weight:600;transition:all .15s;display:flex;align-items:center;gap:5px}
+.btn-dl-all:hover{background:rgba(52,199,89,.18)}
+
+.cards-area{flex:1;overflow-y:auto;padding:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;align-content:start}
+
+/* EMPTY STATE */
+.empty-state{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;color:var(--t4);text-align:center}
+.empty-state .ei{font-size:44px;margin-bottom:16px;opacity:.5}
+.empty-state p{font-size:14px;line-height:1.65;color:var(--t3)}
+
+/* SCENE CARD */
+.scene-card{background:var(--bg2);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--sh);transition:box-shadow .2s;border:none}
+.scene-card:hover{box-shadow:var(--sh-h)}
+.card-thumb{width:100%;aspect-ratio:9/16;background:var(--bg);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;max-height:280px}
+.card-thumb img,.card-thumb video{width:100%;height:100%;object-fit:cover}
+.card-thumb-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--t4);font-size:11px;height:100%}
+.card-thumb-empty .num{font-size:30px;font-weight:700;color:var(--sep)}
+.card-gen-overlay{position:absolute;inset:0;background:rgba(255,255,255,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:12px;color:var(--t2)}
+.card-body{padding:10px 12px;flex:1;display:flex;flex-direction:column;gap:7px}
+.card-meta{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.card-num{font-size:10px;font-weight:700;color:#fff;background:var(--pr);border-radius:5px;padding:1px 6px}
+.card-dur,.card-motion{font-size:10px;color:var(--t3);background:var(--bg);border-radius:4px;padding:2px 7px}
+.card-del{margin-left:auto;width:20px;height:20px;border:none;background:none;cursor:pointer;color:var(--t4);font-size:14px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .15s;padding:0}
+.card-del:hover{background:rgba(255,59,48,.1);color:#FF3B30}
+.card-field{display:flex;flex-direction:column;gap:3px}
+.card-field-label{font-size:9.5px;font-weight:600;color:var(--t4);text-transform:uppercase;letter-spacing:.4px}
+.card-input{width:100%;padding:6px 9px;border:none;border-radius:7px;font-size:11.5px;line-height:1.55;color:var(--t1);resize:none;outline:none;font-family:inherit;background:var(--bg);transition:box-shadow .15s}
+.card-input:focus{box-shadow:inset 0 0 0 2px var(--pr)}
+.card-actions{display:flex;gap:5px;margin-top:2px}
+.btn-card{flex:1;height:28px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;border:none;background:var(--bg);color:var(--t2);display:flex;align-items:center;justify-content:center;gap:3px}
+.btn-card:hover{background:var(--sep)}
+.btn-card.img{background:var(--pr-l);color:var(--pr)}
+.btn-card.img:hover{background:rgba(0,122,255,.15)}
+.btn-card.vid{background:rgba(114,46,209,.1);color:#722ED1}
+.btn-card.vid:hover{background:rgba(114,46,209,.18)}
+.btn-card:disabled{opacity:.4;cursor:not-allowed}
+.card-status{font-size:10px;color:var(--t3);text-align:center;padding:2px 0}
+.card-status.ok{color:#34C759}
+.card-status.err{color:#FF3B30}
+
+/* SPINNER */
+.spinner{width:20px;height:20px;border:2.5px solid var(--bg);border-top-color:var(--pr);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+.spinner.sm{width:14px;height:14px;border-width:2px}
+.spinner.wh{border-color:rgba(255,255,255,.3);border-top-color:#fff}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:200;display:flex;align-items:center;justify-content:center}
+.modal-bg.hidden{display:none}
+.modal{background:var(--bg2);border-radius:16px;width:400px;max-width:95vw;box-shadow:0 20px 60px rgba(0,0,0,.25);padding:24px}
+.modal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.modal-title{font-size:16px;font-weight:700;color:var(--t1)}
+.modal-close{width:28px;height:28px;border:none;background:var(--bg);border-radius:50%;cursor:pointer;font-size:14px;color:var(--t2);display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:var(--sep)}
+.modal-field{margin-bottom:14px}
+.modal-label{font-size:12px;font-weight:600;color:var(--t2);margin-bottom:6px;display:block}
+.modal-input{width:100%;height:38px;padding:0 12px;border:none;border-radius:var(--r);font-size:14px;color:var(--t1);outline:none;font-family:inherit;background:var(--bg);transition:box-shadow .15s}
+.modal-input:focus{box-shadow:inset 0 0 0 2px var(--pr)}
+select.modal-input{-webkit-appearance:none;appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238E8E93'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:30px}
+.modal-note{font-size:11px;color:var(--t4);margin-top:4px;line-height:1.55}
+.modal-save{width:100%;height:44px;background:var(--pr);color:#fff;border:none;border-radius:var(--r);font-size:15px;font-weight:600;cursor:pointer;margin-top:6px;font-family:inherit;transition:all .15s}
+.modal-save:hover{background:var(--pr-d)}
+.modal-save:active{transform:scale(.98)}
+.modal-divider{border:none;border-top:1px solid var(--bd);margin:16px 0}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hd">
+  <div class="hd-logo">万花筒-自动化</div>
+  <div class="hd-sub">小学语文 → 抖音短视频</div>
+  <div class="hd-r">
+    <div class="status-dot" id="statusDot"></div>
+    <button class="btn-cfg" onclick="openConfig()">⚙️ API 配置</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LEFT: INPUT -->
+  <div class="panel-l">
+    <div>
+      <div class="field-label">📄 课文内容</div>
+      <textarea class="article-area" id="articleInput" placeholder="粘贴小学语文课文或文章…"></textarea>
+    </div>
+    <div>
+      <div class="field-label">年级 & 画面风格</div>
+      <div class="select-row">
+        <select class="sel" id="gradeSelect">
+          <option value="一年级" selected>一年级</option>
+          <option value="二年级">二年级</option>
+          <option value="三年级">三年级</option>
+          <option value="四年级">四年级</option>
+          <option value="五年级">五年级</option>
+          <option value="六年级">六年级</option>
+        </select>
+        <select class="sel" id="styleSelect">
+          <option value="故事绘本">故事绘本</option>
+          <option value="卡通动漫">卡通动漫</option>
+          <option value="中国水墨">中国水墨</option>
+          <option value="写实国风">写实国风</option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <div class="field-label">分镜数量</div>
+      <select class="sel" id="sceneCount">
+        <option value="4">4 个场景（约 20 秒）</option>
+        <option value="5">5 个场景（约 25 秒）</option>
+        <option value="6" selected>6 个场景（约 30 秒）</option>
+        <option value="8">8 个场景（约 40 秒）</option>
+        <option value="10">10 个场景（约 50 秒）</option>
+      </select>
+    </div>
+    <button class="btn-parse" id="parseBtn" onclick="parseArticle()">
+      ✨ 解析分镜脚本
+    </button>
+    <div class="hint-box">
+      <strong>工作流：</strong><br>
+      ① 粘贴课文 → 解析分镜<br>
+      ② 检查/编辑场景卡片<br>
+      ③ 批量生图 → 批量生视频<br>
+      ④ 下载所有素材 → AE 合成
+    </div>
+  </div>
+
+  <!-- RIGHT: STORYBOARD -->
+  <div class="panel-r">
+    <div class="panel-r-top">
+      <div class="panel-title">分镜脚本</div>
+      <div class="scene-count" id="sceneCountBadge">0 个场景</div>
+      <div class="batch-btns">
+        <button class="btn-batch btn-batch-img" id="batchImgBtn" onclick="batchGenImages()" disabled>🖼 批量生图</button>
+        <button class="btn-batch btn-batch-vid" id="batchVidBtn" onclick="batchGenVideos()" disabled>🎬 批量生视频</button>
+        <button class="btn-dl-all" id="dlAllBtn" onclick="downloadAll()" style="display:none">⬇ 全部下载</button>
+      </div>
+    </div>
+    <div class="cards-area" id="cardsArea">
+      <div class="empty-state">
+        <div class="ei">🎬</div>
+        <p>在左侧粘贴课文，<br>点击「解析分镜脚本」开始</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- API CONFIG MODAL -->
+<div class="modal-bg hidden" id="configModal">
+  <div class="modal">
+    <div class="modal-hd">
+      <div class="modal-title">⚙️ API 配置</div>
+      <button class="modal-close" onclick="closeConfig()">✕</button>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">火山方舟 API Key <span style="color:#ff4d4f">*</span></label>
+      <input class="modal-input" id="volcKey" type="password" placeholder="ARK…（与万花筒共用同一个 Key）"/>
+      <div class="modal-note">分镜解析 / 生图 / 生视频全部用同一个 Key，与万花筒共享</div>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">图片模型</label>
+      <select class="modal-input" id="imgModel" style="cursor:pointer">
+        <option value="doubao-seedream-5-0-260128">Seedream 5.0（推荐）</option>
+        <option value="doubao-seedream-4-5-251128">Seedream 4.5</option>
+      </select>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">视频模型</label>
+      <select class="modal-input" id="vidModel" style="cursor:pointer">
+        <option value="doubao-seedance-1-5-pro-251215">Seedance 1.5 Pro（推荐）</option>
+        <option value="doubao-seedance-2-0-fast-260128">Seedance 2.0 Fast</option>
+        <option value="doubao-seedance-1-0-lite-250521">Seedance 1.0 Lite</option>
+      </select>
+    </div>
+    <button class="modal-save" onclick="saveConfig()">保存配置</button>
+  </div>
+</div>
+
+<script>
+// ─── ENV ──────────────────────────────────────────────────────
+const IS_LOCAL = location.hostname === 'localhost';
+const IMG_URL  = IS_LOCAL ? 'http://localhost:8766/images/generations'         : '/.netlify/functions/volc-img';
+const VID_URL  = IS_LOCAL ? 'http://localhost:8766/contents/generations/tasks' : '/.netlify/functions/volc-vid';
+const pollUrl  = id => IS_LOCAL
+  ? `http://localhost:8766/contents/generations/tasks/${id}`
+  : `/.netlify/functions/volc-vid?taskId=${id}`;
+
+// ─── CONFIG ───────────────────────────────────────────────────
+const LS = {
+  get: k => { try { return localStorage.getItem(k) || '' } catch(e) { return '' } },
+  set: (k,v) => { try { localStorage.setItem(k,v) } catch(e) {} }
+};
+
+function loadConfig() {
+  const cfg = getCfg();
+  document.getElementById('volcKey').value = cfg.volcKey;
+  document.getElementById('imgModel').value = cfg.imgModel;
+  document.getElementById('vidModel').value = cfg.vidModel;
+  updateStatusDot();
+}
+
+function saveConfig() {
+  const volcInput = document.getElementById('volcKey').value.trim();
+  if (volcInput) LS.set('wht_volc_key', volcInput);
+  LS.set('wht_img_model', document.getElementById('imgModel').value);
+  LS.set('wht_vid_model', document.getElementById('vidModel').value);
+  updateStatusDot();
+  closeConfig();
+}
+
+function getCfg() {
+  const imggenCfg = (() => { try { return JSON.parse(localStorage.getItem('imggen_cfg')||'{}'); } catch { return {}; } })();
+  return {
+    volcKey: LS.get('wht_volc_key') || imggenCfg.key || '',
+    txtModel: LS.get('wht_txt_model') || 'doubao-1-5-pro-32k-250115',
+    imgModel: LS.get('wht_img_model') || imggenCfg.model || 'doubao-seedream-5-0-260128',
+    vidModel: LS.get('wht_vid_model') || 'doubao-seedance-1-5-pro-251215',
+  };
+}
+
+function updateStatusDot() {
+  const cfg = getCfg();
+  const dot = document.getElementById('statusDot');
+  dot.className = 'status-dot ' + (cfg.volcKey ? 'ok' : 'err');
+}
+
+function openConfig() {
+  loadConfig();
+  document.getElementById('configModal').classList.remove('hidden');
+}
+function closeConfig() {
+  document.getElementById('configModal').classList.add('hidden');
+}
+document.getElementById('configModal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeConfig();
+});
+
+// ─── SCENE DATA ───────────────────────────────────────────────
+let scenes = [];
+
+const STYLE_PROMPTS = {
+  '故事绘本': 'children\'s storybook illustration style, soft watercolor, warm pastel colors, flat 2D art, gentle rounded shapes, cozy and heartwarming atmosphere',
+  '卡通动漫': 'cute cartoon anime style, bright vivid colors, clean bold outlines, 2D animation, expressive characters, cheerful mood',
+  '中国水墨': 'traditional Chinese ink wash painting, brush strokes on rice paper texture, monochromatic with subtle color washes, elegant minimalist composition',
+  '写实国风': 'realistic Chinese traditional style, detailed brushwork, rich warm colors, cinematic lighting, ancient Chinese architecture and nature',
+};
+
+const MOTION_LABELS = {
+  'zoom_in': '推进',
+  'zoom_out': '拉远',
+  'pan_left': '左移',
+  'pan_right': '右移',
+  'static': '静止',
+};
+
+// ─── 本地分镜解析（纯 JS，无 API 请求）────────────────────────
+const VISUAL_KEYWORDS = ['看','见','望','听','走','跑','跳','飞','落','升','站','坐','躺','笑','哭','喊','叫','出现','消失','变','长','开','关','明','暗','红','绿','蓝','黄','白','黑','大','小','高','低','远','近','花','树','草','山','水','云','风','雨','雪','日','月','星','鸟','鱼','虫','人','孩','童','老','母','父','师','友','家','屋','路','桥','田','海','河','湖','船','马','牛','羊','春','夏','秋','冬','晨','午','暮','夜'];
+const SCENE_TEMPLATES = {
+  '故事绘本': (cn, style) => `${cn}, children's storybook illustration, soft watercolor textures, warm pastel palette, flat 2D art, gentle rounded shapes, cozy atmosphere, vertical 9:16 portrait composition, ${style}`,
+  '卡通动漫': (cn, style) => `${cn}, cute cartoon anime style, bright vivid colors, bold clean outlines, 2D animation cel-shading, expressive mood, vertical 9:16 portrait composition, ${style}`,
+  '中国水墨': (cn, style) => `${cn}, traditional Chinese ink wash painting, brush strokes on rice paper, monochromatic subtle washes, elegant minimalist composition, vertical 9:16 portrait composition, ${style}`,
+  '写实国风': (cn, style) => `${cn}, realistic Chinese traditional art style, detailed fine brushwork, rich warm cinematic colors, ancient Chinese setting, vertical 9:16 portrait composition, ${style}`,
+};
+
+// 中文关键词 → 英文场景核心词
+const ZH2EN = {'春天':'spring scenery','夏天':'summer scene','秋天':'autumn scene','冬天':'winter scene','树木':'trees in nature','花朵':'blooming flowers','山':'misty mountains','河流':'flowing river','大海':'vast ocean','天空':'vast sky','云朵':'floating clouds','阳光':'warm sunlight','雨':'rain falling','雪':'snow falling','风':'wind blowing','孩子':'child','小朋友':'children playing','老师':'teacher','父亲':'father figure','母亲':'mother figure','鸟儿':'birds flying','鱼':'fish swimming','蝴蝶':'butterfly','村庄':'peaceful village','田野':'open countryside fields','夜晚':'night scene moonlight','早晨':'morning dawn light','夕阳':'sunset golden hour','教室':'classroom','家':'cozy home interior','桥':'ancient stone bridge','小路':'winding path','竹林':'bamboo forest','松树':'pine tree','荷花':'lotus flower pond','梅花':'plum blossom','草地':'green meadow','森林':'lush forest'};
+
+function cnToEnKeywords(text) {
+  const hits = [];
+  for (const [zh, en] of Object.entries(ZH2EN)) {
+    if (text.includes(zh)) hits.push(en);
+  }
+  return hits.length ? hits.slice(0, 3).join(', ') : 'scenic Chinese landscape';
+}
+
+function scoreVisual(sentence) {
+  let score = sentence.length > 8 ? 2 : 0;
+  for (const kw of VISUAL_KEYWORDS) if (sentence.includes(kw)) score += 2;
+  for (const [zh] of Object.entries(ZH2EN)) if (sentence.includes(zh)) score += 3;
+  return score;
+}
+
+function localParse(article, count, style) {
+  const styleBase = STYLE_PROMPTS[style] || STYLE_PROMPTS['故事绘本'];
+  const tplFn = SCENE_TEMPLATES[style] || SCENE_TEMPLATES['故事绘本'];
+
+  // 分句
+  const raw = article.replace(/\n+/g, '。').split(/[。！？…]/g).map(s => s.trim()).filter(s => s.length > 3);
+  if (!raw.length) return [];
+
+  // 按视觉分数排序，选 top N，再按原文顺序排
+  const scored = raw.map((s, i) => ({ s, i, score: scoreVisual(s) })).sort((a, b) => b.score - a.score);
+  const top = scored.slice(0, count).sort((a, b) => a.i - b.i);
+
+  const motions = ['zoom_in','static','zoom_out','pan_right','static','zoom_in','pan_left','static','zoom_out','static'];
+
+  return top.map((item, idx) => {
+    const enKw = cnToEnKeywords(item.s);
+    const sceneCn = item.s.length > 20 ? item.s.slice(0, 20) + '…' : item.s;
+    const promptEn = tplFn(enKw, styleBase);
+    return {
+      id: idx + 1,
+      scene_cn: sceneCn,
+      prompt_en: promptEn,
+      duration: 4,
+      motion: motions[idx % motions.length],
+      imageSrc: null,
+      videoUrl: null,
+      state: 'idle',
+    };
+  });
+}
+
+// ─── PARSE STORYBOARD ─────────────────────────────────────────
+async function parseArticle() {
+  const article = document.getElementById('articleInput').value.trim();
+  if (!article) { alert('请先粘贴课文内容'); return; }
+
+  const style = document.getElementById('styleSelect').value;
+  const count = parseInt(document.getElementById('sceneCount').value);
+
+  const btn = document.getElementById('parseBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner sm wh"></div> 正在解析…';
+
+  document.getElementById('cardsArea').innerHTML = `
+    <div class="empty-state">
+      <div class="spinner" style="width:28px;height:28px;margin-bottom:14px"></div>
+      <p>正在提取关键画面…</p>
+    </div>`;
+
+  // 短暂延迟让 loading 动画显示出来
+  await new Promise(r => setTimeout(r, 300));
+
+  scenes = localParse(article, count, style);
+
+  if (!scenes.length) {
+    document.getElementById('cardsArea').innerHTML = `<div class="empty-state"><p style="color:#ff4d4f">未能识别有效内容，请检查文章是否为中文</p></div>`;
+    btn.disabled = false;
+    btn.innerHTML = '✨ 解析分镜脚本';
+    return;
+  }
+
+  renderCards();
+  document.getElementById('batchImgBtn').disabled = false;
+  btn.disabled = false;
+  btn.innerHTML = '✨ 解析分镜脚本';
+}
+
+// ─── RENDER CARDS ─────────────────────────────────────────────
+function renderCards() {
+  const area = document.getElementById('cardsArea');
+  document.getElementById('sceneCountBadge').textContent = `${scenes.length} 个场景`;
+
+  if (!scenes.length) {
+    area.innerHTML = `<div class="empty-state"><div class="ei">🎬</div><p>暂无场景</p></div>`;
+    return;
+  }
+
+  area.innerHTML = scenes.map(s => cardHtml(s)).join('');
+
+  // Check download button visibility
+  const hasVideos = scenes.some(s => s.videoUrl);
+  document.getElementById('dlAllBtn').style.display = hasVideos ? 'flex' : 'none';
+
+  // Enable batch video if all images done
+  const allImaged = scenes.every(s => s.imageSrc);
+  document.getElementById('batchVidBtn').disabled = !allImaged;
+}
+
+function cardHtml(s) {
+  let thumbHtml = '';
+  if (s.state === 'generating_img') {
+    thumbHtml = `<div class="card-thumb"><div class="card-gen-overlay"><div class="spinner"></div><span>生成中…</span></div></div>`;
+  } else if (s.state === 'generating_vid') {
+    thumbHtml = `<div class="card-thumb">${s.imageSrc ? `<img src="${esc(s.imageSrc)}" style="opacity:.5"/>` : ''}<div class="card-gen-overlay"><div class="spinner"></div><span>视频生成中…</span></div></div>`;
+  } else if (s.videoUrl) {
+    thumbHtml = `<div class="card-thumb"><video src="${esc(s.videoUrl)}" loop muted autoplay playsinline style="width:100%;height:100%;object-fit:cover"></video></div>`;
+  } else if (s.imageSrc) {
+    thumbHtml = `<div class="card-thumb"><img src="${esc(s.imageSrc)}"/></div>`;
+  } else {
+    thumbHtml = `<div class="card-thumb"><div class="card-thumb-empty"><div class="num">${s.id}</div><span>待生成</span></div></div>`;
+  }
+
+  const statusHtml = s.statusMsg
+    ? `<div class="card-status ${s.statusType || ''}">${esc(s.statusMsg)}</div>` : '';
+
+  const busy = s.state === 'generating_img' || s.state === 'generating_vid';
+  const canVid = s.imageSrc && s.state === 'idle';
+  const canDl = !!s.videoUrl;
+
+  return `<div class="scene-card" id="card-${s.id}">
+    ${thumbHtml}
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">场景 ${s.id}</span>
+        <span class="card-dur">⏱ ${s.duration}s</span>
+        <span class="card-motion">${MOTION_LABELS[s.motion] || s.motion}</span>
+        <button class="card-del" onclick="deleteScene(${s.id})" title="删除">×</button>
+      </div>
+      <div class="card-field">
+        <div class="card-field-label">画面描述</div>
+        <textarea class="card-input" rows="2" oninput="updateScene(${s.id},'scene_cn',this.value)">${esc(s.scene_cn)}</textarea>
+      </div>
+      <div class="card-field">
+        <div class="card-field-label">英文提示词</div>
+        <textarea class="card-input" rows="3" oninput="updateScene(${s.id},'prompt_en',this.value)">${esc(s.prompt_en)}</textarea>
+      </div>
+      <div class="card-actions">
+        <button class="btn-card img" onclick="genImage(${s.id})" ${busy ? 'disabled' : ''}>🖼 生图</button>
+        <button class="btn-card vid" onclick="genVideo(${s.id})" ${!canVid ? 'disabled' : ''}>🎬 视频</button>
+        ${canDl ? `<button class="btn-card" onclick="dlVideo(${s.id})">⬇</button>` : ''}
+      </div>
+      ${statusHtml}
+    </div>
+  </div>`;
+}
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function updateScene(id, key, val) {
+  const s = scenes.find(s => s.id === id);
+  if (s) s[key] = val;
+}
+
+function deleteScene(id) {
+  scenes = scenes.filter(s => s.id !== id);
+  renderCards();
+}
+
+// ─── IMAGE GENERATION ─────────────────────────────────────────
+async function genImage(id) {
+  const cfg = getCfg();
+  if (!cfg.volcKey) { alert('请先配置火山方舟 API Key'); openConfig(); return; }
+
+  const s = scenes.find(s => s.id === id);
+  if (!s) return;
+
+  s.state = 'generating_img';
+  s.statusMsg = '';
+  refreshCard(id);
+
+  try {
+    const res = await fetch(IMG_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${cfg.volcKey}` },
+      body: JSON.stringify({
+        model: cfg.imgModel,
+        prompt: s.prompt_en,
+        size: '2K',
+        response_format: 'b64_json',
+        watermark: false,
+        stream: false,
+      }),
+    });
+
+    const rawText = await res.text();
+    let data;
+    try { data = JSON.parse(rawText); } catch(e) { throw new Error(`响应非 JSON：${rawText.slice(0,200)}`); }
+    if (!res.ok) throw new Error(data.error?.message || `HTTP ${res.status}`);
+
+    const item = data.data?.[0];
+    if (!item) throw new Error('无图片数据');
+    s.imageSrc = item.b64_json ? `data:image/png;base64,${item.b64_json}` : item.url;
+    if (!s.imageSrc) throw new Error('无图片 URL');
+
+    s.state = 'idle';
+    s.statusMsg = '✓ 图片已生成';
+    s.statusType = 'ok';
+
+  } catch(e) {
+    s.state = 'idle';
+    s.statusMsg = '生图失败：' + e.message;
+    s.statusType = 'err';
+  }
+
+  refreshCard(id);
+  // Update batch video button
+  const allImaged = scenes.every(s => s.imageSrc);
+  document.getElementById('batchVidBtn').disabled = !allImaged;
+}
+
+// ─── VIDEO GENERATION ─────────────────────────────────────────
+async function genVideo(id) {
+  const cfg = getCfg();
+  if (!cfg.volcKey) { alert('请先配置火山方舟 API Key'); openConfig(); return; }
+
+  const s = scenes.find(s => s.id === id);
+  if (!s || !s.imageSrc) return;
+
+  s.state = 'generating_vid';
+  s.statusMsg = '提交任务…';
+  refreshCard(id);
+
+  try {
+    const b64 = s.imageSrc.startsWith('data:') ? s.imageSrc : null;
+    const content = [];
+    if (b64) content.push({ type: 'image_url', image_url: { url: b64 } });
+
+    const motionPrompts = {
+      zoom_in: 'Slowly zoom in, camera pushes forward',
+      zoom_out: 'Slowly zoom out, camera pulls back',
+      pan_left: 'Camera pans slowly to the left',
+      pan_right: 'Camera pans slowly to the right',
+      static: 'Static camera, subtle ambient movement',
+    };
+    const motionHint = motionPrompts[s.motion] || 'subtle ambient movement';
+    content.push({ type: 'text', text: `${s.prompt_en}. ${motionHint}. Duration: ${s.duration} seconds.` });
+
+    const res = await fetch(VID_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${cfg.volcKey}` },
+      body: JSON.stringify({ model: cfg.vidModel, content }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error?.message || `HTTP ${res.status}`);
+
+    const taskId = data.id;
+    if (!taskId) throw new Error('未获取到任务 ID');
+
+    s.statusMsg = `渲染中（${taskId.slice(0,10)}…）`;
+    refreshCard(id);
+
+    const videoUrl = await pollVideoTask(taskId, cfg.volcKey, (msg) => {
+      s.statusMsg = msg;
+      refreshCard(id);
+    });
+
+    s.videoUrl = videoUrl;
+    s.state = 'idle';
+    s.statusMsg = '✓ 视频已生成';
+    s.statusType = 'ok';
+
+    // Show download all button
+    document.getElementById('dlAllBtn').style.display = 'flex';
+
+  } catch(e) {
+    s.state = 'idle';
+    s.statusMsg = '视频失败：' + e.message;
+    s.statusType = 'err';
+  }
+
+  refreshCard(id);
+}
+
+async function pollVideoTask(taskId, key, onStatus) {
+  const url = pollUrl(taskId);
+  const MAX = 120;
+  for (let i = 0; i < MAX; i++) {
+    await new Promise(r => setTimeout(r, 3000));
+    const res = await fetch(url, { headers: { 'Authorization': `Bearer ${key}` } });
+    const data = await res.json();
+    const st = data.status;
+    if (onStatus) onStatus(`渲染中（已等待 ${(i+1)*3}s）`);
+    if (st === 'succeeded') {
+      const url = data.content?.video_url || data.output?.video_url || data.result?.url;
+      if (!url) throw new Error('任务完成但无视频 URL');
+      return url;
+    }
+    if (st === 'failed' || st === 'cancelled') throw new Error(`任务${st}`);
+  }
+  throw new Error('等待超时（超过 6 分钟）');
+}
+
+// ─── BATCH OPERATIONS ─────────────────────────────────────────
+async function batchGenImages() {
+  const btn = document.getElementById('batchImgBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner sm wh"></div> 生图中…';
+
+  for (const s of scenes) {
+    if (!s.imageSrc) await genImage(s.id);
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '🖼 批量生图';
+}
+
+async function batchGenVideos() {
+  const btn = document.getElementById('batchVidBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner sm" style="border-top-color:#111"></div> 生视频中…';
+
+  for (const s of scenes) {
+    if (!s.videoUrl && s.imageSrc) await genVideo(s.id);
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '🎬 批量生视频';
+}
+
+// ─── DOWNLOAD ─────────────────────────────────────────────────
+function dlVideo(id) {
+  const s = scenes.find(s => s.id === id);
+  if (!s?.videoUrl) return;
+  const a = document.createElement('a');
+  a.href = s.videoUrl;
+  a.download = `scene_${String(id).padStart(2,'0')}.mp4`;
+  a.click();
+}
+
+function downloadAll() {
+  scenes.filter(s => s.videoUrl).forEach((s, i) => {
+    setTimeout(() => dlVideo(s.id), i * 500);
+  });
+}
+
+// ─── REFRESH SINGLE CARD ──────────────────────────────────────
+function refreshCard(id) {
+  const s = scenes.find(s => s.id === id);
+  if (!s) return;
+  const el = document.getElementById(`card-${id}`);
+  if (!el) return;
+  el.outerHTML = cardHtml(s);
+  // Re-bind oninput for textareas — they use inline handlers so no rebinding needed
+}
+
+// ─── INIT ─────────────────────────────────────────────────────
+updateStatusDot();
+</script>
+</body>
+</html>
