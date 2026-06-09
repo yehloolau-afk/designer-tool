@@ -1374,6 +1374,10 @@ function setArchivePanel(visible) {
 }
 
 // ── Init ──────────────────────────────────────────────
+// 精选首次渲染完成后才触发其他 tab 预取，避免争带宽
+let _featuredPaintResolve = null;
+const featuredPainted = new Promise(res => { _featuredPaintResolve = res; });
+
 function init() {
   // 从 localStorage 恢复上次缓存，让 switchTab 直接命中缓存秒显示
   const store = loadFeedStore();
@@ -1384,12 +1388,13 @@ function init() {
   renderNav();
   switchTab('featured');
   scheduleAutoRefresh();
-  // 首屏渲染后 1 秒起，后台静默预取其余所有可见频道
-  setTimeout(() => {
+
+  // 等精选有内容显示出来，再依次预取其余频道（500ms 一个，不争带宽）
+  featuredPainted.then(() => {
     const others = TABS.filter(t => !t.hidden && t.id !== 'featured');
-    others.forEach((t, i) => setTimeout(() => prefetchTab(t.id), i * 1500));
+    others.forEach((t, i) => setTimeout(() => prefetchTab(t.id), 500 + i * 2000));
     prefetchDailyDates();
-  }, 1000);
+  });
 }
 
 // ── Navigation ────────────────────────────────────────
@@ -1466,6 +1471,7 @@ async function switchTab(id) {
   const cached = cache[cacheKey];
   if (cached && Date.now() - cached.ts < REFRESH_INTERVAL) {
     renderTab(tab, cached.items, cached.feedErrors, cached.aiHotData);
+    if (id === 'featured') _featuredPaintResolve?.();
     return;
   }
 
@@ -1490,6 +1496,7 @@ async function switchTab(id) {
           firstRssPainted = true;
           const _merged = mergeItems(rssItems, tab);
           renderTab(tab, _merged, feedErrors); // 先显示，不等翻译
+          if (id === 'featured') _featuredPaintResolve?.();
           if (tab.translate) translateItems(_merged).then(() => {
             if (activeTab === id) renderTab(tab, _merged, feedErrors);
           });
@@ -1519,7 +1526,7 @@ async function switchTab(id) {
     counts[id] = aiHotItems.length;
     cache[id] = { items: aiHotItems, feedErrors: [], aiHotData: null, ts: Date.now() };
     renderNav();
-    if (activeTab === id) renderTab(tab, aiHotItems, []);
+    if (activeTab === id) { renderTab(tab, aiHotItems, []); if (id === 'featured') _featuredPaintResolve?.(); }
     // 继续等 RSS 全部完成，合并两路数据（保证政策/金融/设计/论文等专属源有内容）
     await Promise.allSettled(rssPromises);
     if (!rssItems.length) return;
