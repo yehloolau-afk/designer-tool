@@ -1412,6 +1412,36 @@ function renderNav() {
   nav.innerHTML = `<div class="tab-group-label">资讯频道</div>${items}`;
 }
 
+// ── Phase 2 full load（第一阶段10条展示后，后台补充完整数量）───
+function scheduleFullLoad(id, tab, activeFeedList, cacheKey, prevErrors, aiHotItems = []) {
+  if (tab.layout === 'daily' || tab.layout === 'jobs' || !activeFeedList.length) return;
+  setTimeout(async () => {
+    if (activeTab !== id) return;
+    const results = await Promise.allSettled(activeFeedList.map(f => fetchFeed(f))); // 默认 full limit
+    if (activeTab !== id) return;
+    let rssArr = [];
+    const feedErrors = [...prevErrors];
+    results.forEach((r, i) => {
+      if (r.status === 'fulfilled' && r.value.length)
+        rssArr = rssArr.concat(r.value.map(item => ({ ...item, _feed: activeFeedList[i] })));
+    });
+    if (!rssArr.length) return;
+    let items = mergeItems([...aiHotItems, ...rssArr], tab);
+    cache[cacheKey] = { items, feedErrors, aiHotData: null, ts: Date.now() };
+    saveFeedCache(cacheKey, cache[cacheKey]);
+    counts[id] = items.length;
+    renderNav();
+    if (activeTab !== id) return;
+    renderTab(tab, items, feedErrors);
+    if (tab.translate) {
+      await translateItems(items);
+      cache[cacheKey].ts = Date.now();
+      saveFeedCache(cacheKey, cache[cacheKey]);
+      if (activeTab === id) renderTab(tab, items, feedErrors);
+    }
+  }, 1500);
+}
+
 // ── Tab switch ────────────────────────────────────────
 function prefetchTab(id) {
   if (id === activeTab) return;
@@ -1468,16 +1498,17 @@ async function switchTab(id) {
 
   // 岗位 tab 按地区缓存
   const cacheKey = tab.layout === 'jobs' ? `jobs_${jobsRegion}` : id;
+  const activeFeedList = tab.layout === 'jobs'
+    ? (jobsRegion === 'global' ? (tab.feedsGlobal || []) : (tab.feedsDomestic || []))
+    : tab.feeds;
   const cached = cache[cacheKey];
   if (cached && Date.now() - cached.ts < REFRESH_INTERVAL) {
     renderTab(tab, cached.items, cached.feedErrors, cached.aiHotData);
     if (id === 'featured') _featuredPaintResolve?.();
+    // 若上次是快速预览（10条），后台补足完整数据
+    if (cached._quick) scheduleFullLoad(id, tab, activeFeedList, cacheKey, cached.feedErrors || []);
     return;
   }
-
-  const activeFeedList = tab.layout === 'jobs'
-    ? (jobsRegion === 'global' ? (tab.feedsGlobal || []) : (tab.feedsDomestic || []))
-    : tab.feeds;
 
   // AI HOT 和 RSS 同时发起，谁快用谁
   const aiHotPromise = tab.aiHotPath ? fetchAiHot(tab.aiHotPath) : Promise.resolve(null);
@@ -1488,7 +1519,7 @@ async function switchTab(id) {
   let firstRssPainted = false;
 
   const rssPromises = activeFeedList.map((f, i) =>
-    fetchFeed(f).then(async feedItems => {
+    fetchFeed(f, 10).then(async feedItems => {
       if (feedItems.length) {
         rssItems = rssItems.concat(feedItems.map(item => ({ ...item, _feed: f })));
         // 日报 tab 不做渐进渲染（避免重建 archiveCol 导致存档加载中断）
@@ -1531,11 +1562,12 @@ async function switchTab(id) {
     await Promise.allSettled(rssPromises);
     if (!rssItems.length) return;
     let merged = mergeItems([...aiHotItems, ...rssItems], tab);
-    cache[id] = { items: merged, feedErrors, aiHotData: null, ts: Date.now() };
+    cache[id] = { items: merged, feedErrors, aiHotData: null, ts: Date.now(), _quick: true };
     saveFeedCache(id, cache[id]);
     counts[id] = merged.length;
     renderNav();
     if (activeTab === id) renderTab(tab, merged, feedErrors); // 先显示
+    scheduleFullLoad(id, tab, activeFeedList, id, feedErrors, aiHotItems);
     if (tab.translate) {
       await translateItems(merged);
       cache[id].ts = Date.now();
@@ -1548,11 +1580,12 @@ async function switchTab(id) {
   // AI HOT 失败，等 RSS 全部完成后最终渲染
   await Promise.allSettled(rssPromises);
   let items = mergeItems(rssItems, tab);
-  cache[cacheKey] = { items, feedErrors, aiHotData: null, ts: Date.now() };
+  cache[cacheKey] = { items, feedErrors, aiHotData: null, ts: Date.now(), _quick: true };
   saveFeedCache(cacheKey, cache[cacheKey]);
   counts[id] = items.length;
   renderNav();
   if (activeTab === id) renderTab(tab, items, feedErrors); // 先显示
+  scheduleFullLoad(id, tab, activeFeedList, cacheKey, feedErrors);
   if (tab.translate) {
     await translateItems(items);
     cache[cacheKey].ts = Date.now();
@@ -1641,8 +1674,11 @@ function mergeItems(items, tab) {
 }
 
 // ── Fetch ─────────────────────────────────────────────
-// ArXiv 大文件限 15 条，其他 30 条
-function feedLimit(url) { return url.includes('arxiv.org') ? 15 : 30; }
+// quick=true → 10条快速预览；full → arxiv 15 / 其他 30
+function feedLimit(url, quick = false) {
+  if (quick) return 10;
+  return url.includes('arxiv.org') ? 15 : 30;
+}
 
 async function tryProxy(proxy, encoded, url, limit) {
   if (proxy === 'rss2json') {
@@ -1682,9 +1718,9 @@ async function tryProxy(proxy, encoded, url, limit) {
   throw new Error('unknown proxy');
 }
 
-async function fetchFeed(feed) {
+async function fetchFeed(feed, limitOverride) {
   const encoded = encodeURIComponent(feed.url);
-  const limit = feedLimit(feed.url);
+  const limit = limitOverride !== undefined ? limitOverride : feedLimit(feed.url);
   const remembered = PROXY_MEM[feed.url];
 
   // 优先走上次成功的代理（命中率高时近乎零等待）
