@@ -855,7 +855,7 @@
   <div class="sidebar-footer">
     <div class="refresh-row">
       <span class="live-dot"></span>
-      <span>实时更新中</span>
+      <span>外文已翻译，实时更新中</span>
       <span class="countdown" id="countdown"></span>
     </div>
     <button class="refresh-btn" id="refreshBtn" onclick="manualRefresh()">
@@ -1013,6 +1013,14 @@ const TABS = [
     translate: true,
     aiHotPath: '/items?mode=selected&take=30',
     feeds: [
+      { url: 'https://export.arxiv.org/rss/cs.AI',     name: 'ArXiv AI',  color: '#e67e22' },
+      { url: 'https://export.arxiv.org/rss/cs.LG',     name: 'ArXiv ML',  color: '#e74c3c' },
+      { url: 'https://export.arxiv.org/rss/cs.CL',     name: 'ArXiv NLP', color: '#1abc9c' },
+      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCXZCJLdBC09xxGZ6gcdrc6A', name: 'OpenAI YT',    color: '#10a37f' },
+      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCP7jMXSY2xbc3KCAE0MHQ-A', name: 'DeepMind YT',  color: '#4285f4' },
+      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCrDwWp7EBBv4NwvScIpBDOA', name: 'Anthropic YT', color: '#c75b39' },
+      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg', name: 'Two Minute Papers', color: '#ef4444' },
+      { url: 'https://www.theverge.com/ai-artificial-intelligence/rss', name: 'The Verge AI', color: '#e40045' },
       { url: 'https://www.qbitai.com/feed',            name: '量子位',    color: '#bc8cff' },
       { url: 'https://www.ifanr.com/feed',             name: '爱范儿',    color: '#3fb950' },
       { url: 'https://www.jiqizhixin.com/rss',         name: '机器之心',  color: '#58a6ff' },
@@ -1020,16 +1028,6 @@ const TABS = [
       { url: 'https://sspai.com/feed',                 name: '少数派',    color: '#8b949e' },
       { url: 'https://36kr.com/feed',                  name: '36Kr',     color: '#1677ff' },
       { url: 'https://www.huxiu.com/rss/0.xml',        name: '虎嗅',     color: '#e67e22' },
-
-      { url: 'https://export.arxiv.org/rss/cs.AI',     name: 'ArXiv AI',  color: '#e67e22' },
-      { url: 'https://export.arxiv.org/rss/cs.LG',     name: 'ArXiv ML',  color: '#e74c3c' },
-      { url: 'https://export.arxiv.org/rss/cs.CL',     name: 'ArXiv NLP', color: '#1abc9c' },
-
-      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCXZCJLdBC09xxGZ6gcdrc6A', name: 'OpenAI YT',    color: '#10a37f' },
-      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCP7jMXSY2xbc3KCAE0MHQ-A', name: 'DeepMind YT',  color: '#4285f4' },
-      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCrDwWp7EBBv4NwvScIpBDOA', name: 'Anthropic YT', color: '#c75b39' },
-      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg', name: 'Two Minute Papers', color: '#ef4444' },
-      { url: 'https://www.theverge.com/ai-artificial-intelligence/rss', name: 'The Verge AI', color: '#e40045' },
       { url: 'https://xinzhiyuan.com/feed',             name: '新智元',   color: '#8b5cf6' },
     ]
   },
@@ -1042,6 +1040,14 @@ const TABS = [
     desc: '全网 AI 最新动态',
     aiHotPath: '/items?mode=all&take=80',
     feeds: [
+      { url: 'https://export.arxiv.org/rss/cs.AI',     name: 'ArXiv AI',  color: '#e67e22' },
+      { url: 'https://export.arxiv.org/rss/cs.LG',     name: 'ArXiv ML',  color: '#e74c3c' },
+      { url: 'https://export.arxiv.org/rss/cs.CL',     name: 'ArXiv NLP', color: '#1abc9c' },
+      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCXZCJLdBC09xxGZ6gcdrc6A', name: 'OpenAI YT',    color: '#10a37f' },
+      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCP7jMXSY2xbc3KCAE0MHQ-A', name: 'DeepMind YT',  color: '#4285f4' },
+      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCrDwWp7EBBv4NwvScIpBDOA', name: 'Anthropic YT', color: '#c75b39' },
+      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg', name: 'Two Minute Papers', color: '#ef4444' },
+      { url: 'https://www.theverge.com/ai-artificial-intelligence/rss', name: 'The Verge AI', color: '#e40045' },
       { url: 'https://www.qbitai.com/feed',            name: '量子位',    color: '#bc8cff' },
       { url: 'https://www.ifanr.com/feed',             name: '爱范儿',    color: '#3fb950' },
       { url: 'https://www.jiqizhixin.com/rss',         name: '机器之心',  color: '#58a6ff' },
@@ -1049,18 +1055,7 @@ const TABS = [
       { url: 'https://sspai.com/feed',                 name: '少数派',    color: '#8b949e' },
       { url: 'https://36kr.com/feed',                  name: '36Kr',     color: '#1677ff' },
       { url: 'https://www.huxiu.com/rss/0.xml',        name: '虎嗅',     color: '#e67e22' },
-
-      { url: 'https://export.arxiv.org/rss/cs.AI',     name: 'ArXiv AI',  color: '#e67e22' },
-      { url: 'https://export.arxiv.org/rss/cs.LG',     name: 'ArXiv ML',  color: '#e74c3c' },
-      { url: 'https://export.arxiv.org/rss/cs.CL',     name: 'ArXiv NLP', color: '#1abc9c' },
-
-      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCXZCJLdBC09xxGZ6gcdrc6A', name: 'OpenAI YT',    color: '#10a37f' },
-      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCP7jMXSY2xbc3KCAE0MHQ-A', name: 'DeepMind YT',  color: '#4285f4' },
-      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCrDwWp7EBBv4NwvScIpBDOA', name: 'Anthropic YT', color: '#c75b39' },
-      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg', name: 'Two Minute Papers', color: '#ef4444' },
-      { url: 'https://www.theverge.com/ai-artificial-intelligence/rss', name: 'The Verge AI', color: '#e40045' },
       { url: 'https://xinzhiyuan.com/feed',             name: '新智元',   color: '#8b5cf6' },
-
     ]
   },
   {
@@ -1105,6 +1100,7 @@ const TABS = [
     desc: 'AI 产品与工具动态',
     aiHotPath: '/items?category=ai-products&take=40',
     feeds: [
+      { url: 'https://www.theverge.com/ai-artificial-intelligence/rss', name: 'The Verge AI', color: '#e40045' },
       { url: 'https://www.qbitai.com/feed',            name: '量子位',   color: '#bc8cff' },
       { url: 'https://www.ifanr.com/feed',             name: '爱范儿',   color: '#3fb950' },
       { url: 'https://www.jiqizhixin.com/rss',         name: '机器之心', color: '#58a6ff' },
@@ -1113,7 +1109,6 @@ const TABS = [
       { url: 'https://36kr.com/feed',                  name: '36Kr',    color: '#1677ff' },
       { url: 'https://www.huxiu.com/rss/0.xml',        name: '虎嗅',    color: '#e67e22' },
       { url: 'https://xinzhiyuan.com/feed',             name: '新智元',  color: '#8b5cf6' },
-      { url: 'https://www.theverge.com/ai-artificial-intelligence/rss', name: 'The Verge AI', color: '#e40045' },
     ]
   },
   {
@@ -1126,6 +1121,11 @@ const TABS = [
     desc: 'AI 设计工具与创意趋势',
     aiHotPath: '/items?mode=all&take=80',
     feeds: [
+      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UChpleBmo18P08aKCIgti38g', name: 'Matt Wolfe', color: '#f59e0b' },
+      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UC_HhOkzorAO4_rRsTiiHZ_w', name: 'AI Explained', color: '#8b5cf6' },
+      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCUBqu_z5uP0AZhYtuyFZB3g', name: 'Runway',      color: '#06b6d4' },
+      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg', name: 'Two Minute Papers', color: '#ef4444' },
+      { url: 'https://www.theverge.com/ai-artificial-intelligence/rss', name: 'The Verge AI', color: '#e40045' },
       { url: 'https://www.qbitai.com/feed',            name: '量子位',   color: '#bc8cff' },
       { url: 'https://www.ifanr.com/feed',             name: '爱范儿',   color: '#3fb950' },
       { url: 'https://www.jiqizhixin.com/rss',         name: '机器之心', color: '#58a6ff' },
@@ -1133,11 +1133,6 @@ const TABS = [
       { url: 'https://sspai.com/feed',                 name: '少数派',   color: '#8b949e' },
       { url: 'https://36kr.com/feed',                  name: '36Kr',    color: '#1677ff' },
       { url: 'https://www.huxiu.com/rss/0.xml',        name: '虎嗅',    color: '#e67e22' },
-      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UChpleBmo18P08aKCIgti38g', name: 'Matt Wolfe', color: '#f59e0b' },
-      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UC_HhOkzorAO4_rRsTiiHZ_w', name: 'AI Explained', color: '#8b5cf6' },
-      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCUBqu_z5uP0AZhYtuyFZB3g', name: 'Runway',      color: '#06b6d4' },
-      { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg', name: 'Two Minute Papers', color: '#ef4444' },
-      { url: 'https://www.theverge.com/ai-artificial-intelligence/rss', name: 'The Verge AI', color: '#e40045' },
       { url: 'https://xinzhiyuan.com/feed',             name: '新智元',  color: '#8b5cf6' },
     ]
   },
