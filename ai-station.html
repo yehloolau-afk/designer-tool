@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>飞翔的AI资讯站</title>
+  <link rel="preconnect" href="https://rss2json.com">
+  <link rel="preconnect" href="https://api.allorigins.win">
+  <link rel="preconnect" href="https://corsproxy.io">
+  <link rel="preconnect" href="https://api.codetabs.com">
+  <link rel="preconnect" href="https://translate.googleapis.com">
   <style>
     :root {
       --bg: #f4f6f8;
@@ -882,6 +887,19 @@ function saveProxyHit(url, proxy) {
   try { localStorage.setItem('ai_proxy_mem', JSON.stringify(PROXY_MEM)); } catch {}
 }
 
+// Feed 持久缓存：把拉取结果存入 localStorage，刷新页面后可秒显示
+const LS_FEED_KEY = 'ai_station_feeds_v2';
+function saveFeedCache(key, data) {
+  try {
+    const store = JSON.parse(localStorage.getItem(LS_FEED_KEY) || '{}');
+    store[key] = { items: data.items, feedErrors: data.feedErrors, ts: data.ts };
+    localStorage.setItem(LS_FEED_KEY, JSON.stringify(store));
+  } catch {}
+}
+function loadFeedStore() {
+  try { return JSON.parse(localStorage.getItem(LS_FEED_KEY) || '{}'); } catch { return {}; }
+}
+
 function timeoutSignal(ms) {
   const ctrl = new AbortController();
   setTimeout(() => ctrl.abort(), ms);
@@ -1357,14 +1375,19 @@ function setArchivePanel(visible) {
 
 // ── Init ──────────────────────────────────────────────
 function init() {
+  // 从 localStorage 恢复上次缓存，让 switchTab 直接命中缓存秒显示
+  const store = loadFeedStore();
+  Object.entries(store).forEach(([key, data]) => {
+    if (data && Date.now() - data.ts < REFRESH_INTERVAL) cache[key] = data;
+  });
+
   renderNav();
   switchTab('featured');
   scheduleAutoRefresh();
-  // 首屏渲染后 1 秒起，后台静默预取其余所有可见频道（0.8s 错峰）
+  // 首屏渲染后 1 秒起，后台静默预取其余所有可见频道
   setTimeout(() => {
     const others = TABS.filter(t => !t.hidden && t.id !== 'featured');
     others.forEach((t, i) => setTimeout(() => prefetchTab(t.id), i * 1500));
-    // AI 日报近 10 天与频道预加载并行开始（不等待频道预加载完成）
     prefetchDailyDates();
   }, 1000);
 }
@@ -1417,10 +1440,15 @@ function prefetchTab(id) {
       else feedErrors.push(activeFeedList[i]?.name || '');
     });
     let items = mergeItems([...aiHotItems, ...rssArr], tab);
-    if (tab.translate) await translateItems(items);
     cache[cacheKey] = { items, feedErrors, aiHotData: null, ts: Date.now() };
+    saveFeedCache(cacheKey, cache[cacheKey]);
     counts[id] = items.length;
     renderNav();
+    if (tab.translate) {
+      await translateItems(items);
+      cache[cacheKey].ts = Date.now();
+      saveFeedCache(cacheKey, cache[cacheKey]);
+    }
   })();
 }
 
@@ -1461,8 +1489,10 @@ async function switchTab(id) {
         if (!firstRssPainted && activeTab === id && tab.layout !== 'daily') {
           firstRssPainted = true;
           const _merged = mergeItems(rssItems, tab);
-          if (tab.translate) await translateItems(_merged);
-          renderTab(tab, _merged, feedErrors);
+          renderTab(tab, _merged, feedErrors); // 先显示，不等翻译
+          if (tab.translate) translateItems(_merged).then(() => {
+            if (activeTab === id) renderTab(tab, _merged, feedErrors);
+          });
         }
       } else {
         feedErrors.push(f.name || '');
@@ -1494,23 +1524,34 @@ async function switchTab(id) {
     await Promise.allSettled(rssPromises);
     if (!rssItems.length) return;
     let merged = mergeItems([...aiHotItems, ...rssItems], tab);
-    if (tab.translate) await translateItems(merged);
     cache[id] = { items: merged, feedErrors, aiHotData: null, ts: Date.now() };
+    saveFeedCache(id, cache[id]);
     counts[id] = merged.length;
     renderNav();
-    if (activeTab === id) renderTab(tab, merged, feedErrors);
+    if (activeTab === id) renderTab(tab, merged, feedErrors); // 先显示
+    if (tab.translate) {
+      await translateItems(merged);
+      cache[id].ts = Date.now();
+      saveFeedCache(id, cache[id]);
+      if (activeTab === id) renderTab(tab, merged, feedErrors); // 翻译后更新
+    }
     return;
   }
 
   // AI HOT 失败，等 RSS 全部完成后最终渲染
   await Promise.allSettled(rssPromises);
   let items = mergeItems(rssItems, tab);
-  // 有英文内容的 tab 自动翻译标题
-  if (tab.translate) await translateItems(items);
-  counts[id] = items.length;
   cache[cacheKey] = { items, feedErrors, aiHotData: null, ts: Date.now() };
+  saveFeedCache(cacheKey, cache[cacheKey]);
+  counts[id] = items.length;
   renderNav();
-  if (activeTab === id) renderTab(tab, items, feedErrors);
+  if (activeTab === id) renderTab(tab, items, feedErrors); // 先显示
+  if (tab.translate) {
+    await translateItems(items);
+    cache[cacheKey].ts = Date.now();
+    saveFeedCache(cacheKey, cache[cacheKey]);
+    if (activeTab === id) renderTab(tab, items, feedErrors); // 翻译后更新
+  }
 }
 
 // 渲染标题：已翻译的加 tooltip 显示英文原文
