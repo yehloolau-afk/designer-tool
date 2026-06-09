@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>设计效能工具矩阵 · 滴滴设计</title>
+  <style>
+    /* ── Light (default) ── */
+    :root {
+      --bg:        #F4F7FF;
+      --bg2:       #FFFFFF;
+      --bg3:       #EBF0FF;
+      --card:      #FFFFFF;
+      --card-shadow: 0 1px 3px rgba(30,60,120,0.07), 0 6px 18px rgba(30,60,120,0.07);
+      --card-hover:  0 4px 24px rgba(30,60,120,0.14), 0 1px 4px rgba(30,60,120,0.08);
+      --border:    rgba(79,127,255,0.12);
+      --border-hi: rgba(79,127,255,0.4);
+      --nav-bg:    rgba(244,247,255,0.88);
+      --nav-border: rgba(79,127,255,0.1);
+      --text:      #111827;
+      --t2:        #5B6A8A;
+      --t3:        #9BAACC;
+      --blue:      #4F7FFF;
+      --violet:    #7C5CDB;
+      --green:     #16A34A;
+      --amber:     #D97706;
+      --grad:      linear-gradient(135deg, #4F7FFF 0%, #7C5CDB 100%);
+      --particle:  79,127,255;
+    }
+
+    /* ── Dark ── */
+    [data-theme="dark"] {
+      --bg:        #0C0D0E;
+      --bg2:       #161718;
+      --bg3:       #1C1D1F;
+      --card:      #1C1D1F;
+      --card-shadow: 0 2px 8px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.4);
+      --card-hover:  0 16px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.1);
+      --border:    rgba(255,255,255,0.08);
+      --border-hi: rgba(255,255,255,0.2);
+      --nav-bg:    rgba(12,13,14,0.92);
+      --nav-border: rgba(255,255,255,0.07);
+      --text:      rgba(255,255,255,0.9);
+      --t2:        rgba(255,255,255,0.55);
+      --t3:        rgba(255,255,255,0.3);
+      --green:     #22C55E;
+      --amber:     #F59E0B;
+      --particle:  79,127,255;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background 0.35s, color 0.35s;
+    }
+    * { transition: background-color 0.35s, border-color 0.35s, color 0.35s, box-shadow 0.35s; }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 56px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(24px) saturate(1.5);
+      border-bottom: 1px solid var(--nav-border);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; }
+    .nav-logo { display: flex; align-items: center; flex-shrink: 0; }
+    .nav-logo img { height: 28px; width: auto; display: block; }
+    .nav-name {
+      font-size: 14px; font-weight: 700; letter-spacing: -0.01em;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-link {
+      font-size: 13px; color: var(--t2); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--text); }
+    .btn-nav {
+      font-size: 13px; font-weight: 600; padding: 7px 18px; border-radius: 8px;
+      background: var(--grad); border: none; color: white; cursor: pointer;
+      text-decoration: none; transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-nav:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* Theme toggle */
+    .toggle {
+      width: 46px; height: 24px; border-radius: 12px;
+      background: var(--bg3); border: 1px solid var(--border);
+      cursor: pointer; position: relative;
+      transition: background 0.3s;
+    }
+    .toggle-thumb {
+      position: absolute; top: 2px; left: 2px;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: transparent; border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; line-height: 0;
+      transition: transform 0.25s cubic-bezier(.4,0,.2,1);
+    }
+    [data-theme="dark"] .toggle-thumb { transform: translateX(22px); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      padding: 140px 56px 80px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(79,127,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,127,255,0.06) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 80% 100% at 50% 50%, black 10%, transparent 100%);
+    }
+    .hero-glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 55% 70% at 50% 40%, rgba(79,127,255,0.08) 0%, transparent 70%);
+    }
+    [data-theme="dark"] .hero-glow {
+      background: radial-gradient(ellipse 55% 70% at 50% 40%, rgba(79,127,255,0.13) 0%, transparent 70%);
+    }
+    #hero-canvas { position: absolute; inset: 0; pointer-events: none; opacity: 0.45; }
+    [data-theme="dark"] #hero-canvas { opacity: 0.55; }
+
+    .hero-body { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--blue);
+      background: rgba(79,127,255,0.08);
+      border: 1px solid rgba(79,127,255,0.2);
+      padding: 5px 14px; border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--blue);
+      animation: blink 2.2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .hero-title {
+      font-size: 56px; font-weight: 800; letter-spacing: -0.04em; line-height: 1.08; margin-bottom: 14px;
+      white-space: nowrap;
+    }
+    .grad-text { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-sub {
+      font-size: 15px; font-weight: 500; color: var(--t2); line-height: 1.7; margin: 0;
+    }
+
+    /* ── SECTION ── */
+    .section { max-width: 1200px; margin: 0 auto; padding: 80px 56px; }
+    .sec-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 10px; text-align: center;
+    }
+    .sec-title { font-size: clamp(28px,3.2vw,42px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.15; margin-bottom: 10px; text-align: center; }
+    .sec-desc { font-size: 14px; color: var(--t2); margin-bottom: 44px; line-height: 1.75; text-align: center; max-width: 520px; margin-left: auto; margin-right: auto; }
+
+    .divider {
+      height: 1px; margin: 0 56px;
+      background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent);
+    }
+
+    /* ── STAT COLORS ── */
+    .c-blue   { color: var(--t2); }
+    .c-green  { color: var(--t2); }
+    .c-amber  { color: var(--t2); }
+    .c-violet { color: var(--t2); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: flex; align-items: center;
+      background: transparent; border: none;
+      padding: 0;
+      opacity: 0.85;
+    }
+    .stat-item {
+      flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 4px; padding: 16px 20px; text-align: center;
+    }
+    .stat-sep { display: none; }
+    .stat-bar-num {
+      font-size: 20px; font-weight: 600; letter-spacing: -0.02em; line-height: 1;
+    }
+    .stat-bar-label { font-size: 11px; color: var(--t2); font-weight: 400; }
+    .stat-bar-hint  { font-size: 10px; color: var(--t3); }
+
+    /* ── TOOLS ── */
+    .tool-sections { display: flex; flex-direction: column; gap: 40px; }
+    .tool-section-head {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 14px;
+    }
+    .tool-section-icon { font-size: 15px; }
+    .tool-section-name { font-size: 14px; font-weight: 700; color: var(--text); }
+
+    .tools-grid   { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+    .tools-grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .tool-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 20px; display: flex; flex-direction: column; gap: 10px;
+      cursor: pointer; box-shadow: var(--card-shadow);
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .tool-card:hover { border-color: var(--border-hi); transform: translateY(-3px); box-shadow: var(--card-hover); }
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; }
+    .card-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0;
+    }
+    .icon-prod   { background: rgba(79,127,255,0.12); }
+    .icon-collab { background: rgba(124,92,219,0.12); }
+    .icon-qa     { background: rgba(22,163,74,0.1); }
+    [data-theme="dark"] .icon-qa { background: rgba(34,197,94,0.12); }
+
+    .card-name { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
+    .card-desc { font-size: 12px; color: var(--t2); line-height: 1.55; flex: 1; text-wrap: pretty; }
+    /* ROI badge 右上角 */
+    .roi-tag {
+      font-size: 10.5px; font-weight: 700; letter-spacing: 0.02em;
+      color: var(--blue); background: rgba(79,127,255,0.08);
+      border: 1px solid rgba(79,127,255,0.18);
+      padding: 3px 8px; border-radius: 20px; flex-shrink: 0;
+    }
+    /* 底部进度条 */
+    .card-progress { display: flex; align-items: center; gap: 8px; margin-top: auto; }
+    .prog-bar { flex: 1; height: 3px; border-radius: 2px; overflow: hidden; background: var(--bg3); }
+    .prog-fill { height: 100%; border-radius: 2px; transition: width 0.6s cubic-bezier(.4,0,.2,1); }
+    .prog-fill.live { background: var(--green); }
+    .prog-fill.dev  { background: var(--blue); }
+    .prog-fill.beta { background: var(--amber); }
+    .prog-fill.plan { background: var(--t3); }
+    .prog-label {
+      font-size: 11px; font-weight: 600; white-space: nowrap; flex-shrink: 0;
+    }
+    .prog-label.live { color: var(--green); }
+    .prog-label.dev  { color: var(--blue); }
+    .prog-label.beta { color: var(--amber); }
+    .prog-label.plan { color: var(--t3); }
+
+    /* ── IMAGE CARD ── */
+    .tool-card-img {
+      padding: 0; gap: 0; overflow: hidden;
+      border-radius: 18px;
+      transition: border-color 0.2s, transform 0.25s cubic-bezier(.2,0,.2,1), box-shadow 0.25s;
+    }
+    .tool-card-img:hover { transform: translateY(-6px); box-shadow: var(--card-hover); }
+    .tool-card-img:hover .card-img-wrap img { transform: scale(1.04); }
+    .card-img-wrap {
+      width: 100%; height: 280px;
+      border-radius: 17px 17px 0 0;
+      overflow: hidden; position: relative; flex-shrink: 0;
+    }
+    .card-img-wrap img { transition: transform 0.5s cubic-bezier(.2,0,.2,1); }
+    .card-img-ph {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+    }
+    .card-img-ph-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
+      color: var(--t3); text-transform: uppercase;
+    }
+    .card-img-body {
+      padding: 18px 22px 20px;
+      display: flex; flex-direction: column;
+      gap: 6px; flex: 1;
+    }
+    .tool-card-img .card-name {
+      font-size: 17px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2;
+    }
+    .tool-card-img .card-desc {
+      font-size: 13px; color: var(--t2); line-height: 1.65;
+    }
+    .card-img-footer {
+      display: flex; align-items: center;
+      gap: 10px; margin-top: auto;
+      padding-top: 14px; border-top: 1px solid var(--border);
+    }
+    .footer-sep {
+      width: 1px; height: 12px;
+      background: var(--border); flex-shrink: 0;
+    }
+    .card-img-footer .card-progress { flex: 1; margin-top: 0; }
+    .card-img-badge {
+      position: absolute; bottom: 12px; left: 12px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+      color: #fff;
+      background: rgba(0,0,0,0.52);
+      backdrop-filter: blur(8px);
+      padding: 5px 12px; border-radius: 20px;
+      text-transform: uppercase;
+    }
+    .roi-text {
+      font-size: 11px; font-weight: 600; color: var(--t2);
+    }
+    .btn-use {
+      margin-left: auto; flex-shrink: 0;
+      display: inline-flex; align-items: center; gap: 3px;
+      font-size: 13px; font-weight: 600; line-height: 1;
+      color: #fff;
+      background: #111827;
+      border: 1px solid transparent;
+      padding: 8px 20px; border-radius: 22px; min-width: 80px; justify-content: center;
+      cursor: pointer; white-space: nowrap;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-use:hover { opacity: 0.75; }
+    .btn-use:disabled { background: var(--bg3); color: var(--t3); cursor: not-allowed; opacity: 1; }
+    .btn-use:disabled:hover { opacity: 1; }
+    [data-theme="dark"] .btn-use { background: rgba(255,255,255,0.12); color: #fff; }
+    [data-theme="dark"] .btn-use:disabled { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.3); }
+
+    /* ── CASES ── */
+    .cases-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+    .case-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+      overflow: hidden; box-shadow: var(--card-shadow);
+    }
+    .case-head { padding: 16px 24px 12px; border-bottom: 1px solid var(--border); }
+    .case-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 6px; }
+    .case-title { font-size: 16px; font-weight: 700; }
+    .case-compare { display: grid; grid-template-columns: 1fr 1fr; }
+    .case-col { padding: 20px 24px; }
+    .case-before { border-right: 1px solid var(--border); }
+    .case-col-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+    .case-before .case-col-label { color: var(--t2); }
+    .case-after  .case-col-label { color: var(--green); }
+    .case-num { font-size: 32px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 4px; }
+    .case-before .case-num { color: var(--t2); }
+    .case-after  .case-num { color: var(--green); }
+    .case-unit { font-size: 13px; font-weight: 400; color: var(--t2); margin-left: 2px; }
+    .case-sub { font-size: 12px; color: var(--t2); line-height: 1.5; }
+    .case-foot {
+      padding: 10px 24px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .case-saving { font-size: 13px; font-weight: 700; color: var(--green); }
+    .case-badge {
+      font-size: 12px; font-weight: 700;
+      background: rgba(79,127,255,0.08); border: 1px solid rgba(79,127,255,0.18);
+      color: var(--blue); padding: 4px 12px; border-radius: 20px;
+    }
+    .flow-diagram { padding: 16px 24px; }
+    .flow-row { display: flex; align-items: center; gap: 10px; }
+    .flow-row + .flow-row { margin-top: 10px; }
+    .flow-row-label { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--t3); width: 56px; flex-shrink: 0; line-height: 1.3; }
+    .flow-nodes { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .flow-node { border-radius: 8px; padding: 7px 11px; text-align: center; border: 1px solid var(--border); background: var(--bg3); }
+    .flow-node-name { font-size: 11px; font-weight: 600; color: var(--t2); white-space: nowrap; }
+    .flow-node-role { font-size: 9px; color: var(--t3); margin-top: 2px; white-space: nowrap; }
+    .flow-node-ai { background: rgba(22,163,74,0.06); border-color: rgba(22,163,74,0.25); }
+    .flow-node-ai .flow-node-name { color: var(--green); }
+    .flow-node-ai .flow-node-role { color: rgba(22,163,74,0.7); }
+    .flow-node-key { padding: 7px 18px; }
+    .flow-arrow { font-size: 13px; color: var(--t3); flex-shrink: 0; }
+    .flow-sep { display: flex; align-items: center; gap: 10px; margin: 10px 0 10px 66px; }
+    .flow-sep-line { flex: 1; height: 1px; background: var(--border); }
+    .flow-sep-label { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; color: var(--t3); white-space: nowrap; }
+    .flow-metrics { display: flex; gap: 0; border-top: 1px solid var(--border); }
+    .flow-metric { flex: 1; padding: 10px 20px; text-align: center; border-right: 1px solid var(--border); }
+    .flow-metric:last-child { border-right: none; }
+    .flow-metric-nums { display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .flow-metric-before { font-size: 18px; font-weight: 700; color: var(--t3); letter-spacing: -0.02em; }
+    .flow-metric-after { font-size: 18px; font-weight: 700; color: var(--green); letter-spacing: -0.02em; }
+    .flow-metric-arr { font-size: 11px; color: var(--t3); }
+    .flow-metric-label { font-size: 10px; color: var(--t3); margin-top: 3px; }
+
+    /* ── SECTION WIDTH OVERRIDES ── */
+    #tools { max-width: 1440px; }
+    #tools-collab { max-width: 1160px; }
+
+    /* ── IMAGE CARD SM (section 2) ── */
+    .card-img-wrap-sm { height: 180px; }
+    .card-ph-1 { background: linear-gradient(135deg,rgba(79,127,255,.18),rgba(124,92,219,.12)); }
+    .card-ph-2 { background: linear-gradient(135deg,rgba(124,92,219,.18),rgba(79,127,255,.12)); }
+    .card-ph-3 { background: linear-gradient(135deg,rgba(22,163,74,.16),rgba(79,127,255,.1)); }
+    .card-ph-4 { background: linear-gradient(135deg,rgba(217,119,6,.18),rgba(22,163,74,.1)); }
+    .card-ph-ghost {
+      position:absolute;inset:0;display:flex;align-items:flex-end;padding:14px 16px;
+      font-size:36px;font-weight:900;letter-spacing:-.04em;line-height:1;
+      color:rgba(255,255,255,.12);pointer-events:none;
+    }
+
+    /* ── HORIZONTAL TOOL CARD (section 2) ── */
+    .tools-grid-2h { display: grid; grid-template-columns: repeat(3,1fr); column-gap: 28px; row-gap: 36px; }
+    .tool-card-h {
+      display: flex; flex-direction: row; overflow: hidden;
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      box-shadow: var(--card-shadow); height: 160px;
+      transition: border-color .2s, transform .22s cubic-bezier(.2,0,.2,1), box-shadow .22s;
+    }
+    .tool-card-h:hover { border-color: var(--border-hi); transform: translateY(-2px); box-shadow: var(--card-hover); }
+    .card-h-img {
+      width: 130px; flex-shrink: 0; position: relative; overflow: hidden;
+    }
+    .card-h-img img { width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform .5s cubic-bezier(.2,0,.2,1); }
+    .tool-card-h:hover .card-h-img img { transform: scale(1.05); }
+    .card-h-ph { width: 100%; height: 100%; display: flex; align-items: flex-end; padding: 12px; }
+    .card-h-ph-ghost { font-size: 24px; font-weight: 900; letter-spacing: -.04em; color: rgba(255,255,255,.18); line-height: 1; }
+    .card-h-stage {
+      position: absolute; top: 8px; left: 8px;
+      font-size: 9px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      color: #fff; background: rgba(0,0,0,.48); backdrop-filter: blur(6px);
+      padding: 2px 8px; border-radius: 20px;
+    }
+    .card-h-body { flex: 1; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; justify-content: flex-start; }
+    .card-h-name { font-size: 14px; font-weight: 700; letter-spacing: -.01em; color: var(--text); line-height: 1.2; }
+    .card-h-desc { font-size: 12px; color: var(--t2); line-height: 1.6; flex: 1; }
+    .card-h-footer { display: flex; align-items: center; gap: 6px; margin-top: auto; }
+    .card-h-footer .btn-use {
+      font-size: 11px; padding: 5px 12px; min-width: auto; border-radius: 16px;
+      background: transparent; color: var(--text); border: 1px solid var(--text);
+    }
+    [data-theme="dark"] .card-h-footer .btn-use { background: transparent; color: #fff; border-color: rgba(255,255,255,0.5); }
+    .card-h-footer .btn-use:hover { opacity: 0.6; }
+    .card-h-footer .btn-use:disabled { background: transparent; color: var(--t3); border-color: var(--border); }
+    .card-h-footer .prog-label { font-size: 10px; }
+
+    /* ── QUARTER CARDS (section 3) ── */
+    .quarter-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:20px; }
+    .quarter-card {
+      background:var(--card);border:1px solid var(--border);border-radius:16px;
+      padding:32px 28px;box-shadow:var(--card-shadow);
+      display:flex;flex-direction:column;align-items:center;gap:16px;
+      text-align:center;
+    }
+    .quarter-head { display:flex;flex-direction:column;align-items:center;gap:8px; }
+    .quarter-label { font-size:14px;font-weight:700;letter-spacing:.06em;color:var(--t2);text-transform:uppercase; }
+    .quarter-tools { display:flex;flex-direction:column;gap:7px;width:100%; }
+    .quarter-tool {
+      font-size:13px;color:var(--t2);line-height:1.5;
+    }
+    .quarter-tool strong { color:var(--text);font-weight:600; }
+
+    /* ── ROADMAP TABLE ── */
+    .rm-table { width: 100%; border-collapse: collapse; }
+    .rm-table thead th {
+      text-align: left; font-size: 11px; font-weight: 700; color: var(--t3);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0 16px 12px 0; border-bottom: 1px solid var(--border);
+    }
+    .rm-table tbody td { padding: 16px 16px 16px 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .rm-table tbody tr:last-child td { border-bottom: none; }
+    .rm-quarter { font-size: 13px; font-weight: 700; color: var(--text); white-space: nowrap; width: 80px; }
+    .rm-status-cell { width: 80px; }
+    .rm-badge {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px; white-space: nowrap; letter-spacing: .03em;
+    }
+    .rm-badge.done    { background: rgba(22,163,74,0.1);  color: var(--green); }
+    .rm-badge.active  { background: rgba(79,127,255,0.1); color: var(--blue); }
+    .rm-badge.plan    { background: var(--bg3); color: var(--t2); }
+    .rm-badge.outlook { background: var(--bg3); color: var(--t3); }
+    .rm-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .rm-tag { font-size: 12px; color: var(--t2); background: var(--bg3); padding: 3px 10px; border-radius: 6px; }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid var(--border); padding: 28px 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-left { font-size: 13px; color: var(--t2); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-link { font-size: 12px; color: var(--t3); text-decoration: none; transition: color 0.2s; }
+    .footer-link:hover { color: var(--t2); }
+
+    /* ── MODAL ── */
+    .modal-bg {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.5); backdrop-filter: blur(10px);
+      display: none; align-items: center; justify-content: center;
+    }
+    .modal-bg.open { display: flex; }
+    .modal {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px; width: 480px; position: relative;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.2);
+    }
+    .modal-x {
+      position: absolute; top: 14px; right: 14px; width: 30px; height: 30px;
+      border-radius: 8px; background: transparent; border: none;
+      color: var(--t2); font-size: 16px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+    }
+    .modal-x:hover { background: var(--bg3); }
+    .modal-title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .modal-sub { font-size: 13px; color: var(--t2); margin-bottom: 24px; }
+    .fgrp { margin-bottom: 14px; }
+    .flabel { font-size: 12px; font-weight: 600; color: var(--t2); margin-bottom: 6px; display: block; }
+    .finput, .fselect, .ftextarea {
+      width: 100%; background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 8px; padding: 10px 14px; color: var(--text);
+      font-size: 14px; font-family: inherit; outline: none; transition: border-color 0.2s;
+    }
+    .finput:focus, .fselect:focus, .ftextarea:focus { border-color: var(--blue); }
+    .fselect { cursor: pointer; }
+    .ftextarea { resize: vertical; min-height: 80px; }
+    .fsubmit {
+      width: 100%; padding: 13px; background: var(--grad);
+      border: none; border-radius: 10px; color: white;
+      font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 8px; transition: opacity 0.2s;
+    }
+    .fsubmit:hover { opacity: 0.88; }
+
+    /* ── WORKFLOW AXIS ── */
+    .axis-track { display: flex; flex-direction: column; position: relative; }
+    .axis-track::before {
+      content: ''; position: absolute; left: 7px; top: 21px; bottom: 21px;
+      width: 2px; background: var(--border);
+    }
+    .axis-col { display: flex; flex-direction: row; align-items: flex-start; gap: 20px; }
+    .axis-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 16px; }
+    .axis-node {
+      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+      margin-top: 16px; position: relative; z-index: 1;
+    }
+    .axis-node.live   { background: var(--green); }
+    .axis-node.active { background: var(--blue); }
+    .axis-node.plan   { background: var(--bg3); border: 2px solid var(--t3); }
+    .axis-right { flex: 1; padding-bottom: 32px; }
+    .axis-col:last-child .axis-right { padding-bottom: 0; }
+    .axis-stage-header { margin-bottom: 14px; padding-top: 10px; }
+    .axis-name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .axis-tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .axis-tool {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden; display: flex;
+      min-height: 88px;
+      box-shadow: var(--card-shadow); transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .axis-tool:hover { box-shadow: var(--card-hover); transform: translateY(-1px); }
+    .axis-tool-img { width: 72px; flex-shrink: 0; overflow: hidden; }
+    .axis-tool-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .axis-img-building { background: var(--bg3); display: flex; align-items: center; justify-content: center; }
+    .axis-img-building span { font-size: 9px; color: var(--t3); writing-mode: vertical-rl; letter-spacing: 2px; user-select: none; }
+    #toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(12px); background: var(--text); color: var(--bg); font-size: 12px; padding: 8px 16px; border-radius: 8px; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; white-space: nowrap; z-index: 9999; }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .axis-tool-body { flex: 1; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; }
+    .axis-tool-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .axis-tool-name { font-size: 13px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .axis-tool-desc { font-size: 11px; color: var(--t2); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: calc(11px * 1.5 * 2); }
+    .axis-tool-footer { display: flex; align-items: center; margin-top: auto; padding-top: 8px; }
+    .axis-status { font-size: 11px; font-weight: 500; white-space: nowrap; flex-shrink: 0; }
+    .axis-status.live { color: var(--green); }
+    .axis-status.dev  { color: var(--blue); }
+    .axis-status.beta { color: var(--amber); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .tools-grid { grid-template-columns: repeat(3,1fr); }
+      .tools-grid-3 { grid-template-columns: repeat(3,1fr); }
+    }
+    @media (max-width: 768px) {
+      .nav { padding: 0 24px; }
+      .hero { padding: 112px 24px 56px; }
+      .hero-title { font-size: 38px; }
+      .section { padding: 56px 24px; }
+      .divider { margin: 0 24px; }
+      .tools-grid { grid-template-columns: repeat(2,1fr); }
+      .tools-grid-3 { grid-template-columns: repeat(3,1fr); }
+      .cases-grid { grid-template-columns: 1fr; }
+      .stats-bar { flex-wrap: wrap; }
+      .stat-sep { display: none; }
+      .stat-item { flex: 0 0 50%; border-bottom: 1px solid var(--border); }
+      .rm-quarter { width: auto; }
+      .rm-status-cell { width: auto; }
+      .footer { flex-direction: column; gap: 14px; align-items: flex-start; padding: 24px; }
+    }
+    @media (max-width: 480px) {
+      .tools-grid { grid-template-columns: 1fr; }
+      .tools-grid-3 { grid-template-columns: 1fr; }
+      .hero-title { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">
+    <div class="nav-logo">
+      <img src="设计效能工具矩阵/FD+logo2-2.png" alt="FD+">
+    </div>
+  </div>
+  <div class="nav-right">
+    <a href="#tools"   class="nav-link">工具矩阵</a>
+
+    <a href="#roadmap" class="nav-link">路线图</a>
+    <button class="toggle" onclick="toggleTheme()" title="切换明暗模式">
+      <div class="toggle-thumb" id="toggle-icon">☀️</div>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-body">
+    <div class="hero-badge"><div class="badge-dot"></div>Design AI · v2.0 · 持续进化中</div>
+    <h1 class="hero-title">设计效能<span class="grad-text">工具矩阵</span></h1>
+    <p class="hero-sub">结合信贷保险支付三条业务线实际诉求，自建设计工具，覆盖物料生产、设计协作与代码化落地全链路，让设计师把时间花在更有价值的事情上。</p>
+  </div>
+</div>
+
+<!-- 生产提效 -->
+<div class="section" id="tools">
+  <div class="sec-eyebrow" style="text-align:center">设计生成提效 · 重点抓</div>
+  <div class="sec-title">素材要多少，跑出来就行</div>
+  <p class="sec-desc" style="text-align:center;max-width:480px;margin-left:auto;margin-right:auto">资源位、传播图、视频，批量生成多版本，单次出货，不用逐张逐个调</p>
+  <div class="tools-grid-3">
+
+    <!-- 秒创 -->
+    <div class="tool-card tool-card-img" style="cursor:pointer;" onclick="window.open('file:///Users/didi/Downloads/%E7%A7%92%E5%88%9B_v1.0_category_renamed.html')">
+      <div class="card-img-wrap">
+        <img src="设计效能工具矩阵/秒创-示意图.png" alt="秒创示意图" style="width:100%;height:100%;object-fit:cover;object-position:center 5%;display:block;">
+        <span class="card-img-badge">资源位</span>
+      </div>
+      <div class="card-img-body">
+        <div class="card-name">秒创</div>
+        <div class="card-desc">批量化生成营销素材 | 活动主图，适配司乘两端</div>
+        <div class="card-img-footer">
+          <span class="prog-label live">当前可用</span>
+          <button class="btn-use" onclick="event.stopPropagation();window.open('file:///Users/didi/Downloads/%E7%A7%92%E5%88%9B_v1.0_category_renamed.html')">去使用</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 速绘 -->
+    <div class="tool-card tool-card-img">
+      <div class="card-img-wrap">
+        <img src="设计效能工具矩阵/速绘-示意图.png" alt="速绘示意图" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;">
+        <span class="card-img-badge">传播图</span>
+      </div>
+      <div class="card-img-body">
+        <div class="card-name">速绘</div>
+        <div class="card-desc">反诈消保 | 保险推广 | 支付物料 | 流媒体图文生产</div>
+        <div class="card-img-footer">
+          <span class="prog-label beta">当前内测中</span>
+          <button class="btn-use">去使用</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 飞流 -->
+    <div class="tool-card tool-card-img">
+      <div class="card-img-wrap" style="position:relative;">
+        <img src="设计效能工具矩阵/飞流-示意图2.png" alt="飞流示意图" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;">
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;line-height:0;">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="22" cy="22" r="20" stroke="white" stroke-width="1.5" stroke-opacity="0.85"/>
+            <path d="M17 14L31 22L17 30Z" fill="white" fill-opacity="0.9"/>
+          </svg>
+        </div>
+        <span class="card-img-badge">视频化</span>
+      </div>
+      <div class="card-img-body">
+        <div class="card-name">飞流</div>
+        <div class="card-desc">选题 | 角色 | 剧本 | 视频自动化，出货量有规模</div>
+        <div class="card-img-footer">
+          <span class="prog-label live">当前可用</span>
+          <button class="btn-use">去使用</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 设计协作 & 质量保障 · 线性工作流 -->
+<div class="section" id="tools-collab">
+  <div class="sec-eyebrow">设计协作工具 · 全流程</div>
+  <div class="sec-title">哪个环节卡住，都有工具顶上</div>
+  <p class="sec-desc">从产品洞察到自主落地，把分散的协作环节串成一条可追踪的工作流</p>
+
+  <div class="tools-grid-2h">
+
+    <!-- 第一排：设计Skill -->
+    <div class="tool-card-h">
+      <div class="card-h-img">
+        <img src="设计效能工具矩阵/collab-d-editor.jpg" alt="可视化编辑器" style="object-position:center center">
+      </div>
+      <div class="card-h-body">
+        <div class="card-h-name">设计Skill · 可视化编辑器</div>
+        <div class="card-h-desc">设计说明不止是文字，让对方看懂比写得多更重要</div>
+        <div class="card-h-footer"><span class="prog-label live">当前可用</span><button class="btn-use" onclick="window.open('file:///Users/didi/Downloads/%E8%AE%BE%E8%AE%A1%E7%BB%84%E4%BB%B6%E7%BC%96%E8%BE%91%E5%99%A8.html','_blank')">去使用</button></div>
+      </div>
+    </div>
+
+    <div class="tool-card-h">
+      <div class="card-h-img">
+        <img src="设计效能工具矩阵/collab-f-loan.jpg" alt="滴水贷" style="object-position:center center">
+      </div>
+      <div class="card-h-body">
+        <div class="card-h-name">设计Skill · 滴水贷</div>
+        <div class="card-h-desc">信贷业务的设计决策沉淀，新需求开工就有参照</div>
+        <div class="card-h-footer"><span class="prog-label dev">当前进度 80%</span><button class="btn-use">去使用</button></div>
+      </div>
+    </div>
+
+    <div class="tool-card-h">
+      <div class="card-h-img">
+        <img src="设计效能工具矩阵/collab-e-payment.jpg" alt="信用购" style="object-position:center center">
+      </div>
+      <div class="card-h-body">
+        <div class="card-h-name">设计Skill · 信用购</div>
+        <div class="card-h-desc">信用购全链路设计逻辑，跨版本查起来不费劲</div>
+        <div class="card-h-footer"><span class="prog-label live">当前可用</span><button class="btn-use">去使用</button></div>
+      </div>
+    </div>
+
+    <!-- 第二排：Chrome 扩展 -->
+    <div class="tool-card-h">
+      <div class="card-h-img">
+        <img src="设计效能工具矩阵/collab-i-camera.jpg" alt="图镜" style="object-position:center center">
+      </div>
+      <div class="card-h-body">
+        <div class="card-h-name">图镜 · 提示词反推生图</div>
+        <div class="card-h-desc">右键任意网页图片，AI 自动反推提示词并直接生成新图</div>
+        <div class="card-h-footer"><span class="prog-label dev">建设中</span><button class="btn-use">去使用</button></div>
+      </div>
+    </div>
+
+    <div class="tool-card-h">
+      <div class="card-h-img">
+        <img src="设计效能工具矩阵/collab-j-photo.jpg" alt="留影" style="object-position:center center">
+      </div>
+      <div class="card-h-body">
+        <div class="card-h-name">留影 · 视频分镜分析器</div>
+        <div class="card-h-desc">任意网站视频直接拆，AI 分析叙事结构、镜头语言和创作手法</div>
+        <div class="card-h-footer"><span class="prog-label dev">建设中</span><button class="btn-use">去使用</button></div>
+      </div>
+    </div>
+
+    <div class="tool-card-h">
+      <div class="card-h-img">
+        <img src="设计效能工具矩阵/collab-k-book.jpg" alt="抓书" style="object-position:center center">
+      </div>
+      <div class="card-h-body">
+        <div class="card-h-name">抓书 · 小红书爆款收集器</div>
+        <div class="card-h-desc">正常刷小红书就在积累数据，爆款排行、封面图、表格随时导出</div>
+        <div class="card-h-footer"><span class="prog-label dev">建设中</span><button class="btn-use">去使用</button></div>
+      </div>
+    </div>
+
+    <!-- 第三排：其他工具 -->
+    <div class="tool-card-h">
+      <div class="card-h-img">
+        <img src="设计效能工具矩阵/collab-a-research.jpg" alt="竞品分析" style="object-position:center 30%">
+      </div>
+      <div class="card-h-body">
+        <div class="card-h-name">竞品分析自动化</div>
+        <div class="card-h-desc">把竞品的功能和视觉摸清楚，结构化整理，不靠感觉开始设计</div>
+        <div class="card-h-footer"><span class="prog-label live">当前可用</span><button class="btn-use">去使用</button></div>
+      </div>
+    </div>
+
+    <div class="tool-card-h">
+      <div class="card-h-img">
+        <img src="设计效能工具矩阵/collab-c-present.jpg" alt="提案助手" style="object-position:center center">
+      </div>
+      <div class="card-h-body">
+        <div class="card-h-name">提案助手</div>
+        <div class="card-h-desc">PRD 来了先把方案框架拆一遍，弄清楚画什么再动手</div>
+        <div class="card-h-footer"><span class="prog-label live">当前可用</span><button class="btn-use">去使用</button></div>
+      </div>
+    </div>
+
+    <div class="tool-card-h">
+      <div class="card-h-img">
+        <img src="设计效能工具矩阵/collab-h-design.jpg" alt="还原度检测" style="object-position:center center">
+      </div>
+      <div class="card-h-body">
+        <div class="card-h-name">还原度检测</div>
+        <div class="card-h-desc">稿子和实现逐像素对比，偏了多少一眼就知道</div>
+        <div class="card-h-footer"><span class="prog-label dev">当前进度 30%</span><button class="btn-use">去使用</button></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ROADMAP -->
+<div class="section" id="roadmap">
+  <div class="sec-eyebrow">建设路线图</div>
+  <div class="sec-title">按月维度，持续更新</div>
+  <p class="sec-desc">按月迭代工具，每个阶段都有具体能用上的东西</p>
+  <div class="quarter-grid">
+
+    <div class="quarter-card">
+      <div class="quarter-head">
+        <span class="quarter-label">Q1 2026</span>
+        <span class="rm-badge done">已完成</span>
+      </div>
+      <div class="quarter-tools">
+        <div class="quarter-tool"><strong>跨岗位协作</strong>—行业调研</div>
+        <div class="quarter-tool"><strong>小工具</strong>—体验走查</div>
+        <div class="quarter-tool"><strong>小工具</strong>—竞品分析</div>
+        <div class="quarter-tool"><strong>团队设计Skill</strong>—调研及基建</div>
+      </div>
+    </div>
+
+    <div class="quarter-card">
+      <div class="quarter-head">
+        <span class="quarter-label">Q2 2026</span>
+        <span class="rm-badge active">进行中</span>
+      </div>
+      <div class="quarter-tools">
+        <div class="quarter-tool"><strong>秒创 1.0</strong>—批量生成并接入模型</div>
+        <div class="quarter-tool"><strong>速绘</strong>—图文批量生产</div>
+        <div class="quarter-tool"><strong>飞流</strong>—视频批量制作</div>
+        <div class="quarter-tool"><strong>团队设计Skill</strong>—还原度50%</div>
+      </div>
+    </div>
+
+    <div class="quarter-card">
+      <div class="quarter-head">
+        <span class="quarter-label">Q3 2026</span>
+        <span class="rm-badge plan">规划中</span>
+      </div>
+      <div class="quarter-tools">
+        <div class="quarter-tool"><strong>秒创 1.1</strong>—接入合规判断和检测</div>
+        <div class="quarter-tool"><strong>秒创 2.0</strong>—接入数据面板</div>
+        <div class="quarter-tool"><strong>智图</strong>—跨端素材适配</div>
+        <div class="quarter-tool"><strong>团队设计Skill</strong>—还原度70%</div>
+      </div>
+    </div>
+
+    <div class="quarter-card">
+      <div class="quarter-head">
+        <span class="quarter-label">Q4 2026</span>
+        <span class="rm-badge plan">规划中</span>
+      </div>
+      <div class="quarter-tools">
+        <div class="quarter-tool"><strong>秒创 2.2</strong>—交付运营团队</div>
+        <div class="quarter-tool"><strong>统一数据看板</strong>—上线</div>
+        <div class="quarter-tool"><strong>多品牌设计适配</strong></div>
+        <div class="quarter-tool"><strong>团队设计Skill</strong>—还原度90%</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-left">设计效能工具矩阵 · 滴滴金融设计团队 &nbsp;·&nbsp; © 2026</div>
+  <div class="footer-links">
+    <a href="#" class="footer-link">设计规范库</a>
+    <a href="#" class="footer-link">内部 Wiki</a>
+    <a href="#" class="footer-link">联系我们</a>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modal-bg" onclick="closeModalBg(event)">
+  <div class="modal">
+    <button class="modal-x" onclick="closeModal()">✕</button>
+    <div class="modal-title">申请试用</div>
+    <div class="modal-sub">填写信息后，设计团队将在 1–2 个工作日内与您联系</div>
+    <form onsubmit="submitForm(event)">
+      <div class="fgrp"><label class="flabel">姓名</label><input class="finput" type="text" placeholder="你的名字" required></div>
+      <div class="fgrp"><label class="flabel">部门</label><input class="finput" type="text" placeholder="所在部门" required></div>
+      <div class="fgrp">
+        <label class="flabel">申请工具</label>
+        <select class="fselect" required>
+          <option value="">请选择工具</option>
+          <option>秒创</option><option>速绘</option><option>飞流</option>
+          <option>竞品分析自动化</option><option>设计Skill-可视化编辑器</option>
+          <option>走查协助工具</option><option>其他 / 多个</option>
+        </select>
+      </div>
+      <div class="fgrp"><label class="flabel">使用场景</label><textarea class="ftextarea" placeholder="简要描述使用场景与预期效果…"></textarea></div>
+      <button type="submit" class="fsubmit">提交申请</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  /* Theme */
+  const html = document.documentElement;
+  const icon = document.getElementById('toggle-icon');
+  const saved = localStorage.getItem('cockpit-theme');
+  if (saved) { html.setAttribute('data-theme', saved); icon.textContent = saved === 'dark' ? '🌙' : '☀️'; }
+
+  function toggleTheme() {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    icon.textContent = next === 'dark' ? '🌙' : '☀️';
+    localStorage.setItem('cockpit-theme', next);
+  }
+
+  /* Particle canvas */
+  (function () {
+    const c = document.getElementById('hero-canvas');
+    const ctx = c.getContext('2d');
+    let W, H;
+    function resize() { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; }
+    resize(); window.addEventListener('resize', resize);
+    const pts = Array.from({length: 50}, () => ({
+      x: Math.random() * 1400, y: Math.random() * 600,
+      vx: (Math.random()-.5)*.28, vy: (Math.random()-.5)*.28,
+      r: Math.random()*1.4+.5, a: Math.random()*.3+.1
+    }));
+    function frame() {
+      ctx.clearRect(0,0,W,H);
+      for (let i=0;i<pts.length;i++) {
+        for (let j=i+1;j<pts.length;j++) {
+          const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.sqrt(dx*dx+dy*dy);
+          if (d<130) {
+            ctx.beginPath(); ctx.strokeStyle=`rgba(79,127,255,${.1*(1-d/130)})`; ctx.lineWidth=.5;
+            ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y); ctx.stroke();
+          }
+        }
+        const p=pts[i];
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(79,127,255,${p.a})`; ctx.fill();
+        p.x+=p.vx; p.y+=p.vy;
+        if(p.x<0||p.x>W) p.vx*=-1; if(p.y<0||p.y>H) p.vy*=-1;
+      }
+      requestAnimationFrame(frame);
+    }
+    frame();
+  })();
+
+  /* Counters */
+  function animateNum(el) {
+    const target=+el.dataset.target, suffix=el.dataset.suffix||'', t0=performance.now(), dur=2200;
+    (function tick(now){
+      const p=Math.min((now-t0)/dur,1), e=1-Math.pow(1-p,3);
+      el.textContent=Math.floor(target*e).toLocaleString()+suffix;
+      if(p<1) requestAnimationFrame(tick);
+    })(t0);
+  }
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ animateNum(e.target); io.unobserve(e.target); } });
+  },{threshold:0.6});
+  document.querySelectorAll('[data-target]').forEach(el=>io.observe(el));
+
+  /* Tabs */
+  function switchTab(btn, cat) {
+    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tool-card').forEach(c=>{
+      c.style.display=(cat==='all'||c.dataset.cat===cat)?'flex':'none';
+    });
+  }
+
+  /* Modal */
+  function openModal(){ document.getElementById('modal-bg').classList.add('open'); }
+  function closeModal(){ document.getElementById('modal-bg').classList.remove('open'); }
+  function closeModalBg(e){ if(e.target===document.getElementById('modal-bg')) closeModal(); }
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+  function submitForm(e){
+    e.preventDefault();
+    const btn=e.target.querySelector('.fsubmit');
+    btn.textContent='✓ 提交成功，1–2 个工作日内回复';
+    btn.style.background='#16A34A';
+    setTimeout(closeModal, 2200);
+  }
+
+  // 本地文件跳转：复制路径到剪贴板并弹 toast
+  function openLocalTool(path) {
+    navigator.clipboard.writeText(path).then(() => {
+      const t = document.getElementById('toast');
+      t.textContent = '路径已复制 · 粘贴到浏览器地址栏打开';
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2400);
+    });
+  }
+
+  // 当前进度(dev)状态 → 按钮禁用 + 文案改为"建设中"
+  document.querySelectorAll('.prog-label.dev, .axis-status.dev').forEach(status => {
+    const footer = status.closest('.card-img-footer, .axis-tool-footer');
+    if (!footer) return;
+    const btn = footer.querySelector('.btn-use');
+    if (btn) { btn.textContent = '建设中'; btn.disabled = true; }
+  });
+</script>
+<div id="toast"></div>
+</body>
+</html>
