@@ -1190,63 +1190,96 @@ function genRecReason(item) {
   const raw = item.titleOriginal || item.title || '';
   const desc = String(item.description || '').replace(/<[^>]*>/g, ' ').slice(0, 200);
   const full = raw + ' ' + desc;
-  const tags = [];
 
-  // 1) 提取模型/产品名称
-  const modelRe = /\b(GPT-[\w.]+|o\d[\w.-]*|Claude[\s\w.-]{0,15}|Gemini[\s\w.-]{0,10}|Llama[\s\w.-]{0,10}|Mistral[\w.-]+|Sora|DALL-E[\s\d]*|Stable Diffusion|Midjourney|Runway|Kling|Veo[\s\d]*|Imagen[\s\d]*|Grok[\s\d]*)\b/i;
-  const modelM = raw.match(modelRe);
-  if (modelM) tags.push(modelM[0].trim());
+  // 提取模型/产品名（作为句子主语）
+  const modelRe = /\b(GPT-[\w.]+|o\d[\w.-]*|Claude[\s\w.-]{0,12}|Gemini[\s\w.-]{0,8}|Llama[\s\w.-]{0,8}|Mistral[\w.-]+|Sora|DALL-E[\s\d]*|Stable Diffusion|Midjourney|Runway|Kling|Veo[\s\d]*|Grok[\s\d]*)\b/i;
+  const model = (raw.match(modelRe) || [])[0]?.trim();
 
-  // 2) 提取数字指标（融资额、倍率、参数量、得分）
-  const numRe = /\$[\d,.]+\s*[BMK]?(?:\s*(?:billion|million|万|亿))?|\b\d+(?:\.\d+)?[xX](?:\s*(?:faster|speed|提速))?|\b\d+(?:\.\d+)?%|\b\d+[BMK]\s*(?:tokens?|params?|参数)/i;
-  const numM = raw.match(numRe);
-  if (numM) tags.push(numM[0].trim());
+  // 提取数字指标
+  const numRe = /\$[\d,.]+\s*[BMK]?(?:\s*(?:billion|million))?|\b\d+(?:\.\d+)?[xX]|\b\d+(?:\.\d+)?%|\b\d+[BMK]\s*(?:tokens?|params?)/i;
+  const num = (raw.match(numRe) || [])[0]?.trim();
 
-  // 3) 匹配核心技术/场景关键词（按具体度排序）
-  const concepts = [
-    [/\bmultimodal|多模态\b/i,           '多模态'],
-    [/\breasoning|chain.of.thought|思维链\b/i, '推理能力'],
-    [/\bagent|agentic|自主智能体\b/i,   'Agent'],
-    [/\bfine.?tun|微调\b/i,             '微调'],
-    [/\brlhf|alignment|对齐\b/i,        '对齐'],
-    [/\bopen.?source|开源\b/i,          '开源'],
-    [/\bbenchmark|leaderboard|评测\b/i, '能力评测'],
-    [/\bcontext.window|长上下文|long.context\b/i, '长上下文'],
-    [/\blatency|inference.speed|推理提速\b/i, '推理提速'],
-    [/\bpricing|cost|定价|成本\b/i,     '定价策略'],
-    [/\bsafety|safe|安全对齐\b/i,       '安全对齐'],
-    [/\bregulat|policy|法规|监管\b/i,   '监管动向'],
-    [/\bfund|invest|融资|raise\b/i,     '融资'],
-    [/\bacquir|merger|收购\b/i,         '并购'],
-    [/\bvideo|视频生成\b/i,             '视频生成'],
-    [/\bimage.gen|生图|文生图\b/i,      '生图'],
-    [/\bcode|coding|编程\b/i,           '代码生成'],
-    [/\bembedding|rag|检索\b/i,         'RAG检索'],
-    [/\bcomputer.?vision|cv\b/i,        '计算机视觉'],
-  ];
-  for (const [re, label] of concepts) {
-    if (tags.length >= 3) break;
-    if (re.test(full) && !tags.includes(label)) tags.push(label);
+  // 识别事件类型，返回对应的描述句式
+  const is = re => re.test(full);
+
+  if (is(/\bfund|invest|融资|raise|valuat|估值/i)) {
+    const who = model || (raw.match(/\b(OpenAI|Anthropic|DeepMind|Meta|Google|Microsoft|Baidu|ByteDance|Mistral|xAI)\b/i) || [])[0] || '该公司';
+    return num
+      ? `${who} 完成 ${num} 融资，资本持续押注 AI 赛道的核心信号。`
+      : `${who} 最新融资动态，折射当前 AI 赛道的资本走向与竞争格局。`;
   }
-
-  // 4) 源站兜底（最后填位）
-  if (tags.length < 2) {
-    const src = item._feed?.name;
+  if (is(/\bacquir|merger|收购|并购/i)) {
+    return model
+      ? `涉及 ${model} 的并购整合，AI 产业链重组的重要节点。`
+      : '重大并购动态，AI 行业格局调整的关键信号。';
+  }
+  if (is(/\bregulat|policy|法规|监管|compliance|ban|禁止/i)) {
+    return '监管政策收紧，对 AI 产品合规路径与出海策略有直接影响。';
+  }
+  if (is(/\bopen.?source|开源|open.?weight/i)) {
+    const who = model || 'AI 开源项目';
+    return `${who} 开源发布，降低使用门槛，值得关注其生态影响力。`;
+  }
+  if (is(/\bbenchmark|leaderboard|MMLU|HumanEval|评测|排行/i)) {
+    return model
+      ? `${model} 评测结果出炉，能力边界与竞品差距值得深入对比。`
+      : '最新能力评测出炉，横向对比各模型真实表现的重要参考。';
+  }
+  if (is(/\breasoning|chain.of.thought|思维链|思考模式/i)) {
+    return model
+      ? `${model} 推理能力升级，复杂问题求解与逻辑链路有显著提升。`
+      : '推理能力突破，AI 处理复杂任务的关键技术进展。';
+  }
+  if (is(/\bmultimodal|多模态|vision|视觉理解/i)) {
+    return model
+      ? `${model} 多模态能力更新，图文理解与跨模态交互的重要进展。`
+      : '多模态技术进展，视觉与语言融合应用的新可能。';
+  }
+  if (is(/\bagent|agentic|autonomous|自主|工作流/i)) {
+    return model
+      ? `${model} Agent 能力强化，自动化工作流落地又近一步。`
+      : 'AI Agent 最新进展，自主任务执行能力的重要演进节点。';
+  }
+  if (is(/\bvideo|视频生成|text.to.video/i)) {
+    return model
+      ? `${model} 视频生成能力发布，创作工具链的重要补充。`
+      : '视频生成新突破，AI 创作工具链的能力边界再次扩展。';
+  }
+  if (is(/\bimage.gen|生图|text.to.image|文生图/i)) {
+    return model
+      ? `${model} 生图效果更新，设计师与创作者值得上手体验。`
+      : 'AI 生图新进展，视觉创作工具的能力与易用性持续提升。';
+  }
+  if (is(/\bcode|coding|编程|develope|developer/i)) {
+    return model
+      ? `${model} 代码生成能力提升，开发效率与辅助编程场景的重要参考。`
+      : 'AI 编程能力新进展，开发者工具链的重要动态。';
+  }
+  if (is(/\bpricing|price|cost|定价|收费|付费/i)) {
+    return model
+      ? `${model} 定价策略调整，直接影响开发者成本与产品商业化节奏。`
+      : '定价策略变动，对 AI 产品的商业模式与用户选择有直接影响。';
+  }
+  if (is(/\bsafety|alignment|对齐|安全|risk|风险/i)) {
+    return model
+      ? `${model} 安全对齐进展，AI 可信度与部署边界的关键参考。`
+      : 'AI 安全对齐动态，影响模型部署策略与行业信任基础。';
+  }
+  if (model) {
     const cat = item._aiCat || '';
-    if (src) tags.unshift(src);
-    const fallbacks = {
-      'ai-models':    '模型迭代',
-      'ai-products':  '产品落地',
-      'paper':        '前沿研究',
-      'industry':     '行业动向',
-      'design':       '设计前沿',
-    };
-    const fb = fallbacks[cat];
-    if (fb && !tags.includes(fb)) tags.push(fb);
-    if (tags.length < 2) tags.push('精选收录');
+    if (cat === 'paper' || is(/\bresearch|论文|study|experiment/i))
+      return `${model} 最新研究成果，技术演进方向的前沿信号。`;
+    return `${model} 重要动态，关注其能力进展与行业影响。`;
   }
 
-  return tags.slice(0, 3).join(' · ');
+  // 兜底：分类句
+  const cat = item._aiCat || '';
+  if (cat === 'ai-models') return '大模型能力演进的关键节点，值得持续跟踪。';
+  if (cat === 'ai-products') return 'AI 产品落地新进展，设计与工程实践的参考样本。';
+  if (cat === 'paper')      return '前沿学术成果，把握 AI 技术走向的重要一手信号。';
+  if (cat === 'industry')   return '行业资本与战略动向，AI 商业化进程的观察窗口。';
+  if (cat === 'design')     return 'AI 与设计的交叉前沿，创作者与设计师值得关注。';
+  return '精选内容，覆盖 AI 行业核心进展，值得深度阅读。';
 }
 
 const TABS = [
