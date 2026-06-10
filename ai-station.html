@@ -856,7 +856,7 @@
       /* 主内容区全宽，底部留底栏空间 */
       .main {
         overflow: visible;
-        padding: 14px 14px 80px;
+        padding: 14px 16px 80px;
         height: auto;
       }
       /* 日报三列 → 纵向堆叠 */
@@ -876,14 +876,18 @@
       .archive-month-group + .archive-month-group { margin-top: 0; padding-top: 0; border-top: none; }
       .archive-month-rows { display: flex !important; flex-direction: row; gap: 2px; }
       .archive-day-row { min-width: 38px; padding: 5px 6px; margin: 0; font-size: 12px; }
-      .daily-content-col { overflow: visible; padding: 14px 14px 20px; }
+      .daily-content-col { overflow: visible; padding: 14px 16px 20px; }
 
       /* 日报大标题缩小 */
       .dnp-title { font-size: 30px; }
 
-      /* 卡片间距微调 */
-      .section-header { flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-      .source-pills { font-size: 10px; }
+      /* 标题与间距微调 */
+      .section-header { flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+      .section-title { font-size: 16px; }
+      .source-pills { font-size: 10px; margin-bottom: 12px; }
+      /* 日报时间轴列宽收窄 */
+      .dnp-row { grid-template-columns: 60px 1fr; }
+      .dnp-card-list::after { left: 30px; }
 
       /* ── 移动端顶栏 ── */
       .mobile-header {
