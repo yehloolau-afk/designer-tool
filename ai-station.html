@@ -881,13 +881,15 @@
       /* 日报大标题缩小 */
       .dnp-title { font-size: 30px; }
 
-      /* 推荐理由：左侧改为图标+推荐字样纵向堆叠，文本宽度更大 */
+      /* 推荐理由：左侧「推荐/理由」纵向排列，短竖线分隔 */
       .rec-tip-label {
-        display: flex; flex-direction: column; align-items: center;
-        font-size: 0; min-width: 26px; gap: 2px; padding-top: 0;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        font-size: 0; min-width: 18px; gap: 0; padding-top: 0;
+        border-right: 1.5px solid rgba(208,25,34,0.3);
+        padding-right: 7px; align-self: stretch;
       }
-      .rec-tip-label::before { content: '💡'; font-size: 13px; line-height: 1; }
-      .rec-tip-label::after  { content: '推荐'; font-size: 9px; font-weight: 700; color: var(--accent); }
+      .rec-tip-label::before { content: '推荐'; font-size: 9px; font-weight: 700; color: var(--accent); line-height: 1.5; }
+      .rec-tip-label::after  { content: '理由'; font-size: 9px; font-weight: 700; color: var(--accent); line-height: 1.5; }
 
       /* 标题与间距微调 */
       .section-header { flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
