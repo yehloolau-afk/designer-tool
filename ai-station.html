@@ -911,31 +911,80 @@
       }
       .mobile-refresh-btn:active { color: var(--accent); }
 
-      /* ── 移动端底部 tab 导航 ── */
+      /* ── 移动端底部 tab 导航（5个平分） ── */
       .mobile-nav {
         display: flex !important;
         position: fixed; bottom: 0; left: 0; right: 0;
         background: var(--sidebar-bg);
         border-top: 1px solid var(--border);
-        overflow-x: auto; z-index: 200;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
+        z-index: 202;
         padding-bottom: env(safe-area-inset-bottom, 0);
       }
-      .mobile-nav::-webkit-scrollbar { display: none; }
       .mob-tab-btn {
+        flex: 1; min-width: 0;
         display: flex; flex-direction: column;
         align-items: center; justify-content: center;
-        padding: 6px 14px 8px; min-width: 56px;
+        padding: 6px 4px 8px;
         border: none; background: transparent;
         color: var(--muted); cursor: pointer;
-        transition: color 0.12s; gap: 2px; flex-shrink: 0;
+        transition: color 0.12s; gap: 2px;
       }
       .mob-tab-btn.active { color: var(--accent); }
       .mob-tab-icon { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
       .mob-tab-icon svg { width: 20px; height: 20px; }
       .mob-tab-label { font-size: 10px; font-weight: 500; white-space: nowrap; }
       .mob-tab-btn.active .mob-tab-label { font-weight: 700; }
+
+      /* ── 产品组浮层 ── */
+      .mob-more-backdrop {
+        display: none;
+        position: fixed; inset: 0; z-index: 200;
+      }
+      .mob-more-backdrop.open { display: block; }
+      .mob-more-panel {
+        display: flex; flex-direction: row;
+        position: fixed;
+        bottom: calc(56px + env(safe-area-inset-bottom, 0px));
+        left: 0; right: 0;
+        background: var(--sidebar-bg);
+        border: 1px solid var(--border);
+        border-bottom: none;
+        border-radius: 16px 16px 0 0;
+        z-index: 201;
+        padding: 24px 16px 16px;
+        gap: 10px;
+        box-shadow: 0 -8px 24px rgba(0,0,0,0.1);
+        transform: translateY(110%);
+        transition: transform 0.22s cubic-bezier(0.32, 0.72, 0, 1);
+        pointer-events: none;
+      }
+      .mob-more-panel.open { transform: translateY(0); pointer-events: auto; }
+      .mob-more-handle {
+        position: absolute; top: 8px; left: 50%;
+        transform: translateX(-50%);
+        width: 36px; height: 4px;
+        background: var(--border); border-radius: 2px;
+      }
+      .mob-more-opt {
+        flex: 1;
+        display: flex; flex-direction: column;
+        align-items: center; gap: 8px;
+        padding: 14px 8px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: transparent;
+        color: var(--muted); cursor: pointer;
+        transition: all 0.12s;
+      }
+      .mob-more-opt.active {
+        background: var(--accent-muted);
+        border-color: rgba(208,25,34,0.3);
+        color: var(--accent);
+      }
+      .mob-more-opt-icon { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
+      .mob-more-opt-icon svg { width: 20px; height: 20px; }
+      .mob-more-opt-label { font-size: 12px; font-weight: 500; white-space: nowrap; }
+      .mob-more-opt.active .mob-more-opt-label { font-weight: 700; }
     }
   </style>
 </head>
@@ -989,6 +1038,10 @@
 
 <!-- 移动端底部 tab 导航（手机显示，PC隐藏） -->
 <nav class="mobile-nav" id="mobileNav"></nav>
+
+<!-- 移动端产品组浮层 -->
+<div class="mob-more-backdrop" id="mobMoreBackdrop" onclick="closeMobMore()"></div>
+<div class="mob-more-panel" id="mobMorePanel"></div>
 
 <script>
 const API = 'https://api.rss2json.com/v1/api.json';
@@ -1326,8 +1379,14 @@ const TABS = [
   }
 ];
 
+// 移动端产品组：这三个 tab 在移动端合并为第5个 tab
+const MOB_GROUP_IDS = ['products', 'design', 'videos'];
+// 移动端固定5个 tab 的顺序（全部 | 日报 | 精选 | 官方 | 产品组）
+const MOB_NAV_ORDER = ['all', 'daily', 'featured', 'official'];
+
 // State
 let activeTab = 'featured';
+let mobGroupActiveId = 'products'; // 产品组当前选中的 sub-tab
 let jobsRegion = 'global';   // 'global' | 'domestic'
 let allCatFilter = 'all';    // 'all' | 'ai-models' | 'ai-products' | 'industry' | 'paper'
 const cache = {};          // { tabId: { items, feedErrors, ts } }
@@ -1532,18 +1591,28 @@ function renderNav() {
       ${counts[t.id] != null ? `<span class="tab-count">${counts[t.id]}</span>` : ''}
     </button>`).join('');
 
-  // 移动端底部导航
+  // 移动端底部导航（固定5个）
   const mobileNav = document.getElementById('mobileNav');
   if (mobileNav) {
-    mobileNav.innerHTML = tabs.map(t => `
-      <button class="mob-tab-btn ${t.id === activeTab ? 'active' : ''}"
+    const isGroupActive = MOB_GROUP_IDS.includes(activeTab);
+    if (isGroupActive) mobGroupActiveId = activeTab;
+    const groupTab = TABS.find(t => t.id === mobGroupActiveId) || TABS.find(t => t.id === 'products');
+    const groupLabel = isGroupActive ? groupTab.name.replace(/^AI\s/, '') : '产品';
+
+    mobileNav.innerHTML = MOB_NAV_ORDER.map(id => {
+      const t = TABS.find(t => t.id === id);
+      if (!t) return '';
+      return `<button class="mob-tab-btn ${t.id === activeTab ? 'active' : ''}"
               onclick="switchTab('${t.id}')">
         <span class="mob-tab-icon">${t.icon}</span>
         <span class="mob-tab-label">${t.name.replace(/^AI\s/, '')}</span>
-      </button>`).join('');
-    // 当前 tab 自动滚入视图
-    const activeBtn = mobileNav.querySelector('.mob-tab-btn.active');
-    if (activeBtn) activeBtn.scrollIntoView({ inline: 'center', behavior: 'smooth', block: 'nearest' });
+      </button>`;
+    }).join('') + `
+    <button class="mob-tab-btn ${isGroupActive ? 'active' : ''}" id="mob-more-btn"
+            onclick="toggleMobMore()">
+      <span class="mob-tab-icon">${groupTab.icon}</span>
+      <span class="mob-tab-label">${groupLabel}</span>
+    </button>`;
   }
 }
 
@@ -1575,6 +1644,42 @@ function scheduleFullLoad(id, tab, activeFeedList, cacheKey, prevErrors, aiHotIt
       if (activeTab === id) renderTab(tab, items, feedErrors);
     }
   }, 1500);
+}
+
+// ── 移动端产品组浮层 ─────────────────────────────────────
+function toggleMobMore() {
+  const panel = document.getElementById('mobMorePanel');
+  const backdrop = document.getElementById('mobMoreBackdrop');
+  if (!panel) return;
+  if (panel.classList.contains('open')) {
+    closeMobMore();
+  } else {
+    renderMobMorePanel();
+    panel.classList.add('open');
+    backdrop?.classList.add('open');
+  }
+}
+function renderMobMorePanel() {
+  const panel = document.getElementById('mobMorePanel');
+  if (!panel) return;
+  panel.innerHTML = '<div class="mob-more-handle"></div>' +
+    MOB_GROUP_IDS.map(id => {
+      const t = TABS.find(t => t.id === id);
+      if (!t) return '';
+      return `<button class="mob-more-opt ${activeTab === id ? 'active' : ''}" onclick="selectMobMore('${id}')">
+        <span class="mob-more-opt-icon">${t.icon}</span>
+        <span class="mob-more-opt-label">${t.name}</span>
+      </button>`;
+    }).join('');
+}
+function selectMobMore(id) {
+  closeMobMore();
+  mobGroupActiveId = id;
+  switchTab(id);
+}
+function closeMobMore() {
+  document.getElementById('mobMorePanel')?.classList.remove('open');
+  document.getElementById('mobMoreBackdrop')?.classList.remove('open');
 }
 
 // ── Tab switch ────────────────────────────────────────
