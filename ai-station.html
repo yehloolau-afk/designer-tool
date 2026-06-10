@@ -1389,8 +1389,8 @@ const TABS = [
 
 // 移动端产品组：这三个 tab 在移动端合并为第5个 tab
 const MOB_GROUP_IDS = ['products', 'design', 'videos'];
-// 移动端固定5个 tab 的顺序（全部 | 日报 | 精选 | 官方 | 产品组）
-const MOB_NAV_ORDER = ['all', 'daily', 'featured', 'official'];
+// 移动端固定5个 tab 的顺序（精选 | 日报 | 官方动态 | 全部动态 | 更多）
+const MOB_NAV_ORDER = ['featured', 'daily', 'official', 'all'];
 
 // State
 let activeTab = 'featured';
@@ -1605,7 +1605,7 @@ function renderNav() {
     const isGroupActive = MOB_GROUP_IDS.includes(activeTab);
     if (isGroupActive) mobGroupActiveId = activeTab;
     const groupTab = TABS.find(t => t.id === mobGroupActiveId) || TABS.find(t => t.id === 'products');
-    const groupLabel = isGroupActive ? groupTab.name.replace(/^AI\s/, '') : '产品';
+    const groupLabel = isGroupActive ? groupTab.name.replace(/^AI\s/, '') : '更多';
 
     mobileNav.innerHTML = MOB_NAV_ORDER.map(id => {
       const t = TABS.find(t => t.id === id);
