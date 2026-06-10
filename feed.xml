@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>飞翔的AI资讯站 · 每日精选</title>
+    <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
+    <description>每日精选 AI 行业最值得关注的动态——模型更新、产品发布、设计趋势</description>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 10 Jun 2026 11:11:01 +0000</lastBuildDate>
+    <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>From data to decisions: how LSEG is scaling trusted AI</title>
+      <link>https://openai.com/index/lseg</link>
+      <description>See how LSEG uses OpenAI to scale trusted AI across its global business, accelerating insights, shrinking release cycles, and empowering 4,000 employees.</description>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="true">https://openai.com/index/lseg</guid>
+      <source url="https://openai.com/index/lseg">OpenAI Blog</source>
+    </item>
+    <item>
+      <title>How engineers at Nextdoor use Codex to build without limits</title>
+      <link>https://openai.com/index/nextdoor</link>
+      <description>How engineers at Nextdoor use Codex with GPT-5.5 to investigate hard-to-reproduce issues, build across platforms, and focus on product outcomes.</description>
+      <pubDate>Tue, 09 Jun 2026 12:00:00 +0000</pubDate>
+      <guid isPermaLink="true">https://openai.com/index/nextdoor</guid>
+      <source url="https://openai.com/index/nextdoor">OpenAI Blog</source>
+    </item>
+    <item>
+      <title>What Codex unlocks for Notion</title>
+      <link>https://openai.com/index/notion</link>
+      <description>How Notion uses Codex to one-shot specs, build AI Voice Input for the web, and multiply engineering power across small teams.</description>
+      <pubDate>Tue, 09 Jun 2026 10:00:00 +0000</pubDate>
+      <guid isPermaLink="true">https://openai.com/index/notion</guid>
+      <source url="https://openai.com/index/notion">OpenAI Blog</source>
+    </item>
+    <item>
+      <title>Industrial policy for the Intelligence Age</title>
+      <link>https://openai.com/index/industrial-policy-for-the-intelligence-age</link>
+      <description>Explore our ambitious, people-first industrial policy ideas for the AI era—focused on expanding opportunity, sharing prosperity, and building resilient institutions as advanced intelligence evolves.</description>
+      <pubDate>Tue, 09 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="true">https://openai.com/index/industrial-policy-for-the-intelligence-age</guid>
+      <source url="https://openai.com/index/industrial-policy-for-the-intelligence-age">OpenAI Blog</source>
+    </item>
+    <item>
+      <title>Confidential submission of draft S-1 to the SEC</title>
+      <link>https://openai.com/index/openai-submits-confidential-s-1</link>
+      <description>OpenAI confirms a confidential S-1 submission to the SEC and has not yet determined timing for further action.</description>
+      <pubDate>Mon, 08 Jun 2026 14:00:00 +0000</pubDate>
+      <guid isPermaLink="true">https://openai.com/index/openai-submits-confidential-s-1</guid>
+      <source url="https://openai.com/index/openai-submits-confidential-s-1">OpenAI Blog</source>
+    </item>
+    <item>
+      <title>Generative AI to quantify uncertainty in weather forecasting</title>
+      <link>http://blog.research.google/2024/03/generative-ai-to-quantify-uncertainty.html</link>
+      <description>&lt;span class="byline-author"&gt;Posted by Lizao (Larry) Li, Software Engineer, and Rob Carver, Research Scientist, Google Research&lt;/span&gt;
+
+&lt;img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEglI5U51vvhkA4cAuVvMLn0TbbL5pdlFL-LO1sNnqLyUieA6A88I5HrhJlszxR1GKQqSK5wsdlATDKSy6EC1BsNF7tzS6oVlF</description>
+      <pubDate>Fri, 29 Mar 2024 11:03:00 -0700</pubDate>
+      <guid isPermaLink="true">http://blog.research.google/2024/03/generative-ai-to-quantify-uncertainty.html</guid>
+      <source url="http://blog.research.google/2024/03/generative-ai-to-quantify-uncertainty.html">Google AI Blog</source>
+    </item>
+    <item>
+      <title>AutoBNN: Probabilistic time series forecasting with compositional bayesian neural networks</title>
+      <link>http://blog.research.google/2024/03/autobnn-probabilistic-time-series.html</link>
+      <description>&lt;span class="byline-author"&gt;Posted by Urs Köster, Software Engineer, Google Research&lt;/span&gt;
+
+&lt;img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgd5Wc54p1HvgIokpazxDsMo1u6i9wg3ovpNOiFc4-wYwebETvjs9-hm2wxZ4osNbBAxhet8To3hwGg-whFScksHQB_BP1kS4Z8Cu7FQT2bjVtJl4trPid-OxCyYocwyRTN66tuvAed</description>
+      <pubDate>Thu, 28 Mar 2024 13:53:00 -0700</pubDate>
+      <guid isPermaLink="true">http://blog.research.google/2024/03/autobnn-probabilistic-time-series.html</guid>
+      <source url="http://blog.research.google/2024/03/autobnn-probabilistic-time-series.html">Google AI Blog</source>
+    </item>
+    <item>
+      <title>Computer-aided diagnosis for lung cancer screening</title>
+      <link>http://blog.research.google/2024/03/computer-aided-diagnosis-for-lung.html</link>
+      <description>&lt;span class="byline-author"&gt;Posted by Atilla Kiraly, Software Engineer, and Rory Pilgrim, Product Manager, Google Research &lt;/span&gt;
+
+
+&lt;img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjFpuCd82OUmuS2oG2cVir_ZgeOyUpFndr-kCq8V4pDv6fzxeyViBJymfVt5FFUqgkM_X57msxNv84XBtaXs2FsD7R8_tNqtH6D</description>
+      <pubDate>Wed, 20 Mar 2024 13:54:00 -0700</pubDate>
+      <guid isPermaLink="true">http://blog.research.google/2024/03/computer-aided-diagnosis-for-lung.html</guid>
+      <source url="http://blog.research.google/2024/03/computer-aided-diagnosis-for-lung.html">Google AI Blog</source>
+    </item>
+    <item>
+      <title>Using AI to expand global access to reliable flood forecasts</title>
+      <link>http://blog.research.google/2024/03/using-ai-to-expand-global-access-to.html</link>
+      <description>&lt;span class="byline-author"&gt;Posted by Yossi Matias, VP Engineering &amp;amp; Research, and Grey Nearing, Research Scientist, Google Research&lt;/span&gt;
+
+&lt;img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgABDUlqCHMxNY-QfEftM_9yPy1z4jr1odB-_kSP79yjk6igtpPJNFIocQOKDRnZ3VLmqrI9tqX-dCHpcYtnSx9</description>
+      <pubDate>Wed, 20 Mar 2024 09:06:00 -0700</pubDate>
+      <guid isPermaLink="true">http://blog.research.google/2024/03/using-ai-to-expand-global-access-to.html</guid>
+      <source url="http://blog.research.google/2024/03/using-ai-to-expand-global-access-to.html">Google AI Blog</source>
+    </item>
+    <item>
+      <title>ScreenAI: A visual language model for UI and visually-situated language understanding</title>
+      <link>http://blog.research.google/2024/03/screenai-visual-language-model-for-ui.html</link>
+      <description>&lt;span class="byline-author"&gt;Posted by Srinivas Sunkara and Gilles Baechler, Software Engineers, Google Research&lt;/span&gt;
+
+
+&lt;img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhoXlMR7pAKRRnyKZT8C40i6mPX0KKNGT6AFNvFOFIhZ7BD0rXaU3NS_aqISTGq9S_d0zozgcO0HR_v3R6Msm4uUDkaBFsFVx-miaDL6L0UhSz1</description>
+      <pubDate>Tue, 19 Mar 2024 13:15:00 -0700</pubDate>
+      <guid isPermaLink="true">http://blog.research.google/2024/03/screenai-visual-language-model-for-ui.html</guid>
+      <source url="http://blog.research.google/2024/03/screenai-visual-language-model-for-ui.html">Google AI Blog</source>
+    </item>
+    <item>
+      <title>The “steroid olympics” were a circus—and a window into our culture</title>
+      <link>https://www.technologyreview.com/2026/06/10/1138670/enhanced-games-doping-steroids-hormones-supplements-longevity/</link>
+      <description>Testosterone. Methenolone. Nandrolone. Human growth hormone and EPO. Meldonium, modafinil, and mixed amphetamine salts. Clomiphene, anastrozole, levothyroxine, and liothyronine. Patches and capsules, creams and pills. A whole galaxy of steroids, metabolic modulators, and synthetic hormones coursing </description>
+      <pubDate>Wed, 10 Jun 2026 09:00:00 +0000</pubDate>
+      <guid isPermaLink="true">https://www.technologyreview.com/2026/06/10/1138670/enhanced-games-doping-steroids-hormones-supplements-longevity/</guid>
+      <source url="https://www.technologyreview.com/2026/06/10/1138670/enhanced-games-doping-steroids-hormones-supplements-longevity/">MIT Tech Review</source>
+    </item>
+    <item>
+      <title>The Download: whole-body rejuvenation drugs and five things to know about AI</title>
+      <link>https://www.technologyreview.com/2026/06/09/1138604/the-download-anti-aging-drugs-ai-five-things-to-know/</link>
+      <description>This is today&amp;#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&amp;#8217;s going on in the world of technology. David Sinclair plans to test whole-body rejuvenation drugs in the XPrize competition The outspoken longevity scientist David Sinclair has predicted th</description>
+      <pubDate>Tue, 09 Jun 2026 12:10:00 +0000</pubDate>
+      <guid isPermaLink="true">https://www.technologyreview.com/2026/06/09/1138604/the-download-anti-aging-drugs-ai-five-things-to-know/</guid>
+      <source url="https://www.technologyreview.com/2026/06/09/1138604/the-download-anti-aging-drugs-ai-five-things-to-know/">MIT Tech Review</source>
+    </item>
+    <item>
+      <title>Learning to lead in a hybrid human-AI enterprise</title>
+      <link>https://www.technologyreview.com/2026/06/09/1137830/learning-to-lead-in-a-hybrid-human-ai-enterprise/</link>
+      <description>As adoption of AI agents looks set to surge by as much as 300% in the next two years, leadership teams are carefully considering the implications of a hybrid human-AI workforce.  Unlike existing enterprise-level automation that relies on manual input, AI agents are capable of autonomously coordinati</description>
+      <pubDate>Tue, 09 Jun 2026 10:20:06 +0000</pubDate>
+      <guid isPermaLink="true">https://www.technologyreview.com/2026/06/09/1137830/learning-to-lead-in-a-hybrid-human-ai-enterprise/</guid>
+      <source url="https://www.technologyreview.com/2026/06/09/1137830/learning-to-lead-in-a-hybrid-human-ai-enterprise/">MIT Tech Review</source>
+    </item>
+    <item>
+      <title>David Sinclair plans to test whole-body rejuvenation drugs in the XPrize competition</title>
+      <link>https://www.technologyreview.com/2026/06/09/1138545/david-sinclair-plans-to-test-whole-body-rejuvenation-drugs-in-the-xprize-competition/</link>
+      <description>The outspoken longevity scientist David Sinclair has been predicting that one day, you’ll go to the doctor and get a prescription that will make you 10 years younger. Now MIT Technology Review has learned that he has plans to launch human tests of an oral &amp;#8220;reprogramming&amp;#8221; drug as part of </description>
+      <pubDate>Tue, 09 Jun 2026 10:00:00 +0000</pubDate>
+      <guid isPermaLink="true">https://www.technologyreview.com/2026/06/09/1138545/david-sinclair-plans-to-test-whole-body-rejuvenation-drugs-in-the-xprize-competition/</guid>
+      <source url="https://www.technologyreview.com/2026/06/09/1138545/david-sinclair-plans-to-test-whole-body-rejuvenation-drugs-in-the-xprize-competition/">MIT Tech Review</source>
+    </item>
+    <item>
+      <title>Five things you need to know about AI</title>
+      <link>https://www.technologyreview.com/2026/06/09/1138582/five-things-you-need-to-know-about-ai/</link>
+      <description>At SXSW London last week I gave a talk called “Five things you need to know about AI,” in which I shared what I think are the biggest themes in AI right now. I pulled a few things from our first AI10 list, an annual guide to the most important trends in this buzzy world,&amp;#8230;</description>
+      <pubDate>Tue, 09 Jun 2026 09:16:45 +0000</pubDate>
+      <guid isPermaLink="true">https://www.technologyreview.com/2026/06/09/1138582/five-things-you-need-to-know-about-ai/</guid>
+      <source url="https://www.technologyreview.com/2026/06/09/1138582/five-things-you-need-to-know-about-ai/">MIT Tech Review</source>
+    </item>
+    <item>
+      <title>抖音征召天下「AI视频英才」！创作者们，这次是真能吃上AI红利了…</title>
+      <link>https://www.qbitai.com/2026/06/433832.html</link>
+      <description>踮起脚尖吧。</description>
+      <pubDate>Wed, 10 Jun 2026 10:25:41 +0000</pubDate>
+      <guid isPermaLink="true">https://www.qbitai.com/2026/06/433832.html</guid>
+      <source url="https://www.qbitai.com/2026/06/433832.html">量子位</source>
+    </item>
+    <item>
+      <title>英特尔锐炫™ Pro B70 GPU亮相MPTS2026，共探大视听时代AI创作新范式</title>
+      <link>https://www.qbitai.com/2026/06/433798.html</link>
+      <description>AI创作新时代，英特尔锐炫™ Pro B70 GPU 释放专业算力潜能</description>
+      <pubDate>Wed, 10 Jun 2026 07:27:58 +0000</pubDate>
+      <guid isPermaLink="true">https://www.qbitai.com/2026/06/433798.html</guid>
+      <source url="https://www.qbitai.com/2026/06/433798.html">量子位</source>
+    </item>
+    <item>
+      <title>百度智能云与FluxA达成战略合作，共建 Agent 经济全球支付基础设施</title>
+      <link>https://www.qbitai.com/2026/06/433516.html</link>
+      <description>诚邀30家OPC入驻内测</description>
+      <pubDate>Wed, 10 Jun 2026 06:51:35 +0000</pubDate>
+      <guid isPermaLink="true">https://www.qbitai.com/2026/06/433516.html</guid>
+      <source url="https://www.qbitai.com/2026/06/433516.html">量子位</source>
+    </item>
+    <item>
+      <title>GPT-5.6首批实测来了！精准狙击Mythos</title>
+      <link>https://www.qbitai.com/2026/06/433731.html</link>
+      <description>本月发布！</description>
+      <pubDate>Wed, 10 Jun 2026 06:45:09 +0000</pubDate>
+      <guid isPermaLink="true">https://www.qbitai.com/2026/06/433731.html</guid>
+      <source url="https://www.qbitai.com/2026/06/433731.html">量子位</source>
+    </item>
+    <item>
+      <title>Claude Fable 5首日实测，杀疯了…</title>
+      <link>https://www.qbitai.com/2026/06/433682.html</link>
+      <description>听取哇声一片</description>
+      <pubDate>Wed, 10 Jun 2026 05:54:17 +0000</pubDate>
+      <guid isPermaLink="true">https://www.qbitai.com/2026/06/433682.html</guid>
+      <source url="https://www.qbitai.com/2026/06/433682.html">量子位</source>
+    </item>
+  </channel>
+</rss>
