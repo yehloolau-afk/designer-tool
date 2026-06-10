@@ -952,7 +952,7 @@
       }
       .mob-more-backdrop.open { display: block; }
       .mob-more-panel {
-        display: flex; flex-direction: row;
+        display: flex; flex-direction: column;
         position: fixed;
         bottom: calc(56px + env(safe-area-inset-bottom, 0px));
         left: 0; right: 0;
@@ -961,8 +961,8 @@
         border-bottom: none;
         border-radius: 16px 16px 0 0;
         z-index: 201;
-        padding: 24px 16px 16px;
-        gap: 10px;
+        padding: 20px 16px 16px;
+        gap: 6px;
         box-shadow: 0 -8px 24px rgba(0,0,0,0.1);
         transform: translateY(110%);
         transition: transform 0.22s cubic-bezier(0.32, 0.72, 0, 1);
@@ -976,24 +976,23 @@
         background: var(--border); border-radius: 2px;
       }
       .mob-more-opt {
-        flex: 1;
-        display: flex; flex-direction: column;
-        align-items: center; gap: 8px;
-        padding: 14px 8px;
+        display: flex; flex-direction: row;
+        align-items: center; gap: 12px;
+        padding: 13px 14px;
         border: 1px solid var(--border);
-        border-radius: 12px;
+        border-radius: 10px;
         background: transparent;
         color: var(--muted); cursor: pointer;
-        transition: all 0.12s;
+        transition: all 0.12s; text-align: left;
       }
       .mob-more-opt.active {
         background: var(--accent-muted);
         border-color: rgba(208,25,34,0.3);
         color: var(--accent);
       }
-      .mob-more-opt-icon { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
-      .mob-more-opt-icon svg { width: 20px; height: 20px; }
-      .mob-more-opt-label { font-size: 12px; font-weight: 500; white-space: nowrap; }
+      .mob-more-opt-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+      .mob-more-opt-icon svg { width: 18px; height: 18px; }
+      .mob-more-opt-label { font-size: 14px; font-weight: 500; }
       .mob-more-opt.active .mob-more-opt-label { font-weight: 700; }
     }
   </style>
