@@ -1093,19 +1093,32 @@ async function translateItems(items) {
   const CHUNK_DELAY = 250; // 批次间间隔250ms，避免触发频率限制
 
   async function xlat(text) {
+    // 主：Google Translate（2次重试）
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
         const r = await fetch(
           `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q=${encodeURIComponent(text)}`,
-          { signal: timeoutSignal(6000) }
+          { signal: timeoutSignal(5000) }
         );
         if (!r.ok) throw new Error('http ' + r.status);
         const d = await r.json();
         const result = d?.[0]?.map(p => p?.[0]).filter(Boolean).join('') || '';
-        if (result) return result;
+        if (result && result !== text) return result;
       } catch {}
-      if (attempt === 0) await new Promise(r => setTimeout(r, 600)); // 失败后等600ms再重试
+      if (attempt === 0) await new Promise(r => setTimeout(r, 500));
     }
+    // 备：MyMemory（Google 失败时兜底）
+    try {
+      const r = await fetch(
+        `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|zh-CN`,
+        { signal: timeoutSignal(8000) }
+      );
+      if (r.ok) {
+        const d = await r.json();
+        const result = d?.responseData?.translatedText || '';
+        if (result && result !== text && !result.includes('MYMEMORY WARNING')) return result;
+      }
+    } catch {}
     return '';
   }
 
@@ -1174,27 +1187,66 @@ function aiHotToCard(item) {
 }
 
 function genRecReason(item) {
-  const cat = item._aiCat || '';
-  const t = item.title || '';
-  if (cat === 'ai-models' || /模型|大模型|GPT|Claude|Gemini|Llama|发布|上线|发售/.test(t))
-    return '重要模型动态，AI 能力演进的关键节点，值得关注。';
-  if (cat === 'ai-products' || /产品|工具|应用|App|插件|功能|更新|升级/.test(t))
-    return 'AI 产品落地进展，设计与工程实践的参考样本。';
-  if (cat === 'paper' || /研究|论文|技术突破|算法|实验/.test(t))
-    return '前沿学术动态，把握 AI 技术走向的重要信号。';
-  if (cat === 'tip' || /教程|技巧|提示词|攻略|指南|实战/.test(t))
-    return '实用技巧与操作指南，快速提升 AI 使用效率的捷径。';
-  if (cat === 'opensource' || /开源|开放权重|open.?source/.test(t))
-    return '开源生态重要动态，推动 AI 技术民主化的关键进展。';
-  if (cat === 'industry' || /融资|投资|收购|估值|IPO|亿元|亿美元/.test(t))
-    return '行业资本动向，AI 商业化进程的观察窗口。';
-  if (/OpenAI|谷歌|Google|Anthropic|Meta|微软|Microsoft|苹果|Apple/.test(t))
-    return '头部厂商重要动态，行业风向标，影响范围广泛。';
-  if (/设计|界面|交互|UX|UI|创意|生图|绘图/.test(t))
-    return 'AI 与设计的交叉前沿，创作者与设计师必读。';
-  if (/监管|法规|政策|合规|安全|风险/.test(t))
-    return 'AI 治理与政策动态，影响行业走向的重要信号。';
-  return '编辑精选推荐，覆盖 AI 行业核心进展，值得深度阅读。';
+  const raw = item.titleOriginal || item.title || '';
+  const desc = String(item.description || '').replace(/<[^>]*>/g, ' ').slice(0, 200);
+  const full = raw + ' ' + desc;
+  const tags = [];
+
+  // 1) 提取模型/产品名称
+  const modelRe = /\b(GPT-[\w.]+|o\d[\w.-]*|Claude[\s\w.-]{0,15}|Gemini[\s\w.-]{0,10}|Llama[\s\w.-]{0,10}|Mistral[\w.-]+|Sora|DALL-E[\s\d]*|Stable Diffusion|Midjourney|Runway|Kling|Veo[\s\d]*|Imagen[\s\d]*|Grok[\s\d]*)\b/i;
+  const modelM = raw.match(modelRe);
+  if (modelM) tags.push(modelM[0].trim());
+
+  // 2) 提取数字指标（融资额、倍率、参数量、得分）
+  const numRe = /\$[\d,.]+\s*[BMK]?(?:\s*(?:billion|million|万|亿))?|\b\d+(?:\.\d+)?[xX](?:\s*(?:faster|speed|提速))?|\b\d+(?:\.\d+)?%|\b\d+[BMK]\s*(?:tokens?|params?|参数)/i;
+  const numM = raw.match(numRe);
+  if (numM) tags.push(numM[0].trim());
+
+  // 3) 匹配核心技术/场景关键词（按具体度排序）
+  const concepts = [
+    [/\bmultimodal|多模态\b/i,           '多模态'],
+    [/\breasoning|chain.of.thought|思维链\b/i, '推理能力'],
+    [/\bagent|agentic|自主智能体\b/i,   'Agent'],
+    [/\bfine.?tun|微调\b/i,             '微调'],
+    [/\brlhf|alignment|对齐\b/i,        '对齐'],
+    [/\bopen.?source|开源\b/i,          '开源'],
+    [/\bbenchmark|leaderboard|评测\b/i, '能力评测'],
+    [/\bcontext.window|长上下文|long.context\b/i, '长上下文'],
+    [/\blatency|inference.speed|推理提速\b/i, '推理提速'],
+    [/\bpricing|cost|定价|成本\b/i,     '定价策略'],
+    [/\bsafety|safe|安全对齐\b/i,       '安全对齐'],
+    [/\bregulat|policy|法规|监管\b/i,   '监管动向'],
+    [/\bfund|invest|融资|raise\b/i,     '融资'],
+    [/\bacquir|merger|收购\b/i,         '并购'],
+    [/\bvideo|视频生成\b/i,             '视频生成'],
+    [/\bimage.gen|生图|文生图\b/i,      '生图'],
+    [/\bcode|coding|编程\b/i,           '代码生成'],
+    [/\bembedding|rag|检索\b/i,         'RAG检索'],
+    [/\bcomputer.?vision|cv\b/i,        '计算机视觉'],
+  ];
+  for (const [re, label] of concepts) {
+    if (tags.length >= 3) break;
+    if (re.test(full) && !tags.includes(label)) tags.push(label);
+  }
+
+  // 4) 源站兜底（最后填位）
+  if (tags.length < 2) {
+    const src = item._feed?.name;
+    const cat = item._aiCat || '';
+    if (src) tags.unshift(src);
+    const fallbacks = {
+      'ai-models':    '模型迭代',
+      'ai-products':  '产品落地',
+      'paper':        '前沿研究',
+      'industry':     '行业动向',
+      'design':       '设计前沿',
+    };
+    const fb = fallbacks[cat];
+    if (fb && !tags.includes(fb)) tags.push(fb);
+    if (tags.length < 2) tags.push('精选收录');
+  }
+
+  return tags.slice(0, 3).join(' · ');
 }
 
 const TABS = [
@@ -1660,20 +1712,16 @@ function scheduleFullLoad(id, tab, activeFeedList, cacheKey, prevErrors, aiHotIt
     });
     if (!rssArr.length) return;
     let items = mergeItems([...aiHotItems, ...rssArr], tab);
-    // 继承 Phase 1 已翻译的内容，避免重新渲染时闪回英文
+    // 继承 Phase 1 已翻译的内容
     inheritTranslations(items, cache[cacheKey]?.items);
+    // 先翻译再渲染，避免英文内容闪现
+    if (tab.translate) await translateItems(items);
+    if (activeTab !== id) return;
     cache[cacheKey] = { items, feedErrors, aiHotData: null, ts: Date.now() };
     saveFeedCache(cacheKey, cache[cacheKey]);
     counts[id] = items.length;
     renderNav();
-    if (activeTab !== id) return;
     renderTab(tab, items, feedErrors);
-    if (tab.translate) {
-      await translateItems(items);
-      cache[cacheKey].ts = Date.now();
-      saveFeedCache(cacheKey, cache[cacheKey]);
-      if (activeTab === id) renderTab(tab, items, feedErrors);
-    }
   }, 1500);
 }
 
