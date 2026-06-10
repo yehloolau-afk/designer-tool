@@ -881,6 +881,14 @@
       /* 日报大标题缩小 */
       .dnp-title { font-size: 30px; }
 
+      /* 推荐理由：左侧改为图标+推荐字样纵向堆叠，文本宽度更大 */
+      .rec-tip-label {
+        display: flex; flex-direction: column; align-items: center;
+        font-size: 0; min-width: 26px; gap: 2px; padding-top: 0;
+      }
+      .rec-tip-label::before { content: '💡'; font-size: 13px; line-height: 1; }
+      .rec-tip-label::after  { content: '推荐'; font-size: 9px; font-weight: 700; color: var(--accent); }
+
       /* 标题与间距微调 */
       .section-header { flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
       .section-title { font-size: 16px; }
@@ -1616,6 +1624,26 @@ function renderNav() {
   }
 }
 
+// 将已翻译的内容从旧数组继承到新数组（按 link 匹配），避免 Phase 2 重新渲染时丢失 Phase 1 翻译
+function inheritTranslations(newItems, fromItems) {
+  if (!fromItems || !fromItems.length) return;
+  const byLink = new Map(fromItems.filter(i => i.link).map(i => [i.link, i]));
+  newItems.forEach(item => {
+    if (!item.link) return;
+    const prev = byLink.get(item.link);
+    if (!prev) return;
+    if (prev._translated) {
+      item.title = prev.title;
+      item.titleOriginal = prev.titleOriginal;
+      item._translated = true;
+    }
+    if (prev._descTranslated) {
+      item.description = prev.description;
+      item._descTranslated = true;
+    }
+  });
+}
+
 // ── Phase 2 full load（第一阶段10条展示后，后台补充完整数量）───
 function scheduleFullLoad(id, tab, activeFeedList, cacheKey, prevErrors, aiHotItems = []) {
   if (tab.layout === 'daily' || tab.layout === 'jobs' || !activeFeedList.length) return;
@@ -1631,6 +1659,8 @@ function scheduleFullLoad(id, tab, activeFeedList, cacheKey, prevErrors, aiHotIt
     });
     if (!rssArr.length) return;
     let items = mergeItems([...aiHotItems, ...rssArr], tab);
+    // 继承 Phase 1 已翻译的内容，避免重新渲染时闪回英文
+    inheritTranslations(items, cache[cacheKey]?.items);
     cache[cacheKey] = { items, feedErrors, aiHotData: null, ts: Date.now() };
     saveFeedCache(cacheKey, cache[cacheKey]);
     counts[id] = items.length;
@@ -1804,6 +1834,7 @@ async function switchTab(id) {
     await Promise.allSettled(rssPromises);
     if (!rssItems.length) return;
     let merged = mergeItems([...aiHotItems, ...rssItems], tab);
+    inheritTranslations(merged, cache[id]?.items); // 继承 Phase 1 翻译
     cache[id] = { items: merged, feedErrors, aiHotData: null, ts: Date.now(), _quick: true };
     saveFeedCache(id, cache[id]);
     counts[id] = merged.length;
