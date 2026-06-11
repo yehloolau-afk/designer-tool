@@ -134,6 +134,17 @@
       background: rgba(208,25,34,0.1);
       color: var(--accent);
     }
+    .tab-new-badge {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 700;
+      background: var(--accent);
+      color: #fff;
+      padding: 1px 6px;
+      border-radius: 10px;
+      animation: badgePop 0.25s ease;
+    }
+    @keyframes badgePop { from { transform: scale(0.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
     /* ── Daily 三列布局 ── */
     .main.daily-mode { padding: 0; overflow: hidden; display: flex; }
@@ -1521,6 +1532,18 @@ let countdownTimer = null;
 let nextRefreshAt = 0;
 const REFRESH_INTERVAL = 30 * 60 * 1000; // 30 min
 
+// ── 新条数徽标：记录用户上次查看各 Tab 时的条数 ──────────
+const LS_SEEN_KEY = 'ai_station_seen_v1';
+const seenCounts = (() => { try { return JSON.parse(localStorage.getItem(LS_SEEN_KEY) || '{}'); } catch { return {}; } })();
+function saveSeenCounts() { try { localStorage.setItem(LS_SEEN_KEY, JSON.stringify(seenCounts)); } catch {} }
+function markTabSeen(id) {
+  if (counts[id] != null) { seenCounts[id] = counts[id]; saveSeenCounts(); }
+}
+function getNewCount(id) {
+  if (seenCounts[id] == null) return 0; // 从未访问过，不显示
+  return Math.max(0, (counts[id] || 0) - seenCounts[id]);
+}
+
 // ── Archive panel ─────────────────────────────────────
 let archiveList = null;      // array of { date, headline }
 let archiveLoading = false;  // 防止并发重复触发
@@ -1713,7 +1736,12 @@ function renderNav() {
             onmouseenter="prefetchTab('${t.id}')">
       <span class="tab-icon">${t.icon}</span>
       <span>${t.name}</span>
-      ${counts[t.id] != null ? `<span class="tab-count">${counts[t.id]}</span>` : ''}
+      ${(() => {
+        const n = getNewCount(t.id);
+        if (n > 0 && t.id !== activeTab) return `<span class="tab-new-badge">+${n}</span>`;
+        if (counts[t.id] != null) return `<span class="tab-count">${counts[t.id]}</span>`;
+        return '';
+      })()}
     </button>`).join('');
 
   // 移动端底部导航（固定5个）
@@ -1891,6 +1919,7 @@ function prefetchTab(id) {
 
 async function switchTab(id) {
   activeTab = id;
+  markTabSeen(id); // 标记已读，清除新条数徽标
   renderNav();
   setArchivePanel(id === 'daily');
   showLoading();
