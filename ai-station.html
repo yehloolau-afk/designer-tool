@@ -1085,6 +1085,26 @@
 const API = 'https://api.rss2json.com/v1/api.json';
 const AIHOT = 'https://aihot.virxact.com/api/public';
 
+// 静态数据层：优先读取 GitHub Actions 预生成的 JSON，失败则降级到 CORS 代理
+const STATIC_BASE = 'https://yehloolau-afk.github.io/designer-tool/data';
+const STATIC_TTL  = 2 * 60 * 60 * 1000; // 2 小时有效期，与更新频率匹配
+const STATIC_TABS = new Set(['featured', 'all', 'official', 'products', 'design', 'videos']);
+
+async function fetchStaticData(tabId) {
+  if (!STATIC_TABS.has(tabId)) return null;
+  try {
+    const r = await fetch(`${STATIC_BASE}/${tabId}.json`, { signal: timeoutSignal(5000) });
+    if (!r.ok) return null;
+    const data = await r.json();
+    if (!data.updated || !Array.isArray(data.items) || !data.items.length) return null;
+    const age = Date.now() - new Date(data.updated).getTime();
+    if (age > STATIC_TTL) return null;
+    // 把 ISO 时间字段转成和 RSS 解析结果相同的格式
+    data.items.forEach(item => { item._fromStatic = true; });
+    return data;
+  } catch { return null; }
+}
+
 // 代理记忆：记住每个 feed 上次成功的代理，下次直接命中，跳过无效路径
 const PROXY_MEM = (() => { try { return JSON.parse(localStorage.getItem('ai_proxy_mem') || '{}'); } catch { return {}; } })();
 function saveProxyHit(url, proxy) {
@@ -1891,6 +1911,28 @@ async function switchTab(id) {
     // 若上次是快速预览（10条），后台补足完整数据
     if (cached._quick) scheduleFullLoad(id, tab, activeFeedList, cacheKey, cached.feedErrors || []);
     return;
+  }
+
+  // ── 静态数据优先路径（GitHub Actions 预生成 JSON，无 CORS 代理依赖）──
+  if (STATIC_TABS.has(id)) {
+    const staticData = await fetchStaticData(id);
+    if (staticData && activeTab === id) {
+      const items = staticData.items;
+      cache[cacheKey] = { items, feedErrors: [], aiHotData: null, ts: Date.now() };
+      saveFeedCache(cacheKey, cache[cacheKey]);
+      counts[id] = items.length;
+      renderNav();
+      renderTab(tab, items, []);
+      if (id === 'featured') _featuredPaintResolve?.();
+      if (tab.translate) {
+        translateItems(items).then(() => {
+          if (activeTab === id) renderTab(tab, items, []);
+          cache[cacheKey].ts = Date.now();
+          saveFeedCache(cacheKey, cache[cacheKey]);
+        });
+      }
+      return; // 静态数据命中，跳过 CORS 代理
+    }
   }
 
   // AI HOT 和 RSS 同时发起，谁快用谁

@@ -2,7 +2,7 @@ name: Generate RSS Feed
 
 on:
   schedule:
-    - cron: '0 2 * * *'  # 每天北京时间 10:00 运行
+    - cron: '0 */2 * * *'  # 每 2 小时运行一次
   workflow_dispatch:      # 支持手动触发
 
 jobs:
@@ -25,10 +25,10 @@ jobs:
       - name: Generate RSS feed
         run: python scripts/generate_feed.py
 
-      - name: Commit and push feed.xml
+      - name: Commit and push data files
         run: |
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
-          git add feed.xml
-          git diff --staged --quiet || git commit -m "chore: update RSS feed $(date +%Y-%m-%d)"
+          git add feed.xml data/
+          git diff --staged --quiet || git commit -m "chore: update channel data $(date +'%Y-%m-%d %H:%M')"
           git push
