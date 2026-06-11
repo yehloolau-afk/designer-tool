@@ -19,8 +19,9 @@ ROOT = os.path.dirname(os.path.dirname(__file__))
 DATA_DIR = os.path.join(ROOT, 'data')
 os.makedirs(DATA_DIR, exist_ok=True)
 
-# ── Claude 翻译 ───────────────────────────────────────
-CLAUDE_API_KEY = os.environ.get('ANTHROPIC_API_KEY', '')
+# ── 翻译（Google Translate 免费接口，GitHub Actions 服务器可用）──
+import urllib.parse
+import time
 
 def is_english(text):
     if not text or len(text) < 8:
@@ -31,66 +32,37 @@ def is_english(text):
     latin = sum(1 for c in text if c.isascii() and c.isalpha())
     return latin / alpha > 0.7
 
-def translate_batch(texts):
-    """调用 Claude Haiku 批量翻译英文列表，返回 {原文: 中文} 映射"""
-    if not texts or not CLAUDE_API_KEY:
-        return {}
-    numbered = '\n'.join(f'{i+1}. {t}' for i, t in enumerate(texts))
+def translate_one(text):
+    """用 Google Translate 免费接口翻译单条文本"""
+    url = (
+        'https://translate.googleapis.com/translate_a/single'
+        f'?client=gtx&sl=en&tl=zh-CN&dt=t&q={urllib.parse.quote(text)}'
+    )
     try:
-        r = requests.post(
-            'https://api.anthropic.com/v1/messages',
-            headers={
-                'x-api-key': CLAUDE_API_KEY,
-                'anthropic-version': '2023-06-01',
-                'content-type': 'application/json',
-            },
-            json={
-                'model': 'claude-3-5-haiku-20241022',
-                'max_tokens': 4096,
-                'messages': [{
-                    'role': 'user',
-                    'content': (
-                        'Translate these AI news headlines to Chinese. '
-                        'Return ONLY a JSON array of translations in the same order. '
-                        'No explanation, no markdown.\n\n' + numbered
-                    )
-                }]
-            },
-            timeout=30
-        )
-        if not r.ok:
-            print(f'  ✗ Claude translate: {r.status_code} {r.text[:200]}')
-            return {}
-        text = r.json()['content'][0]['text'].strip()
-        m = re.search(r'\[[\s\S]*\]', text)
-        if not m:
-            return {}
-        translations = json.loads(m.group(0))
-        return {texts[i]: translations[i] for i in range(min(len(texts), len(translations)))}
-    except Exception as ex:
-        print(f'  ✗ Claude translate: {ex}')
-        return {}
+        r = requests.get(url, timeout=8, headers=HEADERS)
+        if r.ok:
+            data = r.json()
+            result = ''.join(p[0] for p in data[0] if p and p[0])
+            if result and result != text:
+                return result
+    except Exception:
+        pass
+    return ''
 
 def translate_items_en(items):
-    """翻译 items 列表中的英文标题（原地修改）"""
-    if not CLAUDE_API_KEY:
-        return
+    """翻译 items 中的英文标题（原地修改）"""
     targets = [it for it in items if is_english(it.get('title', '')) and not it.get('_translated')]
     if not targets:
         return
-    # 每批 50 条，避免超 token 限制
-    BATCH = 50
     translated = 0
-    for i in range(0, len(targets), BATCH):
-        batch = targets[i:i+BATCH]
-        mapping = translate_batch([it['title'] for it in batch])
-        for it in batch:
-            zh = mapping.get(it['title'])
-            if zh and zh != it['title']:
-                it['titleOriginal'] = it['title']
-                it['title'] = zh
-                it['_translated'] = True
-                translated += 1
+    for it in targets:
+        zh = translate_one(it['title'])
+        if zh:
+            it['titleOriginal'] = it['title']
+            it['title'] = zh
+            it['_translated'] = True
+            translated += 1
+        time.sleep(0.1)  # 避免触发频率限制
     print(f'  ✓ 翻译 {translated}/{len(targets)} 条')
 
 # ── 常量 ──────────────────────────────────────────────

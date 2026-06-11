@@ -23,8 +23,6 @@ jobs:
         run: pip install requests feedparser python-dateutil
 
       - name: Generate RSS feed
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python scripts/generate_feed.py
 
       - name: Commit and push data files
