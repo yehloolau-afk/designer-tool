@@ -5,8 +5,36 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 11 Jun 2026 18:22:48 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2026 21:27:20 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>OpenAI 星际之门项目附近的生活</title>
+      <link>https://www.youtube.com/watch?v=6QoMzZ8FdTA</link>
+      <description>For more than 40 years, Tom and Lisa Perini have welcomed visitors to their ranch and restaurant in Buffalo Gap, Texas, just outside Abilene.
+
+As new investment and AI infrastructure arrive in the region, they've seen firsthand how growth can create new opportunities for local businesses while raisi</description>
+      <pubDate>Thu, 11 Jun 2026 20:58:53 +0000</pubDate>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=6QoMzZ8FdTA</guid>
+      <source url="https://www.youtube.com/watch?v=6QoMzZ8FdTA">OpenAI</source>
+    </item>
+    <item>
+      <title>客户点燃演讲：Antonio Bravo Acin（BBVA 人工智能转型全球主管）和 OpenAI</title>
+      <link>https://www.youtube.com/watch?v=UNJSk90Lz1c</link>
+      <description></description>
+      <pubDate>Thu, 11 Jun 2026 19:51:04 +0000</pubDate>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=UNJSk90Lz1c</guid>
+      <source url="https://www.youtube.com/watch?v=UNJSk90Lz1c">OpenAI</source>
+    </item>
+    <item>
+      <title>使用 Codex 制定销售帐户策略和推广</title>
+      <link>https://www.youtube.com/watch?v=4YkOAYNZVOQ</link>
+      <description>See how the sales plugin for Codex helps sales teams move from account context to seller-ready work.
+
+In this demo, Codex prioritizes prospect accounts from Salesforce, creates a prospecting plan, drafts account-specific outreach, and sets up a morning cadence to keep the plan updated when account s</description>
+      <pubDate>Thu, 11 Jun 2026 19:24:28 +0000</pubDate>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=4YkOAYNZVOQ</guid>
+      <source url="https://www.youtube.com/watch?v=4YkOAYNZVOQ">OpenAI</source>
+    </item>
     <item>
       <title>氪星晚报｜百万Token只要几块钱，算力价格还在往下降；OpenAI正考虑大幅下调产品价格；今起儿童旅客可购买铁路旅游计次票，票价为成人旅客的5折</title>
       <link>https://36kr.com/p/3848516305605892?f=rss</link>
@@ -54,16 +82,6 @@ CK creates simulations and compares them to </description>
       <pubDate>Thu, 11 Jun 2026 16:14:47 +0000</pubDate>
       <guid isPermaLink="true">https://www.youtube.com/watch?v=4XSI4SClBMA</guid>
       <source url="https://www.youtube.com/watch?v=4XSI4SClBMA">OpenAI</source>
-    </item>
-    <item>
-      <title>骑自行车穿越南极洲的训练|与 ChatGPT</title>
-      <link>https://www.youtube.com/watch?v=ACue0bPkrPs</link>
-      <description>In November, @jamesbensonking will attempt to become the first person to cycle solo and unsupported from the edge of Antarctica to the South Pole, a journey that could take up to 60 days. But for James, the real challenge begins long before he sets foot or wheel on the ice.
-
-With no existing bluepri</description>
-      <pubDate>Thu, 11 Jun 2026 15:59:45 +0000</pubDate>
-      <guid isPermaLink="true">https://www.youtube.com/watch?v=ACue0bPkrPs</guid>
-      <source url="https://www.youtube.com/watch?v=ACue0bPkrPs">OpenAI</source>
     </item>
     <item>
       <title>最前线｜坦途科技全球首款消费级水上飞行器首飞，拓展水陆空场景出行生态</title>
@@ -194,22 +212,6 @@ With no existing bluepri</description>
       <pubDate>Thu, 11 Jun 2026 07:00:22 +0000</pubDate>
       <guid isPermaLink="true">https://www.ifanr.com/1668621?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</guid>
       <source url="https://www.ifanr.com/1668621?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=">爱范儿</source>
-    </item>
-    <item>
-      <title>3D创作迎来ChatGPT时刻：Meshy发布全球首个3D AI Agent</title>
-      <link>https://www.qbitai.com/2026/06/434317.html</link>
-      <description>Meshy发布全球首个3D AI Agent</description>
-      <pubDate>Thu, 11 Jun 2026 04:18:34 +0000</pubDate>
-      <guid isPermaLink="true">https://www.qbitai.com/2026/06/434317.html</guid>
-      <source url="https://www.qbitai.com/2026/06/434317.html">量子位</source>
-    </item>
-    <item>
-      <title>Mythos阴影里谷歌悄悄发模型，速度暴涨4倍</title>
-      <link>https://www.qbitai.com/2026/06/434316.html</link>
-      <description>用扩散模型生成文字</description>
-      <pubDate>Thu, 11 Jun 2026 04:17:22 +0000</pubDate>
-      <guid isPermaLink="true">https://www.qbitai.com/2026/06/434316.html</guid>
-      <source url="https://www.qbitai.com/2026/06/434316.html">量子位</source>
     </item>
   </channel>
 </rss>
