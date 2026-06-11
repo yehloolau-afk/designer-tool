@@ -1087,7 +1087,7 @@ const AIHOT = 'https://aihot.virxact.com/api/public';
 
 // 静态数据层：优先读取 GitHub Actions 预生成的 JSON，失败则降级到 CORS 代理
 const STATIC_BASE = 'https://yehloolau-afk.github.io/designer-tool/data';
-const STATIC_TTL  = 2 * 60 * 60 * 1000; // 2 小时有效期，与更新频率匹配
+const STATIC_TTL  = 60 * 60 * 1000; // 1 小时有效期，与更新频率匹配
 const STATIC_TABS = new Set(['featured', 'all', 'official', 'products', 'design', 'videos']);
 
 async function fetchStaticData(tabId) {
