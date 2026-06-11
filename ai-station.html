@@ -1692,10 +1692,10 @@ function init() {
   switchTab('featured');
   scheduleAutoRefresh();
 
-  // 等精选有内容显示出来，再依次预取其余频道（500ms 一个，不争带宽）
+  // 精选出现后立即预取其余频道（静态 Tab 只需一次 JSON 请求，间隔缩短）
   featuredPainted.then(() => {
     const others = TABS.filter(t => !t.hidden && t.id !== 'featured');
-    others.forEach((t, i) => setTimeout(() => prefetchTab(t.id), 500 + i * 2000));
+    others.forEach((t, i) => setTimeout(() => prefetchTab(t.id), 100 + i * 500));
     prefetchDailyDates();
   });
 }
@@ -1764,7 +1764,7 @@ function inheritTranslations(newItems, fromItems) {
 // ── Phase 2 full load（第一阶段10条展示后，后台补充完整数量）───
 function scheduleFullLoad(id, tab, activeFeedList, cacheKey, prevErrors, aiHotItems = []) {
   if (tab.layout === 'daily' || tab.layout === 'jobs' || !activeFeedList.length) return;
-  setTimeout(async () => {
+  setTimeout(async () => { // 400ms 后补足完整数据（原 1500ms）
     if (activeTab !== id) return;
     const results = await Promise.allSettled(activeFeedList.map(f => fetchFeed(f))); // 默认 full limit
     if (activeTab !== id) return;
@@ -1786,7 +1786,7 @@ function scheduleFullLoad(id, tab, activeFeedList, cacheKey, prevErrors, aiHotIt
     counts[id] = items.length;
     renderNav();
     renderTab(tab, items, feedErrors);
-  }, 1500);
+  }, 400);
 }
 
 // ── 移动端产品组浮层 ─────────────────────────────────────
@@ -1832,7 +1832,27 @@ function prefetchTab(id) {
   if (!tab) return;
   const cacheKey = tab.layout === 'jobs' ? `jobs_${jobsRegion}` : id;
   if (cache[cacheKey] && Date.now() - cache[cacheKey].ts < REFRESH_INTERVAL) return;
-  // 静默预加载：不改变 UI，只填充缓存
+
+  // 静态 Tab：直接拉预生成 JSON，比 CORS 代理快得多
+  if (STATIC_TABS.has(id)) {
+    (async () => {
+      const staticData = await fetchStaticData(id);
+      if (!staticData || activeTab === id) return;
+      const items = staticData.items;
+      cache[cacheKey] = { items, feedErrors: [], aiHotData: null, ts: Date.now() };
+      saveFeedCache(cacheKey, cache[cacheKey]);
+      counts[id] = items.length;
+      renderNav();
+      if (tab.translate) {
+        await translateItems(items);
+        cache[cacheKey].ts = Date.now();
+        saveFeedCache(cacheKey, cache[cacheKey]);
+      }
+    })();
+    return;
+  }
+
+  // 非静态 Tab：CORS 代理路径（静默预加载，不改变 UI）
   (async () => {
     const activeFeedList = tab.layout === 'jobs'
       ? (jobsRegion === 'global' ? (tab.feedsGlobal || []) : (tab.feedsDomestic || []))
@@ -1840,9 +1860,8 @@ function prefetchTab(id) {
     const aiHotPromise = tab.aiHotPath ? fetchAiHot(tab.aiHotPath) : Promise.resolve(null);
     const rssPromise = Promise.allSettled(activeFeedList.map(f => fetchFeed(f)));
     const aiHotData = await aiHotPromise;
-    // 等 RSS 全部完成（无论 AI HOT 是否成功，都合并两路数据）
     const results = await rssPromise;
-    if (activeTab === id) return; // 用户已切过来，交给 switchTab
+    if (activeTab === id) return;
     if (tab.layout === 'daily' && aiHotData?.sections) {
       cache[id] = { items: [], feedErrors: [], aiHotData, ts: Date.now() };
       const todayKey = new Date().toISOString().slice(0, 10);
@@ -1900,19 +1919,25 @@ async function switchTab(id) {
     const staticData = await fetchStaticData(id);
     if (staticData && activeTab === id) {
       const items = staticData.items;
-      cache[cacheKey] = { items, feedErrors: [], aiHotData: null, ts: Date.now() };
-      saveFeedCache(cacheKey, cache[cacheKey]);
-      counts[id] = items.length;
-      renderNav();
-      renderTab(tab, items, []);
+      // Phase 1：先渲染前10条，让用户立刻看到内容
+      renderTab(tab, items.slice(0, 10), []);
       if (id === 'featured') _featuredPaintResolve?.();
-      if (tab.translate) {
-        translateItems(items).then(() => {
-          if (activeTab === id) renderTab(tab, items, []);
-          cache[cacheKey].ts = Date.now();
-          saveFeedCache(cacheKey, cache[cacheKey]);
-        });
-      }
+      // Phase 2：600ms 后渲染全量并写入缓存
+      setTimeout(() => {
+        if (activeTab !== id) return;
+        cache[cacheKey] = { items, feedErrors: [], aiHotData: null, ts: Date.now() };
+        saveFeedCache(cacheKey, cache[cacheKey]);
+        counts[id] = items.length;
+        renderNav();
+        renderTab(tab, items, []);
+        if (tab.translate) {
+          translateItems(items).then(() => {
+            if (activeTab === id) renderTab(tab, items, []);
+            cache[cacheKey].ts = Date.now();
+            saveFeedCache(cacheKey, cache[cacheKey]);
+          });
+        }
+      }, 600);
       return; // 静态数据命中，跳过 CORS 代理
     }
   }
