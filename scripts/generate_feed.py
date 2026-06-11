@@ -45,7 +45,7 @@ def translate_batch(texts):
                 'content-type': 'application/json',
             },
             json={
-                'model': 'claude-haiku-4-5-20251001',
+                'model': 'claude-3-5-haiku-20241022',
                 'max_tokens': 4096,
                 'messages': [{
                     'role': 'user',
@@ -58,7 +58,9 @@ def translate_batch(texts):
             },
             timeout=30
         )
-        r.raise_for_status()
+        if not r.ok:
+            print(f'  ✗ Claude translate: {r.status_code} {r.text[:200]}')
+            return {}
         text = r.json()['content'][0]['text'].strip()
         m = re.search(r'\[[\s\S]*\]', text)
         if not m:
