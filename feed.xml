@@ -5,7 +5,7 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 11 Jun 2026 14:06:07 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2026 18:22:48 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>氪星晚报｜百万Token只要几块钱，算力价格还在往下降；OpenAI正考虑大幅下调产品价格；今起儿童旅客可购买铁路旅游计次票，票价为成人旅客的5折</title>
@@ -44,6 +44,26 @@
       <pubDate>Thu, 11 Jun 2026 17:24:11 +0800</pubDate>
       <guid isPermaLink="true">https://36kr.com/p/3848564910036229?f=rss</guid>
       <source url="https://36kr.com/p/3848564910036229?f=rss">36Kr</source>
+    </item>
+    <item>
+      <title>使用 Codex 创建黑洞模拟</title>
+      <link>https://www.youtube.com/watch?v=4XSI4SClBMA</link>
+      <description>To learn more about black holes, computational astrophysicist Chi-kwan “CK” Chan is working to create the first moving image of one. CK creates simulations and compares them to observational data gathered at telescopes – but these don’t always match up. 
+
+CK creates simulations and compares them to </description>
+      <pubDate>Thu, 11 Jun 2026 16:14:47 +0000</pubDate>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=4XSI4SClBMA</guid>
+      <source url="https://www.youtube.com/watch?v=4XSI4SClBMA">OpenAI</source>
+    </item>
+    <item>
+      <title>骑自行车穿越南极洲的训练|与 ChatGPT</title>
+      <link>https://www.youtube.com/watch?v=ACue0bPkrPs</link>
+      <description>In November, @jamesbensonking will attempt to become the first person to cycle solo and unsupported from the edge of Antarctica to the South Pole, a journey that could take up to 60 days. But for James, the real challenge begins long before he sets foot or wheel on the ice.
+
+With no existing bluepri</description>
+      <pubDate>Thu, 11 Jun 2026 15:59:45 +0000</pubDate>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=ACue0bPkrPs</guid>
+      <source url="https://www.youtube.com/watch?v=ACue0bPkrPs">OpenAI</source>
     </item>
     <item>
       <title>最前线｜坦途科技全球首款消费级水上飞行器首飞，拓展水陆空场景出行生态</title>
@@ -190,22 +210,6 @@
       <pubDate>Thu, 11 Jun 2026 04:17:22 +0000</pubDate>
       <guid isPermaLink="true">https://www.qbitai.com/2026/06/434316.html</guid>
       <source url="https://www.qbitai.com/2026/06/434316.html">量子位</source>
-    </item>
-    <item>
-      <title>Fable 5自带反蒸馏机制！检测到就降智，误触率高到离谱</title>
-      <link>https://www.qbitai.com/2026/06/434326.html</link>
-      <description>Claude刚刚发布的新模型Fable 5，很多人可能压根就用不上！</description>
-      <pubDate>Thu, 11 Jun 2026 04:16:20 +0000</pubDate>
-      <guid isPermaLink="true">https://www.qbitai.com/2026/06/434326.html</guid>
-      <source url="https://www.qbitai.com/2026/06/434326.html">量子位</source>
-    </item>
-    <item>
-      <title>AI短剧工具赛道，年度最大单笔融资来了</title>
-      <link>https://www.qbitai.com/2026/06/434298.html</link>
-      <description>年度最大单笔融资来了</description>
-      <pubDate>Thu, 11 Jun 2026 04:07:32 +0000</pubDate>
-      <guid isPermaLink="true">https://www.qbitai.com/2026/06/434298.html</guid>
-      <source url="https://www.qbitai.com/2026/06/434298.html">量子位</source>
     </item>
   </channel>
 </rss>
