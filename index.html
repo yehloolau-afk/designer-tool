@@ -23,8 +23,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','SF Pro Text',sa
 .btn-cfg{display:flex;align-items:center;gap:5px;padding:5px 12px;border:none;border-radius:20px;background:var(--pr-l);font-size:12px;color:var(--pr);font-weight:500;cursor:pointer;transition:all .15s;font-family:inherit}
 .btn-cfg:hover{background:rgba(0,122,255,.15)}
 .status-dot{width:7px;height:7px;border-radius:50%;background:#C7C7CC;transition:background .3s}
-.status-dot.ok{background:#34C759}
+.status-dot.ok{background:#34C759;animation:dotBlink 1.6s ease-in-out infinite}
 .status-dot.err{background:#FF3B30}
+@keyframes dotBlink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(52,199,89,.5)}50%{opacity:.7;box-shadow:0 0 0 4px rgba(52,199,89,0)}}
 
 /* LAYOUT */
 .main{display:flex;flex:1;min-height:0;gap:0}
@@ -243,12 +244,14 @@ select.modal-input{-webkit-appearance:none;appearance:none;cursor:pointer;backgr
 
 <script>
 // ─── ENV ──────────────────────────────────────────────────────
-const IS_LOCAL = location.hostname === 'localhost';
-const IMG_URL  = IS_LOCAL ? 'http://localhost:8766/images/generations'         : '/.netlify/functions/volc-img';
-const VID_URL  = IS_LOCAL ? 'http://localhost:8766/contents/generations/tasks' : '/.netlify/functions/volc-vid';
+const IS_LOCAL   = location.hostname === 'localhost';
+const IS_NETLIFY = location.hostname.includes('netlify');
+const PROXY_BASE = IS_LOCAL ? '' : (IS_NETLIFY ? '' : 'https://7-ai-station.netlify.app');
+const IMG_URL  = IS_LOCAL ? 'http://localhost:8766/images/generations'         : `${PROXY_BASE}/.netlify/functions/volc-img`;
+const VID_URL  = IS_LOCAL ? 'http://localhost:8766/contents/generations/tasks' : `${PROXY_BASE}/.netlify/functions/volc-vid`;
 const pollUrl  = id => IS_LOCAL
   ? `http://localhost:8766/contents/generations/tasks/${id}`
-  : `/.netlify/functions/volc-vid?taskId=${id}`;
+  : `${PROXY_BASE}/.netlify/functions/volc-vid?taskId=${id}`;
 
 // ─── CONFIG ───────────────────────────────────────────────────
 const LS = {
