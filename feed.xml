@@ -5,8 +5,18 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 11 Jun 2026 21:27:20 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2026 23:30:24 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>创意法典：Riff、设计、船舶</title>
+      <link>https://www.youtube.com/watch?v=K6wxZOqD-HY</link>
+      <description>“Codex is an art director or a creative director for me, helping me riff on ideas,” - Chad Nelson, creative specialist at OpenAI.  
+
+Don’t sleep on Codex for creatives. It understands brand books, style guides, fonts, composition and can create ship-worthy full funnel campaign visuals in a few hours</description>
+      <pubDate>Thu, 11 Jun 2026 21:28:51 +0000</pubDate>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=K6wxZOqD-HY</guid>
+      <source url="https://www.youtube.com/watch?v=K6wxZOqD-HY">OpenAI</source>
+    </item>
     <item>
       <title>OpenAI 星际之门项目附近的生活</title>
       <link>https://www.youtube.com/watch?v=6QoMzZ8FdTA</link>
@@ -72,16 +82,6 @@ In this demo, Codex prioritizes prospect accounts from Salesforce, creates a pro
       <pubDate>Thu, 11 Jun 2026 17:24:11 +0800</pubDate>
       <guid isPermaLink="true">https://36kr.com/p/3848564910036229?f=rss</guid>
       <source url="https://36kr.com/p/3848564910036229?f=rss">36Kr</source>
-    </item>
-    <item>
-      <title>使用 Codex 创建黑洞模拟</title>
-      <link>https://www.youtube.com/watch?v=4XSI4SClBMA</link>
-      <description>To learn more about black holes, computational astrophysicist Chi-kwan “CK” Chan is working to create the first moving image of one. CK creates simulations and compares them to observational data gathered at telescopes – but these don’t always match up. 
-
-CK creates simulations and compares them to </description>
-      <pubDate>Thu, 11 Jun 2026 16:14:47 +0000</pubDate>
-      <guid isPermaLink="true">https://www.youtube.com/watch?v=4XSI4SClBMA</guid>
-      <source url="https://www.youtube.com/watch?v=4XSI4SClBMA">OpenAI</source>
     </item>
     <item>
       <title>最前线｜坦途科技全球首款消费级水上飞行器首飞，拓展水陆空场景出行生态</title>
