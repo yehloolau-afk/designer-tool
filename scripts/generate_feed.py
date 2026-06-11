@@ -19,6 +19,78 @@ ROOT = os.path.dirname(os.path.dirname(__file__))
 DATA_DIR = os.path.join(ROOT, 'data')
 os.makedirs(DATA_DIR, exist_ok=True)
 
+# ── Claude 翻译 ───────────────────────────────────────
+CLAUDE_API_KEY = os.environ.get('ANTHROPIC_API_KEY', '')
+
+def is_english(text):
+    if not text or len(text) < 8:
+        return False
+    alpha = sum(1 for c in text if c.isalpha())
+    if alpha == 0:
+        return False
+    latin = sum(1 for c in text if c.isascii() and c.isalpha())
+    return latin / alpha > 0.7
+
+def translate_batch(texts):
+    """调用 Claude Haiku 批量翻译英文列表，返回 {原文: 中文} 映射"""
+    if not texts or not CLAUDE_API_KEY:
+        return {}
+    numbered = '\n'.join(f'{i+1}. {t}' for i, t in enumerate(texts))
+    try:
+        r = requests.post(
+            'https://api.anthropic.com/v1/messages',
+            headers={
+                'x-api-key': CLAUDE_API_KEY,
+                'anthropic-version': '2023-06-01',
+                'content-type': 'application/json',
+            },
+            json={
+                'model': 'claude-haiku-4-5-20251001',
+                'max_tokens': 4096,
+                'messages': [{
+                    'role': 'user',
+                    'content': (
+                        'Translate these AI news headlines to Chinese. '
+                        'Return ONLY a JSON array of translations in the same order. '
+                        'No explanation, no markdown.\n\n' + numbered
+                    )
+                }]
+            },
+            timeout=30
+        )
+        r.raise_for_status()
+        text = r.json()['content'][0]['text'].strip()
+        m = re.search(r'\[[\s\S]*\]', text)
+        if not m:
+            return {}
+        translations = json.loads(m.group(0))
+        return {texts[i]: translations[i] for i in range(min(len(texts), len(translations)))}
+    except Exception as ex:
+        print(f'  ✗ Claude translate: {ex}')
+        return {}
+
+def translate_items_en(items):
+    """翻译 items 列表中的英文标题（原地修改）"""
+    if not CLAUDE_API_KEY:
+        return
+    targets = [it for it in items if is_english(it.get('title', '')) and not it.get('_translated')]
+    if not targets:
+        return
+    # 每批 50 条，避免超 token 限制
+    BATCH = 50
+    translated = 0
+    for i in range(0, len(targets), BATCH):
+        batch = targets[i:i+BATCH]
+        mapping = translate_batch([it['title'] for it in batch])
+        for it in batch:
+            zh = mapping.get(it['title'])
+            if zh and zh != it['title']:
+                it['titleOriginal'] = it['title']
+                it['title'] = zh
+                it['_translated'] = True
+                translated += 1
+    print(f'  ✓ 翻译 {translated}/{len(targets)} 条')
+
 # ── 常量 ──────────────────────────────────────────────
 SITE_URL  = 'https://yehloolau-afk.github.io/designer-tool/ai-station.html'
 FEED_URL  = 'https://yehloolau-afk.github.io/designer-tool/feed.xml'
@@ -184,6 +256,7 @@ def keyword_filter(items, keywords):
     return result
 
 def save_json(filename, items):
+    translate_items_en(items)
     path = os.path.join(DATA_DIR, filename)
     payload = {'updated': now_iso(), 'items': items}
     with open(path, 'w', encoding='utf-8') as f:

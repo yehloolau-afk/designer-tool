@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://api.allorigins.win">
   <link rel="preconnect" href="https://corsproxy.io">
   <link rel="preconnect" href="https://api.codetabs.com">
-  <link rel="preconnect" href="https://translate.googleapis.com">
+  <link rel="preconnect" href="https://api.mymemory.translated.net">
   <style>
     :root {
       --bg: #f4f6f8;
@@ -1131,36 +1131,20 @@ function timeoutSignal(ms) {
   return ctrl.signal;
 }
 
-// ── 自动翻译（Google Translate 免费接口，英文标题→中文）──────
+// ── 自动翻译（MyMemory，国内可用）────────────────────
 function isEnglish(text) {
   if (!text || text.length < 8) return false;
   return (text.match(/[a-zA-Z]/g) || []).length / text.length > 0.5;
 }
 
 async function translateItems(items) {
-  const CHUNK = 3;       // 每批3条，减少并发压力
-  const CHUNK_DELAY = 250; // 批次间间隔250ms，避免触发频率限制
+  const CHUNK = 8; // 并发8条，无批次间延迟
 
   async function xlat(text) {
-    // 主：Google Translate（2次重试）
-    for (let attempt = 0; attempt < 2; attempt++) {
-      try {
-        const r = await fetch(
-          `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q=${encodeURIComponent(text)}`,
-          { signal: timeoutSignal(5000) }
-        );
-        if (!r.ok) throw new Error('http ' + r.status);
-        const d = await r.json();
-        const result = d?.[0]?.map(p => p?.[0]).filter(Boolean).join('') || '';
-        if (result && result !== text) return result;
-      } catch {}
-      if (attempt === 0) await new Promise(r => setTimeout(r, 500));
-    }
-    // 备：MyMemory（Google 失败时兜底）
     try {
       const r = await fetch(
         `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|zh-CN`,
-        { signal: timeoutSignal(8000) }
+        { signal: timeoutSignal(5000) }
       );
       if (r.ok) {
         const d = await r.json();
@@ -1171,7 +1155,7 @@ async function translateItems(items) {
     return '';
   }
 
-  // 翻译标题
+  // 翻译标题（已预翻译的静态数据直接跳过）
   const titleTargets = items.filter(i => isEnglish(i.title) && !i._translated);
   for (let i = 0; i < titleTargets.length; i += CHUNK) {
     await Promise.all(
@@ -1182,7 +1166,6 @@ async function translateItems(items) {
         } catch {}
       })
     );
-    if (i + CHUNK < titleTargets.length) await new Promise(r => setTimeout(r, CHUNK_DELAY));
   }
 
   // 翻译摘要（英文 description 取前150字）
@@ -1200,7 +1183,6 @@ async function translateItems(items) {
         } catch {}
       })
     );
-    if (i + CHUNK < descTargets.length) await new Promise(r => setTimeout(r, CHUNK_DELAY));
   }
   return items;
 }
