@@ -5,8 +5,25 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 13 Jun 2026 08:27:42 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jun 2026 11:21:54 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>曼联，要被卖了</title>
+      <link>https://36kr.com/p/3851350342325504?f=rss</link>
+      <description>图片来源：视觉中国
+  作者/余梦莹
+  报道/投资界PEdaily
+  史上最盛大世界杯正在上演。
+  48支球队、39天、104场比赛，总奖金飙升至8.71亿美元。梅西、C罗、莫德里奇“最后一舞”，哈兰德、姆巴佩、亚马尔崛起，诸神之战拉开帷幕。
+  赛场之外，一家老牌足球豪门却站在了十字路口——彭博社消息，掌控英超球队曼联超20年的格雷泽家族内部，近期正在讨论出售事宜。
+  绰号“红魔”，这是英格兰足球史上最富盛名的豪门。最初只是铁路工人组建的业余球队，2005年被美国格雷泽家族全面控股。历经辉煌也走过低谷，“红色旗帜永不落幕”。
+  
+  红魔
+  这一幕颇为感慨。足球这门生意实在赚钱，</description>
+      <pubDate>Sat, 13 Jun 2026 16:37:21 +0800</pubDate>
+      <guid isPermaLink="true">https://36kr.com/p/3851350342325504?f=rss</guid>
+      <source url="https://36kr.com/p/3851350342325504?f=rss">36Kr</source>
+    </item>
     <item>
       <title>36氪研究院 | AI时代留学就业白皮书：中国留学生全球就业趋势与人才价值重塑</title>
       <link>https://36kr.com/p/3846972367866119?f=rss</link>
@@ -109,6 +126,14 @@
       <source url="https://36kr.com/p/3850898430989577?f=rss">36Kr</source>
     </item>
     <item>
+      <title>Agent终于长出了身体：Jiuwen Symbiosis背后的思考与实践</title>
+      <link>https://www.qbitai.com/2026/06/435455.html</link>
+      <description>一起构建下一代物理世界的智能系统</description>
+      <pubDate>Sat, 13 Jun 2026 08:11:07 +0000</pubDate>
+      <guid isPermaLink="true">https://www.qbitai.com/2026/06/435455.html</guid>
+      <source url="https://www.qbitai.com/2026/06/435455.html">量子位</source>
+    </item>
+    <item>
       <title>2026智源大会开幕：推动AI、物理世界和生命科学“三体互动”</title>
       <link>https://www.qbitai.com/2026/06/435394.html</link>
       <description></description>
@@ -201,23 +226,6 @@ In this customer story, LSEG shares how it's using ChatGPT Enterprise and OpenAI
       <pubDate>Fri, 12 Jun 2026 16:24:47 +0000</pubDate>
       <guid isPermaLink="true">https://www.youtube.com/watch?v=sU9-u5p-jA0</guid>
       <source url="https://www.youtube.com/watch?v=sU9-u5p-jA0">OpenAI</source>
-    </item>
-    <item>
-      <title>Level Read：让英语学习从「读得懂」开始，每天都进步一点点</title>
-      <link>https://sspai.com/post/110329</link>
-      <description>你不需要一开始就读最难的内容，不需要把英语变成一件很痛苦的任务。每天读一篇适合自己难度的英文新闻，听一听、查几个词、慢慢积累。查看全文</description>
-      <pubDate>Fri, 12 Jun 2026 15:00:00 +0800</pubDate>
-      <guid isPermaLink="true">https://sspai.com/post/110329</guid>
-      <source url="https://sspai.com/post/110329">少数派</source>
-    </item>
-    <item>
-      <title>把 AI 装进口袋，然后把它忘掉：
-YoooClaw C·ONE 智能硬件一个月使用体验</title>
-      <link>https://sspai.com/post/110914</link>
-      <description>拿到YoooClawC·ONE，还没拆箱的第一印象是：这也太小了吧，包装盒都比我想象中小了好几倍。打开后，发现C·ONE是一张信用卡大小的紫色超薄哑光卡片，没有屏幕、只有一个长条LED呼吸灯和一个按键 ...查看全文</description>
-      <pubDate>Fri, 12 Jun 2026 14:42:07 +0800</pubDate>
-      <guid isPermaLink="true">https://sspai.com/post/110914</guid>
-      <source url="https://sspai.com/post/110914">少数派</source>
     </item>
   </channel>
 </rss>
