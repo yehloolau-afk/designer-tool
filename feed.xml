@@ -5,8 +5,24 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 14 Jun 2026 14:30:07 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jun 2026 16:29:38 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>NVIDIA 的全新免费 AI - 我错了</title>
+      <link>https://www.youtube.com/watch?v=zJvN8PDX1is</link>
+      <description>❤️ Check out Lambda here and sign up for their GPU Cloud: https://lambda.ai/papers
+
+📝 The Nemotron 3 Ultra paper is available here:
+https://research.nvidia.com/labs/nemotron/Nemotron-3-Ultra/
+
+Free Rendering course and source code:
+https://users.cg.tuwien.ac.at/zsolnai/gfx/rendering-course/
+
+🙏 We wo</description>
+      <pubDate>Sun, 14 Jun 2026 15:27:17 +0000</pubDate>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=zJvN8PDX1is</guid>
+      <source url="https://www.youtube.com/watch?v=zJvN8PDX1is">Two Minute Papers</source>
+    </item>
     <item>
       <title>增长停滞两年后，H&amp;M重组全球架构，大中华区降级｜独家</title>
       <link>https://36kr.com/p/3850942780838912?f=rss</link>
@@ -110,7 +126,7 @@
       <source url="https://36kr.com/p/3851073239372809?f=rss">36Kr</source>
     </item>
     <item>
-      <title>爆发！人类全球失效Claude 5</title>
+      <title>突发！人类球失效Claude 5</title>
       <link>https://36kr.com/p/3851015329027336?f=rss</link>
       <description>究竟为何，Anthropic突然下线了地表最强Claude？
   【导读】上线72小时，最强Claude Fable 5被一纸禁令全球下架，连Anthropic自家外籍员工都不许碰。
@@ -214,16 +230,6 @@
       <pubDate>Sat, 13 Jun 2026 01:16:20 +0000</pubDate>
       <guid isPermaLink="true">https://www.ifanr.com/1668871?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</guid>
       <source url="https://www.ifanr.com/1668871?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=">爱范儿</source>
-    </item>
-    <item>
-      <title>使用 Codex 分析收益并更新您的投资理论</title>
-      <link>https://www.youtube.com/watch?v=Rlju1Z9e110</link>
-      <description>See how the public equity investing plugin for Codex turns a company’s latest quarter into a post-earnings analysis. 
-
-Using connected data from sources like Quartr, Daloopa, and S&amp;amp;P Global, Codex evaluates a company’s growth drivers, guidance, margin trends, and quality of print. It then packag</description>
-      <pubDate>Fri, 12 Jun 2026 20:36:47 +0000</pubDate>
-      <guid isPermaLink="true">https://www.youtube.com/watch?v=Rlju1Z9e110</guid>
-      <source url="https://www.youtube.com/watch?v=Rlju1Z9e110">OpenAI</source>
     </item>
   </channel>
 </rss>
