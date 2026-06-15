@@ -2051,12 +2051,26 @@ function fmtPodDate(iso) {
 }
 
 async function translateBuilders(xData, podData) {
-  const CHUNK = 6;
+  const CHUNK = 4;
   async function xlat(text) {
     if (!text || !isEnglish(text)) return '';
+    const q = text.slice(0, 450);
+    // 主：Google Translate 非官方接口（无需 key，无配额限制）
     try {
       const r = await fetch(
-        `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text.slice(0, 450))}&langpair=en|zh-CN`,
+        `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q=${encodeURIComponent(q)}`,
+        { signal: timeoutSignal(6000) }
+      );
+      if (r.ok) {
+        const d = await r.json();
+        const res = (d?.[0] || []).map(s => s?.[0] || '').join('');
+        if (res && res !== text) return res;
+      }
+    } catch {}
+    // 备：MyMemory（国内可用，但有每日配额）
+    try {
+      const r = await fetch(
+        `https://api.mymemory.translated.net/get?q=${encodeURIComponent(q)}&langpair=en|zh-CN`,
         { signal: timeoutSignal(5000) }
       );
       if (r.ok) {
