@@ -1976,6 +1976,7 @@ function prefetchTab(id) {
   if (id === activeTab) return;
   const tab = TABS.find(t => t.id === id);
   if (!tab) return;
+  if (tab.layout === 'builders') return; // 由 switchTab 单独处理
   const cacheKey = tab.layout === 'jobs' ? `jobs_${jobsRegion}` : id;
   if (cache[cacheKey] && Date.now() - cache[cacheKey].ts < REFRESH_INTERVAL) return;
 
@@ -2135,7 +2136,7 @@ async function switchTab(id) {
   // ── Builders tab: 直接拉取 Follow Builders 数据 ──
   if (tab.layout === 'builders') {
     const cached = cache['builders'];
-    if (cached && Date.now() - cached.ts < REFRESH_INTERVAL) {
+    if (cached && cached.xData && Date.now() - cached.ts < REFRESH_INTERVAL) {
       renderBuilders(cached.xData, cached.podData);
       return;
     }
