@@ -1609,7 +1609,7 @@ const MOB_GROUP_IDS = ['products', 'design', 'videos'];
 const MOB_NAV_ORDER = ['builders', 'featured', 'daily', 'official'];
 
 // State
-let activeTab = 'builders';
+let activeTab = 'featured';
 let mobGroupActiveId = 'products'; // 产品组当前选中的 sub-tab
 let jobsRegion = 'global';   // 'global' | 'domestic'
 let allCatFilter = 'all';    // 'all' | 'ai-models' | 'ai-products' | 'industry' | 'paper'
@@ -1800,7 +1800,7 @@ function init() {
   if (sl && ml) ml.src = sl.src;
 
   renderNav();
-  switchTab('builders');
+  switchTab('featured');
   scheduleAutoRefresh();
 
   // 精选出现后立即预取其余频道（静态 Tab 只需一次 JSON 请求，间隔缩短）
