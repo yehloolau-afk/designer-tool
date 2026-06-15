@@ -303,6 +303,14 @@ def gen_design(chinese_base):
     items = sort_items(dedupe(yt + filtered))[:40]
     save_json('design.json', items)
 
+DAILY_SOURCES = {'量子位', '爱范儿', '极客公园', '少数派', '36Kr', '机器之心'}
+
+def gen_daily(chinese_base):
+    print('\n[AI 日报]')
+    items = [it for it in chinese_base if it.get('source') in DAILY_SOURCES]
+    items = sort_items(items)[:60]
+    save_json('daily.json', items)
+
 def gen_rss_xml(featured_items):
     """生成 feed.xml（向后兼容）"""
     now_rfc = format_datetime(datetime.now(timezone.utc))
@@ -352,6 +360,7 @@ def main():
     gen_all(chinese_base, aihot_all)
     gen_products(chinese_base, aihot_all)
     gen_design(chinese_base)
+    gen_daily(chinese_base)
     gen_rss_xml(featured)
 
     print('\n=== 完成 ===')
