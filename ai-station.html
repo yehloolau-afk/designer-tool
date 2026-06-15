@@ -1431,7 +1431,8 @@ function genRecReason(item) {
 const TABS = [
   {
     id: 'builders',
-    name: '牛人',
+    name: 'AI Builder',
+    mobName: 'AI大牛',
     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
     layout: 'builders',
     desc: '追踪 26 位 AI 顶尖建造者的最新动态',
@@ -1498,12 +1499,14 @@ const TABS = [
     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="12" y2="15"/></svg>',
     layout: 'daily',
     desc: '每日 AI 资讯速览',
-    aiHotPath: '/daily',
+    aiHotPath: null,
     feeds: [
       { url: 'https://www.qbitai.com/feed', name: '量子位', color: '#bc8cff' },
       { url: 'https://www.ifanr.com/feed', name: '爱范儿', color: '#ffa657' },
       { url: 'https://www.geekpark.net/rss', name: '极客公园', color: '#3fb950' },
       { url: 'https://sspai.com/feed', name: '少数派', color: '#58a6ff' },
+      { url: 'https://36kr.com/feed', name: '36Kr', color: '#1677ff' },
+      { url: 'https://www.jiqizhixin.com/rss', name: '机器之心', color: '#58a6ff' },
     ]
   },
   {
@@ -1876,7 +1879,7 @@ function renderNav() {
       return `<button class="mob-tab-btn ${t.id === activeTab ? 'active' : ''}"
               onclick="switchTab('${t.id}')">
         <span class="mob-tab-icon">${t.icon}</span>
-        <span class="mob-tab-label">${t.name.replace(/^AI\s/, '')}</span>
+        <span class="mob-tab-label">${t.mobName || t.name.replace(/^AI\s/, '')}</span>
       </button>`;
     }).join('') + `
     <button class="mob-tab-btn ${isGroupActive ? 'active' : ''}" id="mob-more-btn"
@@ -2143,7 +2146,7 @@ function renderBuilders(xData, podData) {
       <div class="section-title" style="display:flex;align-items:center;gap:8px">
         <span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </span>牛人
+        </span>AI Builder
       </div>
       <div class="section-meta">${builders.length} 位有更新 · ${nowStr()} 更新</div>
     </div>
