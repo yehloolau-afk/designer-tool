@@ -5,8 +5,22 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 15 Jun 2026 21:50:39 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 15 Jun 2026 23:53:16 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>无需离开 Codex 即可构建和测试 iOS 应用程序</title>
+      <link>https://www.youtube.com/watch?v=u9zLlcsCDiQ</link>
+      <description>More of the iOS app loop, now inside Codex.
+
+The Build iOS Apps plugin lets Codex view and test your iOS app in the in-app browser, open SwiftUI previews, and hot reload edits without leaving Codex.
+
+Shoutout to the open source projects behind this:
+• Serve-sim powers the streaming simulator by 
+@Ba</description>
+      <pubDate>Mon, 15 Jun 2026 23:20:32 +0000</pubDate>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=u9zLlcsCDiQ</guid>
+      <source url="https://www.youtube.com/watch?v=u9zLlcsCDiQ">OpenAI</source>
+    </item>
     <item>
       <title>Pocket 4P双摄来了：手机影像之外，大疆正在重做一台“口袋电影机”</title>
       <link>https://36kr.com/p/3854510160549124?f=rss</link>
@@ -137,9 +151,9 @@ Codex can be a </description>
   编辑&amp;nbsp;|&amp;nbsp;袁斯来
   过去几个月，“世界模型”（World Model）从学术黑话迅速膨胀成AI和机器人行业里的关键词。
   行业的目光转向背后是切实的焦虑。
-  一方面，经过了过去两年的野蛮生长，具身智能暴露了当前AI在物理世界中的短板——机器人能识别物体，却不懂“推杯子会掉”；能听懂指令，却无法预判“拧瓶盖需要多大的力”。世界模型正是试图补上这个短板，让机器人学会物理世界的规律、因果。
+  一方面，经过了过去两年的野蛮生长，具身智能暴露了当前AI在物理世界中的短板——机器人能识别物体，却���懂“推杯子会掉”；能听懂指令，却无法预判“拧瓶盖需要多大的力”。世界模型正是试图补上这个短板，让机器人学会物理世界的规律、因果。
   也就是说，世界模型与具身智能的关系，本质上是“大脑”与“身体”的关系。
-  另一面，大模型在经历了大语言、视觉模型、多模态的探索之后，需要从</description>
+  另一面，大模型在经历了大语言、视觉模型、多模态的探索之后，需</description>
       <pubDate>Mon, 15 Jun 2026 09:50:00 +0800</pubDate>
       <guid isPermaLink="true">https://36kr.com/p/3853016586359817?f=rss</guid>
       <source url="https://36kr.com/p/3853016586359817?f=rss">36Kr</source>
@@ -202,14 +216,6 @@ Codex can be a </description>
       <pubDate>Mon, 15 Jun 2026 07:57:48 +0800</pubDate>
       <guid isPermaLink="true">https://36kr.com/p/3853670570743040?f=rss</guid>
       <source url="https://36kr.com/p/3853670570743040?f=rss">36Kr</source>
-    </item>
-    <item>
-      <title>昊铂 S600 上市：20 万级 SUV 的竞争，开始进入「少做选择题」阶段</title>
-      <link>https://www.ifanr.com/1668976?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</link>
-      <description>昊铂需要一个爆款。#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。</description>
-      <pubDate>Mon, 15 Jun 2026 07:27:14 +0000</pubDate>
-      <guid isPermaLink="true">https://www.ifanr.com/1668976?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</guid>
-      <source url="https://www.ifanr.com/1668976?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=">爱范儿</source>
     </item>
   </channel>
 </rss>
