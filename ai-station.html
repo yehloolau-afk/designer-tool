@@ -2047,6 +2047,47 @@ function fmtPodDate(iso) {
   try { return new Date(iso).toLocaleDateString('zh-CN', { month:'long', day:'numeric' }); } catch { return ''; }
 }
 
+async function translateBuilders(xData, podData) {
+  const CHUNK = 6;
+  async function xlat(text) {
+    if (!text || !isEnglish(text)) return '';
+    try {
+      const r = await fetch(
+        `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text.slice(0, 450))}&langpair=en|zh-CN`,
+        { signal: timeoutSignal(5000) }
+      );
+      if (r.ok) {
+        const d = await r.json();
+        const res = d?.responseData?.translatedText || '';
+        if (res && res !== text && !res.includes('MYMEMORY WARNING')) return res;
+      }
+    } catch {}
+    return '';
+  }
+
+  const builders = ((xData && xData.x) || []).filter(b => b.tweets && b.tweets.length);
+  const tweetTargets = [];
+  builders.forEach(b => b.tweets.forEach(t => { if (!t._translated) tweetTargets.push(t); }));
+
+  for (let i = 0; i < tweetTargets.length; i += CHUNK) {
+    await Promise.all(tweetTargets.slice(i, i + CHUNK).map(async t => {
+      const zh = await xlat(t.text);
+      if (zh) { t.textOriginal = t.text; t.text = zh; t._translated = true; }
+    }));
+    if (activeTab === 'builders') renderBuilders(xData, podData);
+  }
+
+  // 播客标题翻译
+  const podcasts = (podData && podData.podcasts) || [];
+  await Promise.all(podcasts.map(async p => {
+    if (!p._titleTranslated) {
+      const zh = await xlat(p.title || '');
+      if (zh) { p.titleOriginal = p.title; p.title = zh; p._titleTranslated = true; }
+    }
+  }));
+  if (activeTab === 'builders') renderBuilders(xData, podData);
+}
+
 function renderBuilders(xData, podData) {
   const builders = ((xData && xData.x) || []).filter(b => b.tweets && b.tweets.length);
   const podcasts = (podData && podData.podcasts) || [];
@@ -2145,7 +2186,10 @@ async function switchTab(id) {
       fetch(BUILDERS_FEED_PODCAST).then(r => r.ok ? r.json() : null).catch(() => null)
     ]);
     cache['builders'] = { xData, podData, ts: Date.now() };
-    if (activeTab === 'builders') renderBuilders(xData, podData);
+    if (activeTab === 'builders') {
+      renderBuilders(xData, podData);
+      translateBuilders(xData, podData); // 非阻塞，后台逐批翻译
+    }
     return;
   }
 
