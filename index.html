@@ -86,10 +86,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','SF Pro Text',sa
 .thumb-toggle:hover{background:rgba(0,0,0,.8)}
 .card-field{display:flex;flex-direction:column;gap:3px}
 .card-field-label{font-size:9.5px;font-weight:600;color:var(--t4);text-transform:uppercase;letter-spacing:.4px;display:flex;align-items:center;gap:4px}
-.info-wrap{position:relative;display:inline-flex;align-items:center}
-.info-icon{width:14px;height:14px;border-radius:50%;background:var(--sep);color:var(--t3);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:default;flex-shrink:0;font-style:normal}
-.info-tooltip{display:none;position:absolute;left:0;top:18px;background:#111;color:#fff;font-size:11.5px;line-height:1.65;padding:10px 12px;border-radius:10px;white-space:pre-wrap;width:240px;z-index:50;font-weight:400;letter-spacing:0;box-shadow:0 4px 16px rgba(0,0,0,.3);word-break:break-all}
-.info-wrap:hover .info-tooltip{display:block}
+.info-icon{width:16px;height:16px;border-radius:50%;background:var(--sep);color:var(--t3);font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-style:normal;border:none;padding:0;font-family:inherit;transition:background .15s}
+.info-icon:hover{background:var(--bd)}
+.scene-popup{position:fixed;background:#111;color:#fff;padding:12px 14px;border-radius:12px;font-size:12px;line-height:1.75;max-width:300px;z-index:300;box-shadow:0 8px 32px rgba(0,0,0,.35);word-break:break-all;max-height:320px;overflow-y:auto;white-space:pre-wrap}
 .card-input{width:100%;padding:6px 9px;border:none;border-radius:7px;font-size:11.5px;line-height:1.55;color:var(--t1);resize:none;overflow:hidden;outline:none;font-family:inherit;background:var(--bg);transition:box-shadow .15s;min-height:36px}
 .card-input:focus{box-shadow:inset 0 0 0 2px var(--pr)}
 .card-actions{display:flex;gap:5px;margin-top:2px}
@@ -612,8 +611,7 @@ function cardHtml(s) {
         <button class="card-del" onclick="deleteScene(${s.id})" title="删除">×</button>
       </div>
       <div class="card-field">
-        <div class="card-field-label">画面描述<span class="info-wrap"><i class="info-icon">i</i><span class="info-tooltip">${esc(s.scene_cn)}</span></span></div>
-        <textarea class="card-input" rows="1" oninput="updateScene(${s.id},'scene_cn',this.value);autoResize(this)">${esc(s.scene_cn)}</textarea>
+        <div class="card-field-label">画面描述<button class="info-icon" onclick="showSceneDetail(${s.id},this)">i</button></div>
       </div>
       <div class="card-field">
         <div class="card-field-label">图像提示词</div>
@@ -627,6 +625,30 @@ function cardHtml(s) {
       ${statusHtml}
     </div>
   </div>`;
+}
+
+function showSceneDetail(id, btn) {
+  document.querySelectorAll('.scene-popup').forEach(p => p.remove());
+  const s = scenes.find(s => s.id === id);
+  if (!s) return;
+  const popup = document.createElement('div');
+  popup.className = 'scene-popup';
+  popup.textContent = s.scene_cn;
+  document.body.appendChild(popup);
+  const r = btn.getBoundingClientRect();
+  const pw = 300;
+  let left = r.left;
+  if (left + pw > window.innerWidth - 12) left = window.innerWidth - pw - 12;
+  popup.style.left = left + 'px';
+  popup.style.top = (r.bottom + 6) + 'px';
+  setTimeout(() => {
+    document.addEventListener('click', function close(e) {
+      if (!popup.contains(e.target) && e.target !== btn) {
+        popup.remove();
+        document.removeEventListener('click', close);
+      }
+    });
+  }, 0);
 }
 
 function autoResize(el) {
