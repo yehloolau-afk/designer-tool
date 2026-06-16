@@ -260,6 +260,7 @@ const IS_NETLIFY = location.hostname.includes('netlify');
 const PROXY_BASE = IS_LOCAL ? '' : (IS_NETLIFY ? '' : 'https://wanhuatong-a.netlify.app');
 const IMG_URL  = IS_LOCAL ? 'http://localhost:8766/images/generations'         : `${PROXY_BASE}/.netlify/functions/volc-img`;
 const VID_URL  = IS_LOCAL ? 'http://localhost:8766/contents/generations/tasks' : `${PROXY_BASE}/.netlify/functions/volc-vid`;
+const TXT_URL  = IS_LOCAL ? 'http://localhost:8766/chat/completions'           : `${PROXY_BASE}/.netlify/functions/volc-txt`;
 const pollUrl  = id => IS_LOCAL
   ? `http://localhost:8766/contents/generations/tasks/${id}`
   : `${PROXY_BASE}/.netlify/functions/volc-vid?taskId=${id}`;
@@ -392,6 +393,61 @@ function localParse(article, count, style) {
   });
 }
 
+// ─── LLM PROMPT ENHANCEMENT ───────────────────────────────────
+async function enhancePromptsWithLLM(scenes, style, sizeKey) {
+  const cfg = getCfg();
+  if (!cfg.volcKey) return; // 没有 Key 则跳过，保留本地生成的提示词
+
+  const sizeLabel = (SIZE_MAP[sizeKey] || SIZE_MAP['9:16']).label;
+  const styleDesc = {
+    '故事绘本': '故事绘本风格，柔和水彩，暖色调，扁平2D，圆润可爱',
+    '卡通动漫': '卡通动漫风格，鲜艳色彩，清晰轮廓，2D动画感',
+    '中国水墨': '中国传统水墨画风格，笔墨晕染，留白意境，淡雅',
+    '写实国风': '写实国风风格，工笔细腻，色彩浓郁，古典意境',
+  }[style] || style;
+
+  const userMsg = `以下是从文章中提取的场景片段，请为每个场景生成一条详细的中文图像提示词。
+
+画面风格：${styleDesc}
+输出比例：${sizeLabel}
+
+要求：
+- 描述具体的视觉画面（人物、场景、光线、色彩、氛围）
+- 融入指定风格特征
+- 每条 60-100 字
+- 返回纯 JSON，格式：{"prompts":["提示词1","提示词2",...]}，不要任何其他文字
+
+场景列表：
+${scenes.map((s, i) => `${i + 1}. ${s.scene_cn}`).join('\n')}`;
+
+  try {
+    const res = await fetch(TXT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${cfg.volcKey}` },
+      body: JSON.stringify({
+        model: cfg.txtModel,
+        messages: [
+          { role: 'system', content: '你是专业的 AI 图像提示词工程师，擅长为火山引擎 Seedream 模型生成中文提示词。只返回 JSON，不输出任何解释文字。' },
+          { role: 'user', content: userMsg },
+        ],
+        temperature: 0.7,
+      }),
+    });
+    const data = await res.json();
+    const raw = data.choices?.[0]?.message?.content || '';
+    const match = raw.match(/\{[\s\S]*\}/);
+    if (!match) return;
+    const parsed = JSON.parse(match[0]);
+    const prompts = parsed.prompts;
+    if (!Array.isArray(prompts)) return;
+    prompts.forEach((p, i) => {
+      if (scenes[i] && p) scenes[i].prompt_en = p;
+    });
+  } catch (e) {
+    console.warn('提示词增强失败，使用本地生成：', e.message);
+  }
+}
+
 // ─── PARSE STORYBOARD ─────────────────────────────────────────
 async function parseArticle() {
   const article = document.getElementById('articleInput').value.trim();
@@ -421,6 +477,14 @@ async function parseArticle() {
     btn.innerHTML = '✨ 解析分镜脚本';
     return;
   }
+
+  // LLM 提示词增强
+  document.getElementById('cardsArea').innerHTML = `
+    <div class="empty-state">
+      <div class="spinner" style="width:28px;height:28px;margin-bottom:14px"></div>
+      <p>AI 正在生成图像提示词…</p>
+    </div>`;
+  await enhancePromptsWithLLM(scenes, style, getSelectedSize());
 
   renderCards();
   document.getElementById('batchImgBtn').disabled = false;
@@ -487,11 +551,11 @@ function cardHtml(s) {
       </div>
       <div class="card-field">
         <div class="card-field-label">画面描述</div>
-        <textarea class="card-input" rows="2" oninput="updateScene(${s.id},'scene_cn',this.value)">${esc(s.scene_cn)}</textarea>
+        <textarea class="card-input" rows="4" oninput="updateScene(${s.id},'scene_cn',this.value)">${esc(s.scene_cn)}</textarea>
       </div>
       <div class="card-field">
-        <div class="card-field-label">英文提示词</div>
-        <textarea class="card-input" rows="3" oninput="updateScene(${s.id},'prompt_en',this.value)">${esc(s.prompt_en)}</textarea>
+        <div class="card-field-label">图像提示词</div>
+        <textarea class="card-input" rows="6" oninput="updateScene(${s.id},'prompt_en',this.value)">${esc(s.prompt_en)}</textarea>
       </div>
       <div class="card-actions">
         <button class="btn-card img" onclick="genImage(${s.id})" ${busy ? 'disabled' : ''}>🖼 生图</button>
