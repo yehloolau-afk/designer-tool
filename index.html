@@ -368,7 +368,7 @@ const SCENE_TEMPLATES = {
 const ZH2EN = {'春天':'spring scenery','夏天':'summer scene','秋天':'autumn scene','冬天':'winter scene','树木':'trees in nature','花朵':'blooming flowers','山':'misty mountains','河流':'flowing river','大海':'vast ocean','天空':'vast sky','云朵':'floating clouds','阳光':'warm sunlight','雨':'rain falling','雪':'snow falling','风':'wind blowing','孩子':'child','小朋友':'children playing','老师':'teacher','父亲':'father figure','母亲':'mother figure','鸟儿':'birds flying','鱼':'fish swimming','蝴蝶':'butterfly','村庄':'peaceful village','田野':'open countryside fields','夜晚':'night scene moonlight','早晨':'morning dawn light','夕阳':'sunset golden hour','教室':'classroom','家':'cozy home interior','桥':'ancient stone bridge','小路':'winding path','竹林':'bamboo forest','松树':'pine tree','荷花':'lotus flower pond','梅花':'plum blossom','草地':'green meadow','森林':'lush forest'};
 
 function cnToEnKeywords(text) {
-  return text.length > 25 ? text.slice(0, 25) : text;
+  return text;
 }
 
 function scoreVisual(sentence) {
@@ -395,12 +395,10 @@ function localParse(article, count, style) {
   const motions = ['zoom_in','static','zoom_out','pan_right','static','zoom_in','pan_left','static','zoom_out','static'];
 
   return top.map((item, idx) => {
-    const enKw = cnToEnKeywords(item.s);
-    const sceneCn = item.s.length > 20 ? item.s.slice(0, 20) + '…' : item.s;
-    const promptEn = tplFn(enKw, styleBase, compPrompt);
+    const promptEn = tplFn(item.s, styleBase, compPrompt);
     return {
       id: idx + 1,
-      scene_cn: sceneCn,
+      scene_cn: item.s,
       prompt_en: promptEn,
       duration: 4,
       motion: motions[idx % motions.length],
