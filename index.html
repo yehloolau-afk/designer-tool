@@ -701,16 +701,13 @@ async function genImage(id) {
   const sizeKey = getSelectedSize();
   const sizeInfo = SIZE_MAP[sizeKey] || SIZE_MAP['9:16'];
 
-  // 合并场景描述 + 图像提示词，让生成内容与分镜强关联
-  const finalPrompt = [s.scene_cn, s.prompt_en].filter(p => p && p.trim()).join('，');
-
   try {
     const res = await fetch(IMG_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${cfg.volcKey}` },
       body: JSON.stringify({
         model: cfg.imgModel,
-        prompt: finalPrompt,
+        prompt: s.prompt_en,
         size: sizeInfo.size,
         response_format: 'b64_json',
         watermark: false,
