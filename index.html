@@ -378,6 +378,12 @@ select.modal-input{-webkit-appearance:none;appearance:none;cursor:pointer;backgr
         <option value="doubao-seedance-1-0-lite-250521">Seedance 1.0 Lite</option>
       </select>
     </div>
+    <hr class="modal-divider"/>
+    <div class="modal-field">
+      <label class="modal-label">图片代理 URL <span style="color:var(--t4);font-weight:400">（可选，留空用默认）</span></label>
+      <input class="modal-input" id="customImgProxy" type="url" placeholder="https://your-worker.workers.dev"/>
+      <div class="modal-note">默认代理超时 10 秒，Seedream 出图需 15-30 秒时会报错。填入自建 Cloudflare Worker URL 可彻底解决——详见项目 <code>cloudflare-workers/volc-img-worker.js</code></div>
+    </div>
     <button class="modal-save" onclick="saveConfig()">保存配置</button>
   </div>
 </div>
@@ -408,6 +414,7 @@ function loadConfig() {
   document.getElementById('volcKey').value = cfg.volcKey;
   document.getElementById('imgModel').value = cfg.imgModel;
   document.getElementById('vidModel').value = cfg.vidModel;
+  document.getElementById('customImgProxy').value = cfg.customImgProxy;
   updateStatusDot();
 }
 
@@ -416,6 +423,8 @@ function saveConfig() {
   if (volcInput) LS.set('wht_volc_key', volcInput);
   LS.set('wht_img_model', document.getElementById('imgModel').value);
   LS.set('wht_vid_model', document.getElementById('vidModel').value);
+  const proxy = document.getElementById('customImgProxy').value.trim();
+  LS.set('wht_img_proxy', proxy);
   updateStatusDot();
   closeConfig();
 }
@@ -427,7 +436,14 @@ function getCfg() {
     txtModel: LS.get('wht_txt_model') || 'doubao-1-5-pro-32k-250115',
     imgModel: LS.get('wht_img_model') || imggenCfg.model || 'doubao-seedream-5-0-260128',
     vidModel: LS.get('wht_vid_model') || 'doubao-seedance-1-5-pro-251215',
+    customImgProxy: LS.get('wht_img_proxy') || '',
   };
+}
+
+function getImgUrl() {
+  const custom = LS.get('wht_img_proxy');
+  if (custom) return custom.replace(/\/$/, '');
+  return IS_LOCAL ? 'http://localhost:8766/images/generations' : `${PROXY_BASE}/.netlify/functions/volc-img`;
 }
 
 function updateStatusDot() {
@@ -943,7 +959,7 @@ async function genImage(id) {
   const sizeKey = getSelectedSize();
   const sizeInfo = SIZE_MAP[sizeKey] || SIZE_MAP['9:16'];
 
-  const doRequest = () => fetch(IMG_URL, {
+  const doRequest = () => fetch(getImgUrl(), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${cfg.volcKey}` },
     body: JSON.stringify({
