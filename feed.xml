@@ -5,217 +5,192 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 15 Jun 2026 23:53:16 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 16 Jun 2026 04:33:54 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>无需离开 Codex 即可构建和测试 iOS 应用程序</title>
-      <link>https://www.youtube.com/watch?v=u9zLlcsCDiQ</link>
-      <description>More of the iOS app loop, now inside Codex.
-
-The Build iOS Apps plugin lets Codex view and test your iOS app in the in-app browser, open SwiftUI previews, and hot reload edits without leaving Codex.
-
-Shoutout to the open source projects behind this:
-• Serve-sim powers the streaming simulator by 
-@Ba</description>
-      <pubDate>Mon, 15 Jun 2026 23:20:32 +0000</pubDate>
-      <guid isPermaLink="true">https://www.youtube.com/watch?v=u9zLlcsCDiQ</guid>
-      <source url="https://www.youtube.com/watch?v=u9zLlcsCDiQ">OpenAI</source>
+      <title>今年 618，这些鼠标值得一看</title>
+      <link>https://sspai.com/post/111065</link>
+      <description>介绍点值得买的鼠标，顺便推荐一点鼠标垫。查看全文</description>
+      <pubDate>Tue, 16 Jun 2026 11:00:00 +0800</pubDate>
+      <guid isPermaLink="true">https://sspai.com/post/111065</guid>
+      <source url="https://sspai.com/post/111065">少数派</source>
     </item>
     <item>
-      <title>Pocket 4P双摄来了：手机影像之外，大疆正在重做一台“口袋电影机”</title>
-      <link>https://36kr.com/p/3854510160549124?f=rss</link>
-      <description>在手机影像能力不断逼近专业设备的今天，一个问题变得越来越尖锐：独立影像设备，还有存在的必要吗？
-  6月15日，大疆正式发布 Osmo Pocket 4P，将这台口袋云台相机推向更专业的创作场景。作为 Pocket 系列的新一代旗舰产品，Pocket 4P 定位为“装进口袋里的电影机”，搭载双摄系统、17级动态范围与 D-Log 2 专业色彩曲线，试图在口袋级设备中进一步容纳专业影像能力。
-  Pocket 4P 以&amp;nbsp;3799元起售，多平台预订量持续走高。
-  对于一个原本被视为“手机影像补充”的品类来说，这种热度本身就提出了一个新的问题：当手机已经足够强，为什么仍然有越来越多人愿意</description>
-      <pubDate>Mon, 15 Jun 2026 22:13:11 +0800</pubDate>
-      <guid isPermaLink="true">https://36kr.com/p/3854510160549124?f=rss</guid>
-      <source url="https://36kr.com/p/3854510160549124?f=rss">36Kr</source>
+      <title>派早报：大疆发布 Osmo Pocket 4P 双主摄口袋电影机等</title>
+      <link>https://sspai.com/post/111080</link>
+      <description>少数派的近期动态少数派×AKKO联合共创带屏键盘功能共创计划开启。参与众测招募尝鲜27系列新系统的朋友，你的满意度如何？来一派投票少数派正版软件、付费教程618促销活动限时开启。点击省钱可爱又好玩的经 ...查看全文</description>
+      <pubDate>Tue, 16 Jun 2026 08:14:54 +0800</pubDate>
+      <guid isPermaLink="true">https://sspai.com/post/111080</guid>
+      <source url="https://sspai.com/post/111080">少数派</source>
     </item>
     <item>
-      <title>氪星晚报 ｜我国成功发射吉星高分07C04星等8颗卫星；小红书或已准备好本月在香港提交IPO申请；智谱：公司已推出最新一代旗舰模型GLM-5.2</title>
-      <link>https://36kr.com/p/3854486447510535?f=rss</link>
-      <description>大公司：
-  支付宝：政务AI助手“晓政”服务突破1亿次
-  36氪获悉，支付宝宣布，旗下政务AI助手“晓政”累计服务次数突破1亿次。截至目前，“晓政”服务已覆盖16000项服务事项，成功落地助力70余家部委及省级政务机构，业务场景全面覆盖公积金、人社、公安、不动产等民生领域。
-  小雨智造与地瓜机器人正式宣布达成战略合作
-  36氪获悉，6月12日，小雨智造与地瓜机器人正式宣布达成战略合作，双方将围绕“工业具身大脑+端侧大算力”展开深度协同，推动具身智能技术从实验室走向工业产线，共同打造面向工业制造的高性能软硬一体化解决方案，助力智能制造迈向新阶段。
-  小红书或已准备好本月在香港提交IPO</description>
-      <pubDate>Mon, 15 Jun 2026 21:48:20 +0800</pubDate>
-      <guid isPermaLink="true">https://36kr.com/p/3854486447510535?f=rss</guid>
-      <source url="https://36kr.com/p/3854486447510535?f=rss">36Kr</source>
-    </item>
-    <item>
-      <title>Wayfair 如何使用 GPT-5.5 来丰富 4000 万种产品的目录</title>
-      <link>https://www.youtube.com/watch?v=TDM2Dz_MuPk</link>
-      <description>Fiona Tan and her @wayfair team are leveraging GPT-5.5 and our API to power their catalog enrichment program across 40M products — helping improve how product information is organized, differentiated, and understood.
-
-Next up? Pointing Codex at their gnarliest problems.
-https://openai.com/index/wayf</description>
-      <pubDate>Mon, 15 Jun 2026 18:02:23 +0000</pubDate>
-      <guid isPermaLink="true">https://www.youtube.com/watch?v=TDM2Dz_MuPk</guid>
-      <source url="https://www.youtube.com/watch?v=TDM2Dz_MuPk">OpenAI</source>
-    </item>
-    <item>
-      <title>从一个想法到一个产品，年轻开发者把生活观察写进代码</title>
-      <link>https://36kr.com/p/3854243718550528?f=rss</link>
-      <description>6月14日，HarmonyOS创新赛·极客赛道决赛在HDC华为开发者大会（HDC 2026）落下帷幕。&amp;nbsp;
-  此前，20支入围队伍从众多参赛作品中脱颖而出，在36小时极限编码中抢先使用HarmonyOS 7，围绕AI、3D空间化、用户体验等方向展开比拼。随着最终获奖名单揭晓，比赛的结果已经落定，但比奖项本身更值得被看见的，是这些作品背后一批年轻开发者正在关注什么，又试图用代码回答什么。
-  翻开参赛作品的名单，我们意外地发现，这其中很多的开发者都还是在校学生，没有成熟公司的资源，没有完整的商业团队，甚至可能没有充足的开发经验。但在这场比赛里，他们把自己的生活观察、专业背景和兴趣经验变</description>
-      <pubDate>Mon, 15 Jun 2026 17:46:34 +0800</pubDate>
-      <guid isPermaLink="true">https://36kr.com/p/3854243718550528?f=rss</guid>
-      <source url="https://36kr.com/p/3854243718550528?f=rss">36Kr</source>
-    </item>
-    <item>
-      <title>派评 | 近期值得关注的 App</title>
-      <link>https://sspai.com/post/111068</link>
-      <description>&gt;下载少数派2.0客户端、关注少数派公众号，解锁全新阅读体验📰&gt;实用、好用的正版软件，少数派为你呈现🚀查看全文</description>
-      <pubDate>Mon, 15 Jun 2026 17:45:36 +0800</pubDate>
-      <guid isPermaLink="true">https://sspai.com/post/111068</guid>
-      <source url="https://sspai.com/post/111068">少数派</source>
-    </item>
-    <item>
-      <title>具透 | 思考、打磨、加速：iPadOS 27 首个开发者测试版中值得关注的新内容</title>
-      <link>https://sspai.com/post/111003</link>
-      <description>除了可以自定义的 Liquid Glass 透明度，iPadOS 27 还有这 12 项细节变化。查看全文</description>
-      <pubDate>Mon, 15 Jun 2026 16:04:25 +0800</pubDate>
-      <guid isPermaLink="true">https://sspai.com/post/111003</guid>
-      <source url="https://sspai.com/post/111003">少数派</source>
-    </item>
-    <item>
-      <title>从 BANG!CASE 到 AI Display：我为什么想给 AI 在桌面留一个位置</title>
-      <link>https://sspai.com/post/110984</link>
-      <description>过去几年，我一直在深圳做硬件产品，也在少数派参与过几次消费电子产品的共创。如果你关注过少数派之前的一些硬件项目，可能见过BANG!CASE。它最早来自我的一个产品创意，后来在少数派团队的推进下变成了真 ...查看全文</description>
-      <pubDate>Mon, 15 Jun 2026 16:00:00 +0800</pubDate>
-      <guid isPermaLink="true">https://sspai.com/post/110984</guid>
-      <source url="https://sspai.com/post/110984">少数派</source>
-    </item>
-    <item>
-      <title>Snapseed 4.0：Google 终于想起了这款「免费修图神器」</title>
-      <link>https://sspai.com/post/110525</link>
-      <description>Snapseed可谓是手机摄影App届元老级的存在了，最早由软件公司NikSoftware于2011年开发推出，当年即被评为AppStore年度应用。次年NikSoftware即被Google收购，S ...查看全文</description>
-      <pubDate>Mon, 15 Jun 2026 14:39:30 +0800</pubDate>
-      <guid isPermaLink="true">https://sspai.com/post/110525</guid>
-      <source url="https://sspai.com/post/110525">少数派</source>
-    </item>
-    <item>
-      <title>Codex 作为解决方案工程合作伙伴</title>
-      <link>https://www.youtube.com/watch?v=_jNbM8pV9oI</link>
-      <description>“A big part of my role as a solutions engineer is not only to build but to understand,” Stephanie Anani, Solutions Engineer, OpenAI. 
-
-Stephanie points Codex to Trustpilot reviews and will mock up a customer website based on the feedback to show them how easy it is to make changes. 
-
-Codex can be a </description>
-      <pubDate>Mon, 15 Jun 2026 13:03:41 +0000</pubDate>
-      <guid isPermaLink="true">https://www.youtube.com/watch?v=_jNbM8pV9oI</guid>
-      <source url="https://www.youtube.com/watch?v=_jNbM8pV9oI">OpenAI</source>
-    </item>
-    <item>
-      <title>实测鸿蒙 7 开发者 Beta：AI 很强大，小艺很能干</title>
-      <link>https://www.ifanr.com/1668998?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</link>
-      <description>手机开始自己干活了？我们在 HDC 2026 现场实测了全新小艺。
-只需一句话，小艺就能跨设备取文件、做全能旅游搭子。
-戳视频，看小艺自己干活。#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。</description>
-      <pubDate>Mon, 15 Jun 2026 13:03:28 +0000</pubDate>
-      <guid isPermaLink="true">https://www.ifanr.com/1668998?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</guid>
-      <source url="https://www.ifanr.com/1668998?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=">爱范儿</source>
-    </item>
-    <item>
-      <title>校企共推AI4S 上海交通大学与太初元碁签署合作协议</title>
-      <link>https://www.qbitai.com/2026/06/435848.html</link>
-      <description></description>
-      <pubDate>Mon, 15 Jun 2026 12:57:10 +0000</pubDate>
-      <guid isPermaLink="true">https://www.qbitai.com/2026/06/435848.html</guid>
-      <source url="https://www.qbitai.com/2026/06/435848.html">量子位</source>
-    </item>
-    <item>
-      <title>线下活动｜CiGA Game Jam 2026 广州荔湾少数派站召集令</title>
-      <link>https://sspai.com/post/110989</link>
-      <description>虽迟但到！CGJ2026广州荔湾站来啦！本次活动定位为小型GameJam，意在复刻最经典的古早GJ味道，比较放松，没有评比环节，只有公园、音乐、猫咪、饮品、讨论交流和分享！做人呐，最重要是开心～什么是 ...查看全文</description>
-      <pubDate>Mon, 15 Jun 2026 11:00:00 +0800</pubDate>
-      <guid isPermaLink="true">https://sspai.com/post/110989</guid>
-      <source url="https://sspai.com/post/110989">少数派</source>
-    </item>
-    <item>
-      <title>头部应用撑起天际线之后，鸿蒙还需要什么？</title>
-      <link>https://www.ifanr.com/1668873?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</link>
-      <description>小团队，能干大事，是鸿蒙在 AI 时代的新标签。#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。</description>
-      <pubDate>Mon, 15 Jun 2026 10:20:30 +0000</pubDate>
-      <guid isPermaLink="true">https://www.ifanr.com/1668873?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</guid>
-      <source url="https://www.ifanr.com/1668873?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=">爱范儿</source>
-    </item>
-    <item>
-      <title>硬氪专访 | 智源研究院院长王仲远：VLA不会死，但世界模型是未来</title>
-      <link>https://36kr.com/p/3853016586359817?f=rss</link>
-      <description>作者&amp;nbsp;|&amp;nbsp;邱晓芬
-  编辑&amp;nbsp;|&amp;nbsp;袁斯来
-  过去几个月，“世界模型”（World Model）从学术黑话迅速膨胀成AI和机器人行业里的关键词。
-  行业的目光转向背后是切实的焦虑。
-  一方面，经过了过去两年的野蛮生长，具身智能暴露了当前AI在物理世界中的短板——机器人能识别物体，却���懂“推杯子会掉”；能听懂指令，却无法预判“拧瓶盖需要多大的力”。世界模型正是试图补上这个短板，让机器人学会物理世界的规律、因果。
-  也就是说，世界模型与具身智能的关系，本质上是“大脑”与“身体”的关系。
-  另一面，大模型在经历了大语言、视觉模型、多模态的探索之后，需</description>
-      <pubDate>Mon, 15 Jun 2026 09:50:00 +0800</pubDate>
-      <guid isPermaLink="true">https://36kr.com/p/3853016586359817?f=rss</guid>
-      <source url="https://36kr.com/p/3853016586359817?f=rss">36Kr</source>
-    </item>
-    <item>
-      <title>硬氪首发 | 海洋具身智能公司「世航智能」拿下创纪录10亿融资，朱啸虎押注</title>
-      <link>https://36kr.com/p/3853011900142848?f=rss</link>
-      <description>作者&amp;nbsp;|&amp;nbsp;邱晓芬
-  编辑&amp;nbsp;|&amp;nbsp;袁斯来
-  硬氪获悉，海洋具身智能公司「世航智能」完成A轮融资，融资金额超过10亿元，这也是目前全球海洋机器人领域规模最大的单轮融资。本轮融资由两家芯片公司「摩尔线程」和「昆仑芯」的产业投资方上河动量基金、新加坡国有投资平台Vertex Growth 、上市公司大洋电机等资方出资。
-  另外，金沙江创投也在本轮追加投资，这已是其创始人朱啸虎第五轮投资「世航智能」，祥峰中国、华映资本、长石资本等老股东亦全部超额跟投。
-  「世航智能」创始人兼CEO陈晓博为1989年出生的哈尔滨工程大学校友，长期深耕水下机器人领域，在28岁时</description>
-      <pubDate>Mon, 15 Jun 2026 09:50:00 +0800</pubDate>
-      <guid isPermaLink="true">https://36kr.com/p/3853011900142848?f=rss</guid>
-      <source url="https://36kr.com/p/3853011900142848?f=rss">36Kr</source>
-    </item>
-    <item>
-      <title>从ICRA到CVPR，机器人圈最近到底在聊什么？｜北京·周三晚</title>
-      <link>https://www.qbitai.com/2026/06/435841.html</link>
-      <description></description>
-      <pubDate>Mon, 15 Jun 2026 09:37:40 +0000</pubDate>
-      <guid isPermaLink="true">https://www.qbitai.com/2026/06/435841.html</guid>
-      <source url="https://www.qbitai.com/2026/06/435841.html">量子位</source>
-    </item>
-    <item>
-      <title>36氪首发 | EBike变速器供应商打破海外巨头垄断，获国泰、达晨参与新一轮数千万元融资</title>
-      <link>https://36kr.com/p/3853252135654660?f=rss</link>
-      <description>作者&amp;nbsp;|&amp;nbsp;张子怡
-  编辑&amp;nbsp;|&amp;nbsp;袁斯来
-  硬氪获悉，智能短出行核心零部件供应商洛梵狄智能科技（以下简称“洛梵狄”）已完成新一轮数千万元B+融资。本轮投资方包括国泰海通、达晨财智、以及广州黄埔科创母基金，老股东达晨财智在本轮中继续追加投资。
-  据悉，本轮融资资金将主要用于持续的研发投入、产能扩张、全球销售网络建设及日常运营流动资金。其中，研发重点将聚焦于下一代智能内变速器的深耕。
-  洛梵狄自2012年成立以来，专注内变速器的研发和生产，是中国第一家、全球第三家量产智能内变速器的厂商。目前公司已研发出电控内变速器、电机内置变速器（MEGS）、机械自动内</description>
-      <pubDate>Mon, 15 Jun 2026 09:30:46 +0800</pubDate>
-      <guid isPermaLink="true">https://36kr.com/p/3853252135654660?f=rss</guid>
-      <source url="https://36kr.com/p/3853252135654660?f=rss">36Kr</source>
-    </item>
-    <item>
-      <title>宇树机器人要登珠峰了！</title>
-      <link>https://www.qbitai.com/2026/06/435817.html</link>
-      <description>已登顶钦博拉索</description>
-      <pubDate>Mon, 15 Jun 2026 09:17:30 +0000</pubDate>
-      <guid isPermaLink="true">https://www.qbitai.com/2026/06/435817.html</guid>
-      <source url="https://www.qbitai.com/2026/06/435817.html">量子位</source>
-    </item>
-    <item>
-      <title>8点1氪丨诺奖得主称马斯克是庞氏骗局；SK海力士去年新增员工超2000人；人形机器人U1仅限成人购买</title>
-      <link>https://36kr.com/p/3853670570743040?f=rss</link>
+      <title>8点1氪｜山姆总部因食品安全问题被约谈；智谱股价暴涨，创上市以来单日成交新高；美伊确认达成协议，国际油价显著下跌</title>
+      <link>https://36kr.com/p/3855082873476102?f=rss</link>
       <description>今日热点导览
   
-   加拿大母亲起诉奥特曼与OpenAI，指控ChatGPT诱导女儿自杀
-   A股10家退市公司波及超25万股民
-   SK海力士去年新增员工超2000人
-   H&amp;amp;M重组全球架构，大中华区降级
-   世界杯期间英格兰队装备遭窃，大部分已被追回
+   国内品牌金饰价格普涨
+   小红书公布世界杯开赛数据
+   阿里巴巴达摩院退出旗下科技公司
+   罗马仕接连变更法定代表人
+   遇见小面创始人向“渝见小面”致歉
   
-  TOP 3 大新闻
-  诺奖得主称马斯克是庞氏骗局，SpaceX上市让普通投资者被迫买单
-  据当地时间6月12日，诺贝尔经济学奖得主保罗·克鲁格曼发文“Elon Musk， Human Ponzi Scheme”，称世界首富埃隆·马斯克是庞氏骗局。
-  克鲁格曼认为，SpaceX的IPO完全建立在“庞氏骗局”之</description>
-      <pubDate>Mon, 15 Jun 2026 07:57:48 +0800</pubDate>
-      <guid isPermaLink="true">https://36kr.com/p/3853670570743040?f=rss</guid>
-      <source url="https://36kr.com/p/3853670570743040?f=rss">36Kr</source>
+  TOP3大新闻
+  针对多发食品安全问题，市场监管总局约谈山姆总部
+  记者15日了解到，针对一段时期以来监管发现和媒体曝光的山姆线下门店及线上网店多发的食品安全问题，近日，市场监管总局依法对沃尔玛（中国）投资有限公司（即山姆总部）负责人进行了责任约谈，要求其严格按照《中华人民共和国食品安全法》，以及《食品销售连锁企业落实食品安全主体责任监督管理规定》《网络食品销售经营者落实食品安全主体责任监督管</description>
+      <pubDate>Tue, 16 Jun 2026 07:56:18 +0800</pubDate>
+      <guid isPermaLink="true">https://36kr.com/p/3855082873476102?f=rss</guid>
+      <source url="https://36kr.com/p/3855082873476102?f=rss">36Kr</source>
+    </item>
+    <item>
+      <title>华为小艺：藏器于身，待时而动｜AI 器物志</title>
+      <link>https://www.ifanr.com/1669043?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</link>
+      <description>软件硬件都挺夯，机型适配要跟上#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。</description>
+      <pubDate>Tue, 16 Jun 2026 03:34:48 +0000</pubDate>
+      <guid isPermaLink="true">https://www.ifanr.com/1669043?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</guid>
+      <source url="https://www.ifanr.com/1669043?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=">爱范儿</source>
+    </item>
+    <item>
+      <title>沙利文权威认证：范式 Rise vGPU 获评 Tier 1 领先平台</title>
+      <link>https://www.qbitai.com/2026/06/435853.html</link>
+      <description>成为全球领先的通用人工智能科技公司</description>
+      <pubDate>Tue, 16 Jun 2026 02:47:51 +0000</pubDate>
+      <guid isPermaLink="true">https://www.qbitai.com/2026/06/435853.html</guid>
+      <source url="https://www.qbitai.com/2026/06/435853.html">量子位</source>
+    </item>
+    <item>
+      <title>起猛了，看见 Gemini 上长了个手机</title>
+      <link>https://www.ifanr.com/1669022?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</link>
+      <description>Android 不再是重点了，然后呢？#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。</description>
+      <pubDate>Tue, 16 Jun 2026 02:30:49 +0000</pubDate>
+      <guid isPermaLink="true">https://www.ifanr.com/1669022?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</guid>
+      <source url="https://www.ifanr.com/1669022?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=">爱范儿</source>
+    </item>
+    <item>
+      <title>早报｜AI版支付宝启动内测/小红书世界杯直播在线人数创新高/3799元，大疆Pocket 4P发布</title>
+      <link>https://www.ifanr.com/1669019?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</link>
+      <description>·  AI 版支付宝启动内测，「阿宝」对话助手界面曝光
+· 微信支付发布 AI 接入工具箱 2.0，Token 消耗少一半
+· 智元远征 A3 机器人实现全自主乒乓对抗#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。</description>
+      <pubDate>Tue, 16 Jun 2026 00:30:32 +0000</pubDate>
+      <guid isPermaLink="true">https://www.ifanr.com/1669019?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</guid>
+      <source url="https://www.ifanr.com/1669019?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=">爱范儿</source>
+    </item>
+    <item>
+      <title>良好解释的定义以及解释法学硕士成果的挑战</title>
+      <link>https://arxiv.org/abs/2606.14838</link>
+      <description>arXiv:2606.14838v1 Announce Type: new 
+Abstract: How to define a good explanation is a long-standing philosophical debate which has found recent renewed interest in the context of AI outputs. Explainability is crucial for AI adoption in many contexts, but in order to produce good explanations of AI </description>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.14838</guid>
+      <source url="https://arxiv.org/abs/2606.14838">ArXiv AI</source>
+    </item>
+    <item>
+      <title>Dr-DCI：通过动态工作空间扩展扩展直接语料库交互</title>
+      <link>https://arxiv.org/abs/2606.14885</link>
+      <description>arXiv:2606.14885v1 Announce Type: new 
+Abstract: Agentic search over large corpora relies on retriever-mediated interfaces (e.g., BM25 or ColBERT) for scalable candidate discovery. While effective at ranking relevant documents, these interfaces expose evidence only as ranked results or bounded docum</description>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.14885</guid>
+      <source url="https://arxiv.org/abs/2606.14885">ArXiv AI</source>
+    </item>
+    <item>
+      <title>关系结构因果模型</title>
+      <link>https://arxiv.org/abs/2606.14892</link>
+      <description>arXiv:2606.14892v1 Announce Type: new 
+Abstract: An artificial intelligence must have a model of its environment that is causal, supporting reasoning about interventions and counterfactuals, and also combinatorial, supporting generalization to unseen combinations of objects. In this work, we formall</description>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.14892</guid>
+      <source url="https://arxiv.org/abs/2606.14892">ArXiv AI</source>
+    </item>
+    <item>
+      <title>人工智能代理之间的信任：测量形成、破坏和恢复，对治理多代理系统的影响</title>
+      <link>https://arxiv.org/abs/2606.14923</link>
+      <description>arXiv:2606.14923v1 Announce Type: new 
+Abstract: As language-model agents increasingly work in teams, each agent must decide how much to trust its teammates. Yet we lack a standard way to measure trust between AI agents. We propose a behavioral measure based on costly verification. In a cooperative </description>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.14923</guid>
+      <source url="https://arxiv.org/abs/2606.14923">ArXiv AI</source>
+    </item>
+    <item>
+      <title>PrologMCP：LLM 代理的标准化 Prolog 工具接口</title>
+      <link>https://arxiv.org/abs/2606.14935</link>
+      <description>arXiv:2606.14935v1 Announce Type: new 
+Abstract: Frontier reasoning-tuned language models still fail on deductive tasks at depth, and the cost of improved performance through extended internal reasoning scales poorly. Symbolic delegation offers a complementary route: a language model translates the </description>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.14935</guid>
+      <source url="https://arxiv.org/abs/2606.14935">ArXiv AI</source>
+    </item>
+    <item>
+      <title>QPILOTS：针对流量策略的高效测试时 Q 转向</title>
+      <link>https://arxiv.org/abs/2606.14801</link>
+      <description>arXiv:2606.14801v1 Announce Type: new 
+Abstract: Flow-matching and diffusion policies are expressive action generators, but optimizing them with temporal-difference reinforcement learning (RL) remains difficult. Effective policy extraction requires exploiting the critic's action gradient, yet direct</description>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.14801</guid>
+      <source url="https://arxiv.org/abs/2606.14801">ArXiv ML</source>
+    </item>
+    <item>
+      <title>GRAPE：用于紧凑对抗鲁棒性的引导参数空间演化</title>
+      <link>https://arxiv.org/abs/2606.14865</link>
+      <description>arXiv:2606.14865v1 Announce Type: new 
+Abstract: Adversarial Training (AT) improves neural network robustness, but most methods train a fixed parameter space from the start. This paper asks whether the order in which parameters become optimizable can affect the final robust solution, even when the f</description>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.14865</guid>
+      <source url="https://arxiv.org/abs/2606.14865">ArXiv ML</source>
+    </item>
+    <item>
+      <title>{\alpha}-公平保险定价：公平连续体</title>
+      <link>https://arxiv.org/abs/2606.14898</link>
+      <description>arXiv:2606.14898v1 Announce Type: new 
+Abstract: Fairness in insurance pricing remains a long-standing and deeply debated puzzle. On one hand, insurers, driven by profitability considerations, set premiums that differentiate across individual risks to achieve actuarial fairness. On the other hand, i</description>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.14898</guid>
+      <source url="https://arxiv.org/abs/2606.14898">ArXiv ML</source>
+    </item>
+    <item>
+      <title>GRASP：梯度对齐顺序参数传输，实现内存高效的多源学习</title>
+      <link>https://arxiv.org/abs/2606.14900</link>
+      <description>arXiv:2606.14900v1 Announce Type: new 
+Abstract: Multi-source transfer learning faces a fundamental scalability bottleneck: existing approaches require either loading all K source models into memory simultaneously during parameter fusion, requiring O(K) memory, or deploying all models at inference t</description>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.14900</guid>
+      <source url="https://arxiv.org/abs/2606.14900">ArXiv ML</source>
+    </item>
+    <item>
+      <title>嵌入模型路由的政策遗憾：低级别专家的上下文强盗</title>
+      <link>https://arxiv.org/abs/2606.14929</link>
+      <description>arXiv:2606.14929v1 Announce Type: new 
+Abstract: Modern recommendation systems increasingly rely on dynamically routing diverse queries to multiple embedding models. Despite its practical significance, this problem remains poorly understood under realistic conditions like adversarial queries, bandit</description>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.14929</guid>
+      <source url="https://arxiv.org/abs/2606.14929">ArXiv ML</source>
+    </item>
+    <item>
+      <title>PhoneHarness：通过混合 GUI、CLI 和工具操作来利用电话使用代理</title>
+      <link>https://arxiv.org/abs/2606.14832</link>
+      <description>arXiv:2606.14832v1 Announce Type: new 
+Abstract: Phone agents are increasingly expected to complete real mobile workflows rather than merely predict the next screen action. However, much of the current mobile-agent literature still evaluates agents primarily as GUI controllers that observe a screen,</description>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.14832</guid>
+      <source url="https://arxiv.org/abs/2606.14832">ArXiv NLP</source>
+    </item>
+    <item>
+      <title>评估 Lean 4 中证明自动形式化的鲁棒性</title>
+      <link>https://arxiv.org/abs/2606.14867</link>
+      <description>arXiv:2606.14867v1 Announce Type: new 
+Abstract: Proof autoformalization aims to translate a mathematical informal proof written in natural language into a formal proof in a formal language such as Lean~4. Several works have developed LLM-based models for proof autoformalization. However, existing e</description>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.14867</guid>
+      <source url="https://arxiv.org/abs/2606.14867">ArXiv NLP</source>
+    </item>
+    <item>
+      <title>上下文压缩不是一回事：在匹配预算下可读的符号重新表达与连贯的摘要</title>
+      <link>https://arxiv.org/abs/2606.14875</link>
+      <description>arXiv:2606.14875v1 Announce Type: new 
+Abstract: We study context compression for multi-hop question answering with small language models. We propose Telegraph English, a readable symbolic format that rewrites retrieved passages into structured entity-relation statements, preserving reasoning eviden</description>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.14875</guid>
+      <source url="https://arxiv.org/abs/2606.14875">ArXiv NLP</source>
     </item>
   </channel>
 </rss>
