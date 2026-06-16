@@ -86,7 +86,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','SF Pro Text',sa
 .thumb-toggle:hover{background:rgba(0,0,0,.8)}
 .card-field{display:flex;flex-direction:column;gap:3px}
 .card-field-label{font-size:9.5px;font-weight:600;color:var(--t4);text-transform:uppercase;letter-spacing:.4px}
-.card-input{width:100%;padding:6px 9px;border:none;border-radius:7px;font-size:11.5px;line-height:1.55;color:var(--t1);resize:none;outline:none;font-family:inherit;background:var(--bg);transition:box-shadow .15s}
+.card-input{width:100%;padding:6px 9px;border:none;border-radius:7px;font-size:11.5px;line-height:1.55;color:var(--t1);resize:none;overflow:hidden;outline:none;font-family:inherit;background:var(--bg);transition:box-shadow .15s;min-height:36px}
 .card-input:focus{box-shadow:inset 0 0 0 2px var(--pr)}
 .card-actions{display:flex;gap:5px;margin-top:2px}
 .btn-card{flex:1;height:28px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;border:none;background:var(--bg);color:var(--t2);display:flex;align-items:center;justify-content:center;gap:3px}
@@ -564,6 +564,7 @@ function renderCards() {
   }
 
   area.innerHTML = scenes.map(s => cardHtml(s)).join('');
+  requestAnimationFrame(initAutoResize);
 
   // Check download button visibility
   const hasVideos = scenes.some(s => s.videoUrl);
@@ -612,11 +613,11 @@ function cardHtml(s) {
       </div>
       <div class="card-field">
         <div class="card-field-label">画面描述</div>
-        <textarea class="card-input" rows="4" oninput="updateScene(${s.id},'scene_cn',this.value)">${esc(s.scene_cn)}</textarea>
+        <textarea class="card-input" rows="1" oninput="updateScene(${s.id},'scene_cn',this.value);autoResize(this)">${esc(s.scene_cn)}</textarea>
       </div>
       <div class="card-field">
         <div class="card-field-label">图像提示词</div>
-        <textarea class="card-input" rows="6" oninput="updateScene(${s.id},'prompt_en',this.value)">${esc(s.prompt_en)}</textarea>
+        <textarea class="card-input" rows="1" oninput="updateScene(${s.id},'prompt_en',this.value);autoResize(this)">${esc(s.prompt_en)}</textarea>
       </div>
       <div class="card-actions">
         <button class="btn-card img" onclick="genImage(${s.id})" ${busy ? 'disabled' : ''}>🖼 生图</button>
@@ -626,6 +627,15 @@ function cardHtml(s) {
       ${statusHtml}
     </div>
   </div>`;
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = el.scrollHeight + 'px';
+}
+
+function initAutoResize() {
+  document.querySelectorAll('.card-input').forEach(autoResize);
 }
 
 function esc(s) {
@@ -852,7 +862,9 @@ function refreshCard(id) {
   const el = document.getElementById(`card-${id}`);
   if (!el) return;
   el.outerHTML = cardHtml(s);
-  // Re-bind oninput for textareas — they use inline handlers so no rebinding needed
+  requestAnimationFrame(() => {
+    document.querySelectorAll(`#card-${id} .card-input`).forEach(autoResize);
+  });
 }
 
 // ─── INIT ─────────────────────────────────────────────────────
