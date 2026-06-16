@@ -2,5 +2,8 @@
   publish = "."
   functions = "netlify/functions"
 
+[functions]
+  timeout = 30
+
 [build.environment]
   NODE_VERSION = "18"
