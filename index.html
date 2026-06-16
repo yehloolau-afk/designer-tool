@@ -89,8 +89,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','SF Pro Text',sa
 .info-icon{width:16px;height:16px;border-radius:50%;background:var(--sep);color:var(--t3);font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-style:normal;border:none;padding:0;font-family:inherit;transition:background .15s}
 .info-icon:hover{background:var(--bd)}
 .scene-popup{position:fixed;background:#111;color:#fff;padding:12px 14px;border-radius:12px;font-size:12px;line-height:1.75;max-width:300px;z-index:300;box-shadow:0 8px 32px rgba(0,0,0,.35);word-break:break-all;max-height:320px;overflow-y:auto;white-space:pre-wrap}
-.card-input{width:100%;padding:6px 9px;border:none;border-radius:7px;font-size:11.5px;line-height:1.55;color:var(--t1);resize:none;overflow:hidden;outline:none;font-family:inherit;background:var(--bg);transition:box-shadow .15s;min-height:36px}
+.card-input{width:100%;padding:6px 9px;border:none;border-radius:7px;font-size:11.5px;line-height:1.6;color:var(--t1);resize:none;overflow:hidden;outline:none;font-family:inherit;background:var(--bg);transition:box-shadow .15s}
 .card-input:focus{box-shadow:inset 0 0 0 2px var(--pr)}
+.prompt-text{font-size:11px;line-height:1.7;color:var(--t2);padding:7px 9px;background:var(--bg);border-radius:7px;word-break:break-all;white-space:pre-wrap}
 .card-actions{display:flex;gap:5px;margin-top:2px}
 .btn-card{flex:1;height:28px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;border:none;background:var(--bg);color:var(--t2);display:flex;align-items:center;justify-content:center;gap:3px}
 .btn-card:hover{background:var(--sep)}
@@ -561,7 +562,7 @@ function renderCards() {
   }
 
   area.innerHTML = scenes.map(s => cardHtml(s)).join('');
-  requestAnimationFrame(initAutoResize);
+  setTimeout(initAutoResize, 0);
 
   // Check download button visibility
   const hasVideos = scenes.some(s => s.videoUrl);
@@ -613,7 +614,7 @@ function cardHtml(s) {
       </div>
       <div class="card-field">
         <div class="card-field-label">图像提示词</div>
-        <textarea class="card-input" rows="1" oninput="updateScene(${s.id},'prompt_en',this.value);autoResize(this)">${esc(s.prompt_en)}</textarea>
+        <textarea class="card-input" rows="5" oninput="updateScene(${s.id},'prompt_en',this.value);autoResize(this)">${esc(s.prompt_en)}</textarea>
       </div>
       <div class="card-actions">
         <button class="btn-card img" onclick="genImage(${s.id})" ${busy ? 'disabled' : ''}>🖼 生图</button>
@@ -882,9 +883,9 @@ function refreshCard(id) {
   const el = document.getElementById(`card-${id}`);
   if (!el) return;
   el.outerHTML = cardHtml(s);
-  requestAnimationFrame(() => {
+  setTimeout(() => {
     document.querySelectorAll(`#card-${id} .card-input`).forEach(autoResize);
-  });
+  }, 0);
 }
 
 // ─── INIT ─────────────────────────────────────────────────────
