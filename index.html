@@ -16,22 +16,20 @@
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','SF Pro Text',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
 
 /* HEADER */
-.hd{background:rgba(255,255,255,.85);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--bd);padding:0 20px;height:52px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100}
+.hd{background:rgba(255,255,255,.85);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--bd);padding:0 20px;height:52px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;flex-shrink:0}
 .hd-logo{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:var(--t1);letter-spacing:-.3px;white-space:nowrap}
 .hd-logo-icon{width:30px;height:30px;border-radius:7px;background:#111;color:#fff;font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;letter-spacing:-1px;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif}
 .hd-sub{font-size:12px;color:var(--t4);border-left:1px solid var(--bd);padding-left:12px}
 .hd-r{margin-left:auto;display:flex;align-items:center;gap:8px}
 .btn-cfg{display:flex;align-items:center;gap:5px;padding:5px 12px;border:none;border-radius:20px;background:var(--pr-l);font-size:12px;color:var(--t2);font-weight:500;cursor:pointer;transition:all .15s;font-family:inherit}
 .btn-cfg:hover{background:rgba(0,0,0,.1)}
-.status-dot{width:7px;height:7px;border-radius:50%;background:#C7C7CC;transition:background .3s}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#C7C7CC;transition:background .3s;flex-shrink:0}
 .status-dot.ok{background:#34C759;animation:dotBlink 1.6s ease-in-out infinite}
 .status-dot.err{background:#FF3B30}
 @keyframes dotBlink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(52,199,89,.5)}50%{opacity:.7;box-shadow:0 0 0 4px rgba(52,199,89,0)}}
 
-/* LAYOUT */
+/* DESKTOP LAYOUT */
 .main{display:flex;flex:1;min-height:0;gap:0}
-
-/* LEFT PANEL */
 .panel-l{width:405px;min-width:405px;background:#fff;box-shadow:1px 0 0 rgba(0,0,0,.08),6px 0 20px rgba(0,0,0,.04);display:flex;flex-direction:column;padding:0;gap:0;overflow-y:auto;position:relative;z-index:1}
 .form-block{padding:16px;border-bottom:1px solid rgba(0,0,0,.06)}
 .field-label{font-size:11px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
@@ -46,8 +44,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','SF Pro Text',sa
 .btn-parse:disabled{opacity:.45;cursor:not-allowed;transform:none}
 .hint-box{margin:16px;background:var(--bg);border-radius:var(--r);padding:12px 14px;font-size:12px;color:var(--t3);line-height:1.75;border:1px solid rgba(0,0,0,.06)}
 .hint-box strong{color:var(--t2);font-weight:600}
-
-/* RIGHT PANEL */
 .panel-r{flex:1;display:flex;flex-direction:column;min-width:0;background:var(--bg)}
 .panel-r-top{padding:12px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bd);background:rgba(255,255,255,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .panel-title{font-size:13px;font-weight:600;color:var(--t1)}
@@ -61,7 +57,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','SF Pro Text',sa
 .btn-batch:disabled{opacity:.4;cursor:not-allowed}
 .btn-dl-all{height:32px;padding:0 14px;border-radius:20px;font-size:12px;cursor:pointer;font-family:inherit;background:rgba(0,0,0,.06);color:var(--t2);border:none;font-weight:600;transition:all .15s;display:flex;align-items:center;gap:5px}
 .btn-dl-all:hover{background:rgba(0,0,0,.1)}
-
 .cards-area{flex:1;overflow-y:auto;padding:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;align-content:start}
 
 /* EMPTY STATE */
@@ -109,7 +104,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','SF Pro Text',sa
 .card-status.ok{color:#34C759}
 .card-status.err{color:#FF3B30}
 
-/* TUTORIAL */
+/* DESKTOP TUTORIAL */
 .tutorial{grid-column:1/-1;padding:32px 24px;max-width:760px;margin:0 auto;width:100%}
 .tutorial-hd{text-align:center;margin-bottom:32px}
 .tutorial-hd .t-icon{font-size:36px;display:block;margin-bottom:10px}
@@ -153,23 +148,63 @@ select.modal-input{-webkit-appearance:none;appearance:none;cursor:pointer;backgr
 .modal-save:hover{background:var(--pr-d)}
 .modal-save:active{transform:scale(.98)}
 .modal-divider{border:none;border-top:1px solid var(--bd);margin:16px 0}
+
+/* === MOBILE APP === */
+.is-mobile .hd-sub{display:none}
+.is-mobile .hd{padding:0 14px;gap:10px}
+#mobileApp{flex:1;display:none;flex-direction:column;min-height:0;overflow:hidden}
+.m-panel{background:var(--bg2);border-bottom:1px solid var(--sep);flex-shrink:0}
+.m-panel-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;cursor:pointer;font-size:14px;font-weight:600;color:var(--t1);-webkit-tap-highlight-color:transparent;user-select:none}
+.m-panel-head:active{background:rgba(0,0,0,.04)}
+.m-chevron{transition:transform .2s;font-size:11px;color:var(--t4)}
+.m-chevron.open{transform:rotate(180deg)}
+.m-panel-body{padding:0 16px 16px;display:flex;flex-direction:column;gap:10px}
+.m-panel-body.collapsed{display:none}
+.m-selgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.m-selgrid .sel{width:100%}
+.m-textarea{width:100%;min-height:130px;max-height:280px;padding:12px 14px;border:none;border-radius:var(--r);font-size:14px;line-height:1.7;color:var(--t1);resize:vertical;outline:none;font-family:inherit;background:var(--bg);box-shadow:inset 0 0 0 1px rgba(0,0,0,.07);transition:box-shadow .15s}
+.m-textarea:focus{box-shadow:inset 0 0 0 2px var(--pr)}
+.m-parse-btn{width:100%;height:48px;background:var(--pr);color:#fff;border:none;border-radius:var(--r);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;font-family:inherit;-webkit-tap-highlight-color:transparent;transition:all .15s}
+.m-parse-btn:active{background:var(--pr-d);transform:scale(.98)}
+.m-parse-btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.m-batch-bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:var(--bg2);border-bottom:1px solid var(--sep);position:sticky;top:0;z-index:10;flex-shrink:0}
+.m-batch-bar .btn-batch{flex:1;height:34px;font-size:12px;padding:0 8px}
+.m-batch-bar .btn-dl-all{height:34px;padding:0 12px}
+.m-batch-bar .scene-count{flex-shrink:0}
+.m-cards-area{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 16px;display:flex;flex-direction:column;gap:10px}
+.m-card{background:var(--bg2);border-radius:12px;overflow:hidden;box-shadow:var(--sh);display:flex;flex-direction:column}
+.m-card-thumb{width:100%;height:160px;background:var(--bg);position:relative;overflow:hidden;flex-shrink:0}
+.m-card-thumb img,.m-card-thumb video{width:100%;height:100%;object-fit:cover}
+.m-thumb-empty{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:700;color:var(--sep)}
+.m-scene-text{font-size:12px;line-height:1.6;color:var(--t2);word-break:break-all}
+.m-tutorial{padding:24px 4px}
+.m-tut-hd{text-align:center;margin-bottom:24px}
+.m-tut-hd .t-icon{font-size:32px;display:block;margin-bottom:8px}
+.m-tut-hd h2{font-size:18px;font-weight:700;color:var(--t1);margin:0 0 6px}
+.m-tut-hd p{font-size:13px;color:var(--t3);margin:0;line-height:1.6}
+.m-tut-steps{display:flex;flex-direction:column;margin-bottom:20px;background:var(--bg2);border-radius:12px;overflow:hidden;box-shadow:var(--sh)}
+.m-tut-step{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-bottom:1px solid var(--sep)}
+.m-tut-step:last-child{border-bottom:none}
+.m-tut-step-num{width:28px;height:28px;border-radius:50%;background:var(--t1);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.m-tut-step-cnt{flex:1}
+.m-tut-step-title{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:3px}
+.m-tut-step-desc{font-size:12px;color:var(--t3);line-height:1.5}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
+<!-- HEADER (shared) -->
 <div class="hd">
   <div class="hd-logo"><div class="hd-logo-icon">7</div><span>万花筒</span></div>
-  
+  <div class="hd-sub">分镜 · 生图 · 生视频</div>
   <div class="hd-r">
     <div class="status-dot" id="statusDot"></div>
     <button class="btn-cfg" onclick="openConfig()">⚙️ API 配置</button>
   </div>
 </div>
 
-<!-- MAIN -->
-<div class="main">
-
+<!-- DESKTOP APP -->
+<div class="main" id="desktopApp">
   <!-- LEFT: INPUT -->
   <div class="panel-l">
     <div class="form-block">
@@ -215,9 +250,7 @@ select.modal-input{-webkit-appearance:none;appearance:none;cursor:pointer;backgr
       </select>
     </div>
     <div class="form-block" style="border-bottom:none">
-      <button class="btn-parse" id="parseBtn" onclick="parseArticle()">
-        ✨ 解析分镜脚本
-      </button>
+      <button class="btn-parse" id="parseBtn" onclick="parseArticle()">✨ 解析分镜脚本</button>
     </div>
     <div class="hint-box">
       <strong>工作流</strong>
@@ -245,10 +278,76 @@ select.modal-input{-webkit-appearance:none;appearance:none;cursor:pointer;backgr
       <div id="tutorialPlaceholder"></div>
     </div>
   </div>
-
 </div>
 
-<!-- API CONFIG MODAL -->
+<!-- MOBILE APP -->
+<div id="mobileApp">
+  <!-- Input accordion -->
+  <div class="m-panel">
+    <div class="m-panel-head" onclick="toggleMobileInput()">
+      <span>✏️ 粘贴文本 · 配置参数</span>
+      <span class="m-chevron open" id="mChevron">▲</span>
+    </div>
+    <div class="m-panel-body" id="mPanelBody">
+      <textarea class="m-textarea" id="m-article" placeholder="粘贴任意文本，如课文、故事、诗词…"></textarea>
+      <div class="m-selgrid">
+        <div>
+          <div class="field-label">年级</div>
+          <select class="sel" id="m-grade">
+            <option value="一年级" selected>一年级</option>
+            <option value="二年级">二年级</option>
+            <option value="三年级">三年级</option>
+            <option value="四年级">四年级</option>
+            <option value="五年级">五年级</option>
+            <option value="六年级">六年级</option>
+          </select>
+        </div>
+        <div>
+          <div class="field-label">画面风格</div>
+          <select class="sel" id="m-style">
+            <option value="故事绘本">故事绘本</option>
+            <option value="卡通动漫">卡通动漫</option>
+            <option value="中国水墨">中国水墨</option>
+            <option value="写实国风">写实国风</option>
+          </select>
+        </div>
+        <div>
+          <div class="field-label">输出尺寸</div>
+          <select class="sel" id="m-size">
+            <option value="9:16">抖音 9:16</option>
+            <option value="3:4">小红书 3:4</option>
+            <option value="1:1">方形 1:1</option>
+            <option value="16:9">横屏 16:9</option>
+          </select>
+        </div>
+        <div>
+          <div class="field-label">场景数量</div>
+          <select class="sel" id="m-count">
+            <option value="4">4 个场景</option>
+            <option value="5">5 个场景</option>
+            <option value="6" selected>6 个场景</option>
+            <option value="8">8 个场景</option>
+            <option value="10">10 个场景</option>
+          </select>
+        </div>
+      </div>
+      <button class="m-parse-btn" id="m-parseBtn" onclick="parseArticle()">✨ 解析分镜脚本</button>
+    </div>
+  </div>
+
+  <!-- Batch bar (hidden until parsed) -->
+  <div class="m-batch-bar" id="m-batchBar" style="display:none">
+    <span class="scene-count" id="m-sceneCountBadge">0 个</span>
+    <button class="btn-batch btn-batch-img" id="m-batchImgBtn" onclick="batchGenImages()" disabled>🖼 批量生图</button>
+    <button class="btn-batch btn-batch-vid" id="m-batchVidBtn" onclick="batchGenVideos()" disabled>🎬 批量生视频</button>
+    <button class="btn-dl-all" id="m-dlAllBtn" onclick="downloadAll()" style="display:none">⬇</button>
+  </div>
+
+  <!-- Cards -->
+  <div class="m-cards-area" id="m-cardsArea"></div>
+</div>
+
+<!-- API CONFIG MODAL (shared) -->
 <div class="modal-bg hidden" id="configModal">
   <div class="modal">
     <div class="modal-hd">
@@ -284,6 +383,9 @@ select.modal-input{-webkit-appearance:none;appearance:none;cursor:pointer;backgr
 </div>
 
 <script>
+// ─── DEVICE DETECTION ─────────────────────────────────────────
+const IS_MOBILE_MODE = window.innerWidth < 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
 // ─── ENV ──────────────────────────────────────────────────────
 const IS_LOCAL   = location.hostname === 'localhost';
 const IS_NETLIFY = location.hostname.includes('netlify');
@@ -363,7 +465,7 @@ const MOTION_LABELS = {
   'static': '静止',
 };
 
-// ─── 本地分镜解析（纯 JS，无 API 请求）────────────────────────
+// ─── 本地分镜解析 ─────────────────────────────────────────────
 const VISUAL_KEYWORDS = ['看','见','望','听','走','跑','跳','飞','落','升','站','坐','躺','笑','哭','喊','叫','出现','消失','变','长','开','关','明','暗','红','绿','蓝','黄','白','黑','大','小','高','低','远','近','花','树','草','山','水','云','风','雨','雪','日','月','星','鸟','鱼','虫','人','孩','童','老','母','父','师','友','家','屋','路','桥','田','海','河','湖','船','马','牛','羊','春','夏','秋','冬','晨','午','暮','夜'];
 const SCENE_TEMPLATES = {
   '故事绘本': (cn, style, comp) => `${cn}，故事绘本插画风格，柔和水彩质感，暖色系马卡龙色调，扁平2D插画，圆润可爱造型，温馨氛围，${comp}`,
@@ -372,12 +474,7 @@ const SCENE_TEMPLATES = {
   '写实国风': (cn, style, comp) => `${cn}，写实国风风格，工笔细腻，色彩浓郁温暖，古典场景氛围，电影感光影，${comp}`,
 };
 
-// 中文关键词 → 英文场景核心词
 const ZH2EN = {'春天':'spring scenery','夏天':'summer scene','秋天':'autumn scene','冬天':'winter scene','树木':'trees in nature','花朵':'blooming flowers','山':'misty mountains','河流':'flowing river','大海':'vast ocean','天空':'vast sky','云朵':'floating clouds','阳光':'warm sunlight','雨':'rain falling','雪':'snow falling','风':'wind blowing','孩子':'child','小朋友':'children playing','老师':'teacher','父亲':'father figure','母亲':'mother figure','鸟儿':'birds flying','鱼':'fish swimming','蝴蝶':'butterfly','村庄':'peaceful village','田野':'open countryside fields','夜晚':'night scene moonlight','早晨':'morning dawn light','夕阳':'sunset golden hour','教室':'classroom','家':'cozy home interior','桥':'ancient stone bridge','小路':'winding path','竹林':'bamboo forest','松树':'pine tree','荷花':'lotus flower pond','梅花':'plum blossom','草地':'green meadow','森林':'lush forest'};
-
-function cnToEnKeywords(text) {
-  return text;
-}
 
 function scoreVisual(sentence) {
   let score = sentence.length > 8 ? 2 : 0;
@@ -392,35 +489,30 @@ function localParse(article, count, style) {
   const sizeKey = getSelectedSize();
   const compPrompt = (SIZE_MAP[sizeKey] || SIZE_MAP['9:16']).prompt;
 
-  // 分句
   const raw = article.replace(/\n+/g, '。').split(/[。！？…]/g).map(s => s.trim()).filter(s => s.length > 3);
   if (!raw.length) return [];
 
-  // 按视觉分数排序，选 top N，再按原文顺序排
   const scored = raw.map((s, i) => ({ s, i, score: scoreVisual(s) })).sort((a, b) => b.score - a.score);
   const top = scored.slice(0, count).sort((a, b) => a.i - b.i);
 
   const motions = ['zoom_in','static','zoom_out','pan_right','static','zoom_in','pan_left','static','zoom_out','static'];
 
-  return top.map((item, idx) => {
-    const promptEn = tplFn(item.s, styleBase, compPrompt);
-    return {
-      id: idx + 1,
-      scene_cn: item.s,
-      prompt_en: promptEn,
-      duration: 4,
-      motion: motions[idx % motions.length],
-      imageSrc: null,
-      videoUrl: null,
-      state: 'idle',
-    };
-  });
+  return top.map((item, idx) => ({
+    id: idx + 1,
+    scene_cn: item.s,
+    prompt_en: tplFn(item.s, styleBase, compPrompt),
+    duration: 4,
+    motion: motions[idx % motions.length],
+    imageSrc: null,
+    videoUrl: null,
+    state: 'idle',
+  }));
 }
 
 // ─── LLM PROMPT ENHANCEMENT ───────────────────────────────────
 async function enhancePromptsWithLLM(scenes, style, sizeKey) {
   const cfg = getCfg();
-  if (!cfg.volcKey) return; // 没有 Key 则跳过，保留本地生成的提示词
+  if (!cfg.volcKey) return;
 
   const sizeLabel = (SIZE_MAP[sizeKey] || SIZE_MAP['9:16']).label;
   const styleDesc = {
@@ -465,46 +557,63 @@ ${scenes.map((s, i) => `${i + 1}. ${s.scene_cn}`).join('\n')}`;
     const parsed = JSON.parse(match[0]);
     const prompts = parsed.prompts;
     if (!Array.isArray(prompts)) return;
-    prompts.forEach((p, i) => {
-      if (scenes[i] && p) scenes[i].prompt_en = p;
-    });
+    prompts.forEach((p, i) => { if (scenes[i] && p) scenes[i].prompt_en = p; });
   } catch (e) {
     console.warn('提示词增强失败，使用本地生成：', e.message);
   }
 }
 
+// ─── HELPERS ──────────────────────────────────────────────────
+function getEl(id) {
+  return document.getElementById(IS_MOBILE_MODE ? 'm-' + id : id);
+}
+
+function getCardsArea() {
+  return document.getElementById(IS_MOBILE_MODE ? 'm-cardsArea' : 'cardsArea');
+}
+
+function getSelectedSize() {
+  const el = document.getElementById(IS_MOBILE_MODE ? 'm-size' : 'sizeSelect');
+  return el ? el.value : '9:16';
+}
+
 // ─── PARSE STORYBOARD ─────────────────────────────────────────
 async function parseArticle() {
-  const article = document.getElementById('articleInput').value.trim();
+  let article, style, count;
+  if (IS_MOBILE_MODE) {
+    article = document.getElementById('m-article').value.trim();
+    style   = document.getElementById('m-style').value;
+    count   = parseInt(document.getElementById('m-count').value);
+  } else {
+    article = document.getElementById('articleInput').value.trim();
+    style   = document.getElementById('styleSelect').value;
+    count   = parseInt(document.getElementById('sceneCount').value);
+  }
   if (!article) { alert('请先粘贴文本内容'); return; }
 
-  const style = document.getElementById('styleSelect').value;
-  const count = parseInt(document.getElementById('sceneCount').value);
+  const parseBtn = document.getElementById(IS_MOBILE_MODE ? 'm-parseBtn' : 'parseBtn');
+  const cardsArea = getCardsArea();
 
-  const btn = document.getElementById('parseBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<div class="spinner sm wh"></div> 正在解析…';
+  parseBtn.disabled = true;
+  parseBtn.innerHTML = '<div class="spinner sm wh"></div> 正在解析…';
 
-  document.getElementById('cardsArea').innerHTML = `
+  cardsArea.innerHTML = `
     <div class="empty-state">
       <div class="spinner" style="width:28px;height:28px;margin-bottom:14px"></div>
       <p>正在提取关键画面…</p>
     </div>`;
 
-  // 短暂延迟让 loading 动画显示出来
   await new Promise(r => setTimeout(r, 300));
-
   scenes = localParse(article, count, style);
 
   if (!scenes.length) {
-    document.getElementById('cardsArea').innerHTML = `<div class="empty-state"><p style="color:#ff4d4f">未能识别有效内容，请检查文章是否为中文</p></div>`;
-    btn.disabled = false;
-    btn.innerHTML = '✨ 解析分镜脚本';
+    cardsArea.innerHTML = `<div class="empty-state"><p style="color:#ff4d4f">未能识别有效内容，请检查文章是否为中文</p></div>`;
+    parseBtn.disabled = false;
+    parseBtn.innerHTML = '✨ 解析分镜脚本';
     return;
   }
 
-  // LLM 提示词增强
-  document.getElementById('cardsArea').innerHTML = `
+  cardsArea.innerHTML = `
     <div class="empty-state">
       <div class="spinner" style="width:28px;height:28px;margin-bottom:14px"></div>
       <p>AI 正在生成图像提示词…</p>
@@ -512,15 +621,42 @@ async function parseArticle() {
   await enhancePromptsWithLLM(scenes, style, getSelectedSize());
 
   renderCards();
-  document.getElementById('batchImgBtn').disabled = false;
-  btn.disabled = false;
-  btn.innerHTML = '✨ 解析分镜脚本';
+
+  // Auto-collapse input panel on mobile after parsing
+  if (IS_MOBILE_MODE) collapseMobileInput();
+
+  getEl('batchImgBtn').disabled = false;
+  parseBtn.disabled = false;
+  parseBtn.innerHTML = '✨ 解析分镜脚本';
 }
 
-// ─── TUTORIAL HTML ────────────────────────────────────────────
+// ─── MOBILE INPUT TOGGLE ──────────────────────────────────────
+function toggleMobileInput() {
+  const body = document.getElementById('mPanelBody');
+  const chevron = document.getElementById('mChevron');
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    chevron.classList.add('open');
+    chevron.textContent = '▲';
+  } else {
+    body.classList.add('collapsed');
+    chevron.classList.remove('open');
+    chevron.textContent = '▼';
+  }
+}
+
+function collapseMobileInput() {
+  const body = document.getElementById('mPanelBody');
+  const chevron = document.getElementById('mChevron');
+  body.classList.add('collapsed');
+  chevron.classList.remove('open');
+  chevron.textContent = '▼';
+}
+
+// ─── DESKTOP TUTORIAL HTML ────────────────────────────────────
 function tutorialHtml() {
-  const step = (n, emoji, title, desc, isKey) => `
-    <div class="tut-step${isKey ? ' key' : ''}">
+  const step = (n, emoji, title, desc) => `
+    <div class="tut-step">
       <div class="tut-num">${n}</div>
       <div class="tut-card">
         <div class="tut-emoji">${emoji}</div>
@@ -536,74 +672,124 @@ function tutorialHtml() {
       <p>粘贴任意文本，自动生成分镜 · 图片 · 视频，一键下载素材</p>
     </div>
     <div class="tut-flow">
-      ${step(1,'📋','粘贴文本','课文、诗词、故事<br>粘贴到左侧输入框',false)}
+      ${step(1,'📋','粘贴文本','课文、诗词、故事<br>粘贴到左侧输入框')}
       ${arrow}
-      ${step(2,'⚙️','配置参数','选风格、尺寸<br>和场景数量',false)}
+      ${step(2,'⚙️','配置参数','选风格、尺寸<br>和场景数量')}
       ${arrow}
-      ${step(3,'✨','解析分镜','AI 生成场景分割<br>和中文图像提示词',false)}
+      ${step(3,'✨','解析分镜','AI 生成场景分割<br>和中文图像提示词')}
       ${arrow}
-      ${step(4,'🖼','批量生图','点顶部按钮<br>一键生成所有图片',false)}
+      ${step(4,'🖼','批量生图','点顶部按钮<br>一键生成所有图片')}
       ${arrow}
-      ${step(5,'🎬','批量生视频','图片全部完成后<br>一键生成视频片段',false)}
+      ${step(5,'🎬','批量生视频','图片全部完成后<br>一键生成视频片段')}
       ${arrow}
-      ${step(6,'⬇','下载素材','下载全部视频<br>导入 AE / 剪映',false)}
+      ${step(6,'⬇','下载素材','下载全部视频<br>导入 AE / 剪映')}
     </div>
     <div class="tut-tips">
       <div class="tut-tips-title">使用须知</div>
       <div class="tut-tip"><span class="tut-tip-icon">🔑</span><span><strong>首次使用</strong>：点右上角「API 配置」填入火山方舟 API Key，状态圆点变绿即可开始</span></div>
       <div class="tut-tip"><span class="tut-tip-icon">📐</span><span><strong>输出尺寸</strong>：发抖音选 9:16 竖屏，发小红书选 3:4 或 1:1，横屏内容选 16:9</span></div>
-      <div class="tut-tip"><span class="tut-tip-icon">✏️</span><span><strong>提示词可编辑</strong>：每张卡片的「图像提示词」可手动修改后单独重新生图，精细调整每个场景</span></div>
+      <div class="tut-tip"><span class="tut-tip-icon">✏️</span><span><strong>提示词可编辑</strong>：每张卡片的「图像提示词」可手动修改后单独重新生图</span></div>
       <div class="tut-tip"><span class="tut-tip-icon">🖼</span><span><strong>图片 / 视频切换</strong>：视频生成后，点卡片右下角小按钮可切换查看原图或视频</span></div>
+    </div>
+  </div>`;
+}
+
+// ─── MOBILE TUTORIAL HTML ─────────────────────────────────────
+function mobileTutorialHtml() {
+  const steps = [
+    ['📋','粘贴文本','课文、诗词、故事，粘贴到上方输入框'],
+    ['⚙️','配置参数','选择画面风格、尺寸和场景数量'],
+    ['✨','解析分镜','AI 自动生成场景和图像提示词'],
+    ['🖼','批量生图','一键生成所有场景图片'],
+    ['🎬','批量生视频','图片完成后一键生成视频片段'],
+    ['⬇','下载素材','下载所有视频，导入剪映合成'],
+  ];
+  return `<div class="m-tutorial">
+    <div class="m-tut-hd">
+      <span class="t-icon">🎬</span>
+      <h2>欢迎使用万花筒</h2>
+      <p>粘贴任意文本，自动生成<br>分镜 · 图片 · 视频，一键下载素材</p>
+    </div>
+    <div class="m-tut-steps">
+      ${steps.map(([emoji,title,desc], i) => `
+        <div class="m-tut-step">
+          <div class="m-tut-step-num">${i+1}</div>
+          <div class="m-tut-step-cnt">
+            <div class="m-tut-step-title">${emoji} ${title}</div>
+            <div class="m-tut-step-desc">${desc}</div>
+          </div>
+        </div>`).join('')}
+    </div>
+    <div class="tut-tips">
+      <div class="tut-tips-title">使用须知</div>
+      <div class="tut-tip"><span class="tut-tip-icon">🔑</span><span><strong>首次使用</strong>：点右上角「⚙️」填入火山方舟 API Key，状态圆点变绿即可</span></div>
+      <div class="tut-tip"><span class="tut-tip-icon">📐</span><span><strong>输出尺寸</strong>：发抖音选 9:16，小红书选 3:4 或 1:1</span></div>
+      <div class="tut-tip"><span class="tut-tip-icon">✏️</span><span><strong>提示词可编辑</strong>：每张卡片的提示词可手动修改后重新生图</span></div>
     </div>
   </div>`;
 }
 
 // ─── RENDER CARDS ─────────────────────────────────────────────
 function renderCards() {
+  if (IS_MOBILE_MODE) { renderCardsMobile(); return; }
+
   const area = document.getElementById('cardsArea');
   document.getElementById('sceneCountBadge').textContent = `${scenes.length} 个场景`;
 
-  if (!scenes.length) {
-    area.innerHTML = tutorialHtml();
-    return;
-  }
+  if (!scenes.length) { area.innerHTML = tutorialHtml(); return; }
 
   area.innerHTML = scenes.map(s => cardHtml(s)).join('');
   setTimeout(initAutoResize, 0);
 
-  // Check download button visibility
   const hasVideos = scenes.some(s => s.videoUrl);
   document.getElementById('dlAllBtn').style.display = hasVideos ? 'flex' : 'none';
 
-  // Enable batch video if all images done
   const allImaged = scenes.every(s => s.imageSrc);
   document.getElementById('batchVidBtn').disabled = !allImaged;
 }
 
+function renderCardsMobile() {
+  const area = document.getElementById('m-cardsArea');
+  const batchBar = document.getElementById('m-batchBar');
+
+  if (!scenes.length) {
+    area.innerHTML = mobileTutorialHtml();
+    if (batchBar) batchBar.style.display = 'none';
+    return;
+  }
+
+  if (batchBar) batchBar.style.display = 'flex';
+  document.getElementById('m-sceneCountBadge').textContent = `${scenes.length} 个场景`;
+  area.innerHTML = scenes.map(s => mobileCardHtml(s)).join('');
+  setTimeout(initAutoResize, 0);
+
+  const hasVideos = scenes.some(s => s.videoUrl);
+  document.getElementById('m-dlAllBtn').style.display = hasVideos ? 'flex' : 'none';
+
+  const allImaged = scenes.every(s => s.imageSrc);
+  document.getElementById('m-batchVidBtn').disabled = !allImaged;
+}
+
+// ─── DESKTOP CARD HTML ────────────────────────────────────────
 function cardHtml(s) {
   const busy = s.state === 'generating_img' || s.state === 'generating_vid';
   const showImg = !!s.showImage;
   const hasVid = !!s.videoUrl;
   const hasImg = !!s.imageSrc;
 
-  // ── download button (top-right of thumb) ──
   let dlBtn = '';
   if (hasImg || hasVid) {
     const showingVid = hasVid && !showImg;
-    const dlFn = showingVid ? `dlVideo(${s.id})` : `dlImage(${s.id})`;
-    dlBtn = `<button class="thumb-dl" onclick="${dlFn}" title="${showingVid ? '下载视频' : '下载图片'}">⬇</button>`;
+    dlBtn = `<button class="thumb-dl" onclick="${showingVid ? `dlVideo(${s.id})` : `dlImage(${s.id})`}" title="${showingVid ? '下载视频' : '下载图片'}">⬇</button>`;
   }
 
-  // ── thumbnail ──
   let thumbHtml = '';
   if (s.state === 'generating_img') {
     thumbHtml = `<div class="card-thumb"><div class="card-gen-overlay"><div class="spinner"></div><span>生成中…</span></div></div>`;
   } else if (s.state === 'generating_vid') {
     thumbHtml = `<div class="card-thumb">${hasImg ? `<img src="${esc(s.imageSrc)}" style="opacity:.5"/>` : ''}<div class="card-gen-overlay"><div class="spinner"></div><span>视频生成中…</span></div></div>`;
   } else if (hasVid && hasImg) {
-    const media = showImg
-      ? `<img src="${esc(s.imageSrc)}"/>`
-      : `<video src="${esc(s.videoUrl)}" loop muted autoplay playsinline style="width:100%;height:100%;object-fit:cover"></video>`;
+    const media = showImg ? `<img src="${esc(s.imageSrc)}"/>` : `<video src="${esc(s.videoUrl)}" loop muted autoplay playsinline style="width:100%;height:100%;object-fit:cover"></video>`;
     thumbHtml = `<div class="card-thumb">${media}${dlBtn}<button class="thumb-toggle" onclick="toggleThumb(${s.id})" title="${showImg ? '查看视频' : '查看图片'}">${showImg ? '🎬' : '🖼'}</button></div>`;
   } else if (hasVid) {
     thumbHtml = `<div class="card-thumb"><video src="${esc(s.videoUrl)}" loop muted autoplay playsinline style="width:100%;height:100%;object-fit:cover"></video>${dlBtn}</div>`;
@@ -613,17 +799,9 @@ function cardHtml(s) {
     thumbHtml = `<div class="card-thumb"><div class="card-thumb-empty"><div class="num">${s.id}</div><span>待生成</span></div></div>`;
   }
 
-  // ── duration select ──
-  const durOpts = [3,4,5,6,8].map(v =>
-    `<option value="${v}" ${s.duration===v?'selected':''}>${v}s</option>`).join('');
-
-  // ── motion select ──
-  const motionOpts = Object.entries(MOTION_LABELS).map(([k,v]) =>
-    `<option value="${k}" ${s.motion===k?'selected':''}>${v}</option>`).join('');
-
-  const statusHtml = s.statusMsg
-    ? `<div class="card-status ${s.statusType || ''}">${esc(s.statusMsg)}</div>` : '';
-
+  const durOpts = [3,4,5,6,8].map(v => `<option value="${v}" ${s.duration===v?'selected':''}>${v}s</option>`).join('');
+  const motionOpts = Object.entries(MOTION_LABELS).map(([k,v]) => `<option value="${k}" ${s.motion===k?'selected':''}>${v}</option>`).join('');
+  const statusHtml = s.statusMsg ? `<div class="card-status ${s.statusType || ''}">${esc(s.statusMsg)}</div>` : '';
   const canVid = hasImg && s.state === 'idle';
 
   return `<div class="scene-card" id="card-${s.id}">
@@ -651,6 +829,63 @@ function cardHtml(s) {
   </div>`;
 }
 
+// ─── MOBILE CARD HTML ─────────────────────────────────────────
+function mobileCardHtml(s) {
+  const busy = s.state === 'generating_img' || s.state === 'generating_vid';
+  const showImg = !!s.showImage;
+  const hasVid = !!s.videoUrl;
+  const hasImg = !!s.imageSrc;
+
+  let dlBtn = '';
+  if (hasImg || hasVid) {
+    const showingVid = hasVid && !showImg;
+    dlBtn = `<button class="thumb-dl" onclick="${showingVid ? `dlVideo(${s.id})` : `dlImage(${s.id})`}" title="${showingVid ? '下载视频' : '下载图片'}">⬇</button>`;
+  }
+
+  let thumbHtml = '';
+  if (s.state === 'generating_img') {
+    thumbHtml = `<div class="m-card-thumb"><div class="card-gen-overlay"><div class="spinner"></div><span>生成中…</span></div></div>`;
+  } else if (s.state === 'generating_vid') {
+    thumbHtml = `<div class="m-card-thumb">${hasImg ? `<img src="${esc(s.imageSrc)}" style="opacity:.5"/>` : ''}<div class="card-gen-overlay"><div class="spinner"></div><span>视频生成中…</span></div></div>`;
+  } else if (hasVid && hasImg) {
+    const media = showImg ? `<img src="${esc(s.imageSrc)}"/>` : `<video src="${esc(s.videoUrl)}" loop muted autoplay playsinline></video>`;
+    thumbHtml = `<div class="m-card-thumb">${media}${dlBtn}<button class="thumb-toggle" onclick="toggleThumb(${s.id})" title="${showImg ? '查看视频' : '查看图片'}">${showImg ? '🎬' : '🖼'}</button></div>`;
+  } else if (hasVid) {
+    thumbHtml = `<div class="m-card-thumb"><video src="${esc(s.videoUrl)}" loop muted autoplay playsinline></video>${dlBtn}</div>`;
+  } else if (hasImg) {
+    thumbHtml = `<div class="m-card-thumb"><img src="${esc(s.imageSrc)}"/>${dlBtn}</div>`;
+  } else {
+    thumbHtml = `<div class="m-card-thumb"><div class="m-thumb-empty">${s.id}</div></div>`;
+  }
+
+  const durOpts = [3,4,5,6,8].map(v => `<option value="${v}" ${s.duration===v?'selected':''}>${v}s</option>`).join('');
+  const motionOpts = Object.entries(MOTION_LABELS).map(([k,v]) => `<option value="${k}" ${s.motion===k?'selected':''}>${v}</option>`).join('');
+  const statusHtml = s.statusMsg ? `<div class="card-status ${s.statusType || ''}">${esc(s.statusMsg)}</div>` : '';
+  const canVid = hasImg && s.state === 'idle';
+
+  return `<div class="m-card" id="card-${s.id}">
+    ${thumbHtml}
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">场景 ${s.id}</span>
+        <select class="card-sel" title="时长" onchange="updateScene(${s.id},'duration',+this.value)">${durOpts}</select>
+        <select class="card-sel" title="镜头运动" onchange="updateScene(${s.id},'motion',this.value)">${motionOpts}</select>
+        <button class="card-del" onclick="deleteScene(${s.id})" title="删除">×</button>
+      </div>
+      <div class="m-scene-text">${esc(s.scene_cn)}</div>
+      <div class="card-field">
+        <div class="card-field-label">图像提示词</div>
+        <textarea class="card-input" rows="3" oninput="updateScene(${s.id},'prompt_en',this.value);autoResize(this)">${esc(s.prompt_en)}</textarea>
+      </div>
+      <div class="card-actions">
+        <button class="btn-card img" onclick="genImage(${s.id})" ${busy ? 'disabled' : ''}>🖼 生图</button>
+        <button class="btn-card vid" onclick="genVideo(${s.id})" ${!canVid ? 'disabled' : ''}>🎬 视频</button>
+      </div>
+      ${statusHtml}
+    </div>
+  </div>`;
+}
+
 function showSceneDetail(id, btn) {
   document.querySelectorAll('.scene-popup').forEach(p => p.remove());
   const s = scenes.find(s => s.id === id);
@@ -667,26 +902,14 @@ function showSceneDetail(id, btn) {
   popup.style.top = (r.bottom + 6) + 'px';
   setTimeout(() => {
     document.addEventListener('click', function close(e) {
-      if (!popup.contains(e.target) && e.target !== btn) {
-        popup.remove();
-        document.removeEventListener('click', close);
-      }
+      if (!popup.contains(e.target) && e.target !== btn) { popup.remove(); document.removeEventListener('click', close); }
     });
   }, 0);
 }
 
-function autoResize(el) {
-  el.style.height = 'auto';
-  el.style.height = el.scrollHeight + 'px';
-}
-
-function initAutoResize() {
-  document.querySelectorAll('.card-input').forEach(autoResize);
-}
-
-function esc(s) {
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-}
+function autoResize(el) { el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; }
+function initAutoResize() { document.querySelectorAll('.card-input').forEach(autoResize); }
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
 function updateScene(id, key, val) {
   const s = scenes.find(s => s.id === id);
@@ -698,18 +921,12 @@ function deleteScene(id) {
   renderCards();
 }
 
-// 尺寸比例 → Volcengine API size 参数映射（最小 3,686,400 像素）
 const SIZE_MAP = {
   '9:16':  { size: '1440x2560', label: '9:16 竖屏',  prompt: '竖版9:16画面构图' },
   '3:4':   { size: '1728x2304', label: '3:4 竖版',   prompt: '竖版3:4画面构图' },
   '1:1':   { size: '2k',        label: '1:1 方形',   prompt: '方形1:1画面构图' },
   '16:9':  { size: '2560x1440', label: '16:9 横屏',  prompt: '横版16:9画面构图' },
 };
-
-function getSelectedSize() {
-  const sel = document.getElementById('sizeSelect');
-  return sel ? sel.value : '9:16';
-}
 
 // ─── IMAGE GENERATION ─────────────────────────────────────────
 async function genImage(id) {
@@ -761,9 +978,8 @@ async function genImage(id) {
   }
 
   refreshCard(id);
-  // Update batch video button
   const allImaged = scenes.every(s => s.imageSrc);
-  document.getElementById('batchVidBtn').disabled = !allImaged;
+  getEl('batchVidBtn').disabled = !allImaged;
 }
 
 // ─── VIDEO GENERATION ─────────────────────────────────────────
@@ -809,17 +1025,14 @@ async function genVideo(id) {
     refreshCard(id);
 
     const videoUrl = await pollVideoTask(taskId, cfg.volcKey, (msg) => {
-      s.statusMsg = msg;
-      refreshCard(id);
+      s.statusMsg = msg; refreshCard(id);
     });
 
     s.videoUrl = videoUrl;
     s.state = 'idle';
     s.statusMsg = '✓ 视频已生成';
     s.statusType = 'ok';
-
-    // Show download all button
-    document.getElementById('dlAllBtn').style.display = 'flex';
+    getEl('dlAllBtn').style.display = 'flex';
 
   } catch(e) {
     s.state = 'idle';
@@ -851,29 +1064,23 @@ async function pollVideoTask(taskId, key, onStatus) {
 
 // ─── BATCH OPERATIONS ─────────────────────────────────────────
 async function batchGenImages() {
-  const btn = document.getElementById('batchImgBtn');
+  const btn = getEl('batchImgBtn');
+  const orig = btn.innerHTML;
   btn.disabled = true;
   btn.innerHTML = '<div class="spinner sm wh"></div> 生图中…';
-
-  for (const s of scenes) {
-    if (!s.imageSrc) await genImage(s.id);
-  }
-
+  for (const s of scenes) { if (!s.imageSrc) await genImage(s.id); }
   btn.disabled = false;
-  btn.innerHTML = '🖼 批量生图';
+  btn.innerHTML = orig;
 }
 
 async function batchGenVideos() {
-  const btn = document.getElementById('batchVidBtn');
+  const btn = getEl('batchVidBtn');
+  const orig = btn.innerHTML;
   btn.disabled = true;
   btn.innerHTML = '<div class="spinner sm" style="border-top-color:#111"></div> 生视频中…';
-
-  for (const s of scenes) {
-    if (!s.videoUrl && s.imageSrc) await genVideo(s.id);
-  }
-
+  for (const s of scenes) { if (!s.videoUrl && s.imageSrc) await genVideo(s.id); }
   btn.disabled = false;
-  btn.innerHTML = '🎬 批量生视频';
+  btn.innerHTML = orig;
 }
 
 // ─── DOWNLOAD ─────────────────────────────────────────────────
@@ -886,7 +1093,6 @@ function dlImage(id) {
     a.download = `scene_${String(id).padStart(2,'0')}.png`;
     a.click();
   } else {
-    // URL from CDN — fetch as blob to force download
     fetch(s.imageSrc)
       .then(r => r.blob())
       .then(blob => {
@@ -911,27 +1117,21 @@ function dlVideo(id) {
 }
 
 function downloadAll() {
-  scenes.filter(s => s.videoUrl).forEach((s, i) => {
-    setTimeout(() => dlVideo(s.id), i * 500);
-  });
+  scenes.filter(s => s.videoUrl).forEach((s, i) => { setTimeout(() => dlVideo(s.id), i * 500); });
 }
 
-// ─── TOGGLE IMAGE / VIDEO ─────────────────────────────────────
 function toggleThumb(id) {
   const s = scenes.find(s => s.id === id);
   if (s) { s.showImage = !s.showImage; refreshCard(id); }
 }
 
-// ─── REFRESH SINGLE CARD ──────────────────────────────────────
 function refreshCard(id) {
   const s = scenes.find(s => s.id === id);
   if (!s) return;
   const el = document.getElementById(`card-${id}`);
   if (!el) return;
-  el.outerHTML = cardHtml(s);
-  setTimeout(() => {
-    document.querySelectorAll(`#card-${id} .card-input`).forEach(autoResize);
-  }, 0);
+  el.outerHTML = IS_MOBILE_MODE ? mobileCardHtml(s) : cardHtml(s);
+  setTimeout(() => { document.querySelectorAll(`#card-${id} .card-input`).forEach(autoResize); }, 0);
 }
 
 // ─── KEY COPY / SHOW ──────────────────────────────────────────
@@ -949,14 +1149,19 @@ function copyApiKey() {
     const btn = document.getElementById('keyCopyBtn');
     btn.textContent = '已复制 ✓';
     setTimeout(() => { btn.textContent = '复制'; }, 2000);
-  }).catch(() => {
-    prompt('请手动复制下方 Key：', val);
-  });
+  }).catch(() => { prompt('请手动复制下方 Key：', val); });
 }
 
 // ─── INIT ─────────────────────────────────────────────────────
+if (IS_MOBILE_MODE) {
+  document.body.classList.add('is-mobile');
+  document.getElementById('desktopApp').style.display = 'none';
+  document.getElementById('mobileApp').style.display = 'flex';
+  document.getElementById('m-cardsArea').innerHTML = mobileTutorialHtml();
+} else {
+  document.getElementById('tutorialPlaceholder').outerHTML = tutorialHtml();
+}
 updateStatusDot();
-document.getElementById('tutorialPlaceholder').outerHTML = tutorialHtml();
 </script>
 </body>
 </html>
