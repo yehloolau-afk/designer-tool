@@ -355,21 +355,17 @@ const MOTION_LABELS = {
 // ─── 本地分镜解析（纯 JS，无 API 请求）────────────────────────
 const VISUAL_KEYWORDS = ['看','见','望','听','走','跑','跳','飞','落','升','站','坐','躺','笑','哭','喊','叫','出现','消失','变','长','开','关','明','暗','红','绿','蓝','黄','白','黑','大','小','高','低','远','近','花','树','草','山','水','云','风','雨','雪','日','月','星','鸟','鱼','虫','人','孩','童','老','母','父','师','友','家','屋','路','桥','田','海','河','湖','船','马','牛','羊','春','夏','秋','冬','晨','午','暮','夜'];
 const SCENE_TEMPLATES = {
-  '故事绘本': (cn, style, comp) => `${cn}, children's storybook illustration, soft watercolor textures, warm pastel palette, flat 2D art, gentle rounded shapes, cozy atmosphere, ${comp}, ${style}`,
-  '卡通动漫': (cn, style, comp) => `${cn}, cute cartoon anime style, bright vivid colors, bold clean outlines, 2D animation cel-shading, expressive mood, ${comp}, ${style}`,
-  '中国水墨': (cn, style, comp) => `${cn}, traditional Chinese ink wash painting, brush strokes on rice paper, monochromatic subtle washes, elegant minimalist composition, ${comp}, ${style}`,
-  '写实国风': (cn, style, comp) => `${cn}, realistic Chinese traditional art style, detailed fine brushwork, rich warm cinematic colors, ancient Chinese setting, ${comp}, ${style}`,
+  '故事绘本': (cn, style, comp) => `${cn}，故事绘本插画风格，柔和水彩质感，暖色系马卡龙色调，扁平2D插画，圆润可爱造型，温馨氛围，${comp}`,
+  '卡通动漫': (cn, style, comp) => `${cn}，卡通动漫风格，色彩鲜艳，线条清晰，2D动画赛璐璐质感，人物表情生动，氛围活泼，${comp}`,
+  '中国水墨': (cn, style, comp) => `${cn}，中国传统水墨画风格，笔墨晕染，宣纸质感，留白意境，色调淡雅清新，${comp}`,
+  '写实国风': (cn, style, comp) => `${cn}，写实国风风格，工笔细腻，色彩浓郁温暖，古典场景氛围，电影感光影，${comp}`,
 };
 
 // 中文关键词 → 英文场景核心词
 const ZH2EN = {'春天':'spring scenery','夏天':'summer scene','秋天':'autumn scene','冬天':'winter scene','树木':'trees in nature','花朵':'blooming flowers','山':'misty mountains','河流':'flowing river','大海':'vast ocean','天空':'vast sky','云朵':'floating clouds','阳光':'warm sunlight','雨':'rain falling','雪':'snow falling','风':'wind blowing','孩子':'child','小朋友':'children playing','老师':'teacher','父亲':'father figure','母亲':'mother figure','鸟儿':'birds flying','鱼':'fish swimming','蝴蝶':'butterfly','村庄':'peaceful village','田野':'open countryside fields','夜晚':'night scene moonlight','早晨':'morning dawn light','夕阳':'sunset golden hour','教室':'classroom','家':'cozy home interior','桥':'ancient stone bridge','小路':'winding path','竹林':'bamboo forest','松树':'pine tree','荷花':'lotus flower pond','梅花':'plum blossom','草地':'green meadow','森林':'lush forest'};
 
 function cnToEnKeywords(text) {
-  const hits = [];
-  for (const [zh, en] of Object.entries(ZH2EN)) {
-    if (text.includes(zh)) hits.push(en);
-  }
-  return hits.length ? hits.slice(0, 3).join(', ') : 'scenic Chinese landscape';
+  return text.length > 25 ? text.slice(0, 25) : text;
 }
 
 function scoreVisual(sentence) {
@@ -654,10 +650,10 @@ function deleteScene(id) {
 
 // 尺寸比例 → Volcengine API size 参数映射（最小 3,686,400 像素）
 const SIZE_MAP = {
-  '9:16':  { size: '1440x2560', label: '9:16 竖屏',  prompt: 'vertical 9:16 portrait composition' },
-  '3:4':   { size: '1728x2304', label: '3:4 竖版',   prompt: 'vertical 3:4 portrait composition' },
-  '1:1':   { size: '2k',        label: '1:1 方形',   prompt: 'square 1:1 composition' },
-  '16:9':  { size: '2560x1440', label: '16:9 横屏',  prompt: 'horizontal 16:9 landscape composition' },
+  '9:16':  { size: '1440x2560', label: '9:16 竖屏',  prompt: '竖版9:16画面构图' },
+  '3:4':   { size: '1728x2304', label: '3:4 竖版',   prompt: '竖版3:4画面构图' },
+  '1:1':   { size: '2k',        label: '1:1 方形',   prompt: '方形1:1画面构图' },
+  '16:9':  { size: '2560x1440', label: '16:9 横屏',  prompt: '横版16:9画面构图' },
 };
 
 function getSelectedSize() {
