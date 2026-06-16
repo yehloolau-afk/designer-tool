@@ -82,6 +82,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','SF Pro Text',sa
 .card-dur,.card-motion{font-size:10px;color:var(--t3);background:var(--bg);border-radius:4px;padding:2px 7px}
 .card-del{margin-left:auto;width:20px;height:20px;border:none;background:none;cursor:pointer;color:var(--t4);font-size:14px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .15s;padding:0}
 .card-del:hover{background:rgba(255,59,48,.1);color:#FF3B30}
+.thumb-toggle{position:absolute;bottom:7px;right:7px;width:28px;height:28px;border:none;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .15s;z-index:2;padding:0}
+.thumb-toggle:hover{background:rgba(0,0,0,.8)}
 .card-field{display:flex;flex-direction:column;gap:3px}
 .card-field-label{font-size:9.5px;font-weight:600;color:var(--t4);text-transform:uppercase;letter-spacing:.4px}
 .card-input{width:100%;padding:6px 9px;border:none;border-radius:7px;font-size:11.5px;line-height:1.55;color:var(--t1);resize:none;outline:none;font-family:inherit;background:var(--bg);transition:box-shadow .15s}
@@ -453,6 +455,12 @@ function cardHtml(s) {
     thumbHtml = `<div class="card-thumb"><div class="card-gen-overlay"><div class="spinner"></div><span>生成中…</span></div></div>`;
   } else if (s.state === 'generating_vid') {
     thumbHtml = `<div class="card-thumb">${s.imageSrc ? `<img src="${esc(s.imageSrc)}" style="opacity:.5"/>` : ''}<div class="card-gen-overlay"><div class="spinner"></div><span>视频生成中…</span></div></div>`;
+  } else if (s.videoUrl && s.imageSrc) {
+    const showImg = !!s.showImage;
+    const media = showImg
+      ? `<img src="${esc(s.imageSrc)}"/>`
+      : `<video src="${esc(s.videoUrl)}" loop muted autoplay playsinline style="width:100%;height:100%;object-fit:cover"></video>`;
+    thumbHtml = `<div class="card-thumb">${media}<button class="thumb-toggle" onclick="toggleThumb(${s.id})" title="${showImg ? '查看视频' : '查看图片'}">${showImg ? '🎬' : '🖼'}</button></div>`;
   } else if (s.videoUrl) {
     thumbHtml = `<div class="card-thumb"><video src="${esc(s.videoUrl)}" loop muted autoplay playsinline style="width:100%;height:100%;object-fit:cover"></video></div>`;
   } else if (s.imageSrc) {
@@ -701,6 +709,12 @@ function downloadAll() {
   scenes.filter(s => s.videoUrl).forEach((s, i) => {
     setTimeout(() => dlVideo(s.id), i * 500);
   });
+}
+
+// ─── TOGGLE IMAGE / VIDEO ─────────────────────────────────────
+function toggleThumb(id) {
+  const s = scenes.find(s => s.id === id);
+  if (s) { s.showImage = !s.showImage; refreshCard(id); }
 }
 
 // ─── REFRESH SINGLE CARD ──────────────────────────────────────
