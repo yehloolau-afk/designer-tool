@@ -254,8 +254,12 @@ select.modal-input{-webkit-appearance:none;appearance:none;cursor:pointer;backgr
     </div>
     <div class="modal-field">
       <label class="modal-label">火山方舟 API Key <span style="color:#ff4d4f">*</span></label>
-      <input class="modal-input" id="volcKey" type="password" placeholder="ARK…（与万花筒共用同一个 Key）"/>
-      <div class="modal-note">分镜解析 / 生图 / 生视频全部用同一个 Key，与万花筒共享</div>
+      <div style="display:flex;gap:6px;align-items:center">
+        <input class="modal-input" id="volcKey" type="password" placeholder="ARK…" style="flex:1;min-width:0"/>
+        <button type="button" onclick="toggleKeyVisible()" id="keyToggleBtn" style="height:38px;padding:0 10px;border:none;border-radius:var(--r);background:var(--bg);color:var(--t3);font-size:13px;cursor:pointer;white-space:nowrap;font-family:inherit;flex-shrink:0">👁</button>
+        <button type="button" onclick="copyApiKey()" id="keyCopyBtn" style="height:38px;padding:0 10px;border:none;border-radius:var(--r);background:var(--bg);color:var(--t3);font-size:13px;cursor:pointer;white-space:nowrap;font-family:inherit;flex-shrink:0">复制</button>
+      </div>
+      <div class="modal-note">分镜解析 / 生图 / 生视频全部用同一个 Key。换浏览器时：点「复制」→ 新浏览器粘贴即可</div>
     </div>
     <div class="modal-field">
       <label class="modal-label">图片模型</label>
@@ -883,6 +887,26 @@ function refreshCard(id) {
   setTimeout(() => {
     document.querySelectorAll(`#card-${id} .card-input`).forEach(autoResize);
   }, 0);
+}
+
+// ─── KEY COPY / SHOW ──────────────────────────────────────────
+function toggleKeyVisible() {
+  const inp = document.getElementById('volcKey');
+  const btn = document.getElementById('keyToggleBtn');
+  if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
+  else { inp.type = 'password'; btn.textContent = '👁'; }
+}
+
+function copyApiKey() {
+  const val = document.getElementById('volcKey').value.trim();
+  if (!val) { alert('Key 为空，请先填写'); return; }
+  navigator.clipboard.writeText(val).then(() => {
+    const btn = document.getElementById('keyCopyBtn');
+    btn.textContent = '已复制 ✓';
+    setTimeout(() => { btn.textContent = '复制'; }, 2000);
+  }).catch(() => {
+    prompt('请手动复制下方 Key：', val);
+  });
 }
 
 // ─── INIT ─────────────────────────────────────────────────────
