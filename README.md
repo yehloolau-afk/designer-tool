@@ -4,7 +4,7 @@ Two single-file tools for designers. No backend, no framework, no build step.
 
 ---
 
-## 🗞️ AI 资讯站 · AI News Station
+## 🗞️ AI News Station
 
 **Live →** [yehloolau-afk.github.io/designer-tool/ai-station.html](https://yehloolau-afk.github.io/designer-tool/ai-station.html)
 
