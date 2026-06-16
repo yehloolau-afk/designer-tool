@@ -734,7 +734,7 @@ async function genImage(id) {
         model: cfg.imgModel,
         prompt: s.prompt_en,
         size: sizeInfo.size,
-        response_format: 'b64_json',
+        response_format: 'url',
         watermark: false,
         stream: false,
       }),
@@ -747,7 +747,7 @@ async function genImage(id) {
 
     const item = data.data?.[0];
     if (!item) throw new Error('无图片数据');
-    s.imageSrc = item.b64_json ? `data:image/png;base64,${item.b64_json}` : item.url;
+    s.imageSrc = item.url || (item.b64_json ? `data:image/png;base64,${item.b64_json}` : null);
     if (!s.imageSrc) throw new Error('无图片 URL');
 
     s.state = 'idle';
@@ -880,10 +880,25 @@ async function batchGenVideos() {
 function dlImage(id) {
   const s = scenes.find(s => s.id === id);
   if (!s?.imageSrc) return;
-  const a = document.createElement('a');
-  a.href = s.imageSrc;
-  a.download = `scene_${String(id).padStart(2,'0')}.png`;
-  a.click();
+  if (s.imageSrc.startsWith('data:')) {
+    const a = document.createElement('a');
+    a.href = s.imageSrc;
+    a.download = `scene_${String(id).padStart(2,'0')}.png`;
+    a.click();
+  } else {
+    // URL from CDN — fetch as blob to force download
+    fetch(s.imageSrc)
+      .then(r => r.blob())
+      .then(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `scene_${String(id).padStart(2,'0')}.png`;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      })
+      .catch(() => window.open(s.imageSrc, '_blank'));
+  }
 }
 
 function dlVideo(id) {
