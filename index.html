@@ -509,12 +509,12 @@ function deleteScene(id) {
   renderCards();
 }
 
-// 尺寸比例 → Volcengine API size 参数映射（API 接受 WIDTHxHEIGHT / 2k / 3k / 4k）
+// 尺寸比例 → Volcengine API size 参数映射（最小 3,686,400 像素）
 const SIZE_MAP = {
-  '9:16':  { size: '720x1280',  label: '9:16 竖屏',  prompt: 'vertical 9:16 portrait composition' },
-  '3:4':   { size: '960x1280',  label: '3:4 竖版',   prompt: 'vertical 3:4 portrait composition' },
+  '9:16':  { size: '1440x2560', label: '9:16 竖屏',  prompt: 'vertical 9:16 portrait composition' },
+  '3:4':   { size: '1728x2304', label: '3:4 竖版',   prompt: 'vertical 3:4 portrait composition' },
   '1:1':   { size: '2k',        label: '1:1 方形',   prompt: 'square 1:1 composition' },
-  '16:9':  { size: '1280x720',  label: '16:9 横屏',  prompt: 'horizontal 16:9 landscape composition' },
+  '16:9':  { size: '2560x1440', label: '16:9 横屏',  prompt: 'horizontal 16:9 landscape composition' },
 };
 
 function getSelectedSize() {
