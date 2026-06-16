@@ -18,6 +18,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','SF Pro Text',sa
 /* HEADER */
 .hd{background:rgba(255,255,255,.85);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--bd);padding:0 20px;height:52px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100}
 .hd-logo{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:var(--t1);letter-spacing:-.3px;white-space:nowrap}
+.hd-logo img{filter:brightness(0)}
 .hd-sub{font-size:12px;color:var(--t4);border-left:1px solid var(--bd);padding-left:12px}
 .hd-r{margin-left:auto;display:flex;align-items:center;gap:8px}
 .btn-cfg{display:flex;align-items:center;gap:5px;padding:5px 12px;border:none;border-radius:20px;background:var(--pr-l);font-size:12px;color:var(--t2);font-weight:500;cursor:pointer;transition:all .15s;font-family:inherit}
@@ -114,16 +115,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','SF Pro Text',sa
 .tutorial-hd .t-icon{font-size:36px;display:block;margin-bottom:10px}
 .tutorial-hd h2{font-size:18px;font-weight:700;color:var(--t1);margin:0 0 6px}
 .tutorial-hd p{font-size:13px;color:var(--t3);margin:0}
-.tut-flow{display:flex;align-items:flex-start;gap:0;margin-bottom:28px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}
+.tut-flow{display:flex;align-items:stretch;gap:0;margin-bottom:28px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}
 .tut-step{display:flex;flex-direction:column;align-items:center;gap:6px;width:90px;min-width:90px;flex-shrink:0}
-.tut-num{width:32px;height:32px;border-radius:50%;background:var(--t1);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.tut-step.key .tut-num{width:36px;height:36px;font-size:13px;box-shadow:0 0 0 4px rgba(0,0,0,.1)}
-.tut-step.key .tut-card{border:2px solid var(--t1)}
-.tut-card{background:var(--bg2);border:1px solid var(--sep);border-radius:10px;padding:10px 8px;text-align:center;width:100%;box-shadow:var(--sh)}
+.tut-num{width:32px;height:32px;border-radius:50%;background:var(--t1);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tut-card{background:var(--bg2);border:1px solid var(--sep);border-radius:10px;padding:10px 8px;text-align:center;width:100%;box-shadow:var(--sh);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .tut-emoji{font-size:18px;margin-bottom:4px}
 .tut-title{font-size:11px;font-weight:700;color:var(--t1);margin-bottom:3px}
 .tut-desc{font-size:10px;color:var(--t3);line-height:1.5}
-.tut-arrow{color:var(--sep);font-size:18px;margin:0 1px;padding-top:14px;flex-shrink:0;align-self:flex-start}
+.tut-arrow{color:var(--sep);font-size:18px;margin:0 1px;flex-shrink:0;display:flex;align-items:center;padding-top:38px}
 .tut-tips{background:var(--bg);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px}
 .tut-tips-title{font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
 .tut-tip{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--t2);line-height:1.6}
@@ -541,7 +540,7 @@ function tutorialHtml() {
       ${arrow}
       ${step(2,'⚙️','配置参数','选风格、尺寸<br>和场景数量',false)}
       ${arrow}
-      ${step(3,'✨','解析分镜','AI 生成场景分割<br>和中文图像提示词',true)}
+      ${step(3,'✨','解析分镜','AI 生成场景分割<br>和中文图像提示词',false)}
       ${arrow}
       ${step(4,'🖼','批量生图','点顶部按钮<br>一键生成所有图片',false)}
       ${arrow}
