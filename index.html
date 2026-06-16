@@ -100,6 +100,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','SF Pro Text',sa
 .card-status.ok{color:#34C759}
 .card-status.err{color:#FF3B30}
 
+/* TUTORIAL */
+.tutorial{grid-column:1/-1;padding:32px 24px;max-width:760px;margin:0 auto;width:100%}
+.tutorial-hd{text-align:center;margin-bottom:32px}
+.tutorial-hd .t-icon{font-size:36px;display:block;margin-bottom:10px}
+.tutorial-hd h2{font-size:18px;font-weight:700;color:var(--t1);margin:0 0 6px}
+.tutorial-hd p{font-size:13px;color:var(--t3);margin:0}
+.tut-flow{display:flex;align-items:flex-start;gap:0;margin-bottom:28px;flex-wrap:wrap;justify-content:center}
+.tut-step{display:flex;flex-direction:column;align-items:center;gap:8px;width:110px;flex-shrink:0}
+.tut-num{width:36px;height:36px;border-radius:50%;background:var(--t1);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.tut-step.key .tut-num{width:40px;height:40px;font-size:15px;box-shadow:0 0 0 4px rgba(0,0,0,.1)}
+.tut-step.key .tut-card{border:2px solid var(--t1)}
+.tut-card{background:var(--bg2);border:1px solid var(--sep);border-radius:12px;padding:14px 10px;text-align:center;width:100%;box-shadow:var(--sh)}
+.tut-emoji{font-size:22px;margin-bottom:6px}
+.tut-title{font-size:12px;font-weight:700;color:var(--t1);margin-bottom:4px}
+.tut-desc{font-size:11px;color:var(--t3);line-height:1.5}
+.tut-arrow{color:var(--sep);font-size:20px;margin:0 2px;padding-top:18px;flex-shrink:0;align-self:flex-start}
+.tut-tips{background:var(--bg);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.tut-tips-title{font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.tut-tip{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--t2);line-height:1.6}
+.tut-tip-icon{font-size:15px;flex-shrink:0;margin-top:1px}
+.tut-tip strong{color:var(--t1)}
+
 /* SPINNER */
 .spinner{width:20px;height:20px;border:2.5px solid var(--bg);border-top-color:var(--pr);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
 .spinner.sm{width:14px;height:14px;border-width:2px}
@@ -213,10 +235,7 @@ select.modal-input{-webkit-appearance:none;appearance:none;cursor:pointer;backgr
       </div>
     </div>
     <div class="cards-area" id="cardsArea">
-      <div class="empty-state">
-        <div class="ei">🎬</div>
-        <p>在左侧粘贴文本，<br>点击「解析分镜脚本」开始</p>
-      </div>
+      <div id="tutorialPlaceholder"></div>
     </div>
   </div>
 
@@ -492,13 +511,54 @@ async function parseArticle() {
   btn.innerHTML = '✨ 解析分镜脚本';
 }
 
+// ─── TUTORIAL HTML ────────────────────────────────────────────
+function tutorialHtml() {
+  const step = (n, emoji, title, desc, isKey) => `
+    <div class="tut-step${isKey ? ' key' : ''}">
+      <div class="tut-num">${n}</div>
+      <div class="tut-card">
+        <div class="tut-emoji">${emoji}</div>
+        <div class="tut-title">${title}</div>
+        <div class="tut-desc">${desc}</div>
+      </div>
+    </div>`;
+  const arrow = `<div class="tut-arrow">›</div>`;
+  return `<div class="tutorial">
+    <div class="tutorial-hd">
+      <span class="t-icon">🎬</span>
+      <h2>欢迎使用万花筒</h2>
+      <p>粘贴任意文本，自动生成分镜 · 图片 · 视频，一键下载素材</p>
+    </div>
+    <div class="tut-flow">
+      ${step(1,'📋','粘贴文本','课文、诗词、故事<br>粘贴到左侧输入框',false)}
+      ${arrow}
+      ${step(2,'⚙️','配置参数','选风格、尺寸<br>和场景数量',false)}
+      ${arrow}
+      ${step(3,'✨','解析分镜','AI 生成场景分割<br>和中文图像提示词',true)}
+      ${arrow}
+      ${step(4,'🖼','批量生图','点顶部按钮<br>一键生成所有图片',false)}
+      ${arrow}
+      ${step(5,'🎬','批量生视频','图片全部完成后<br>一键生成视频片段',false)}
+      ${arrow}
+      ${step(6,'⬇','下载素材','下载全部视频<br>导入 AE / 剪映',false)}
+    </div>
+    <div class="tut-tips">
+      <div class="tut-tips-title">使用须知</div>
+      <div class="tut-tip"><span class="tut-tip-icon">🔑</span><span><strong>首次使用</strong>：点右上角「API 配置」填入火山方舟 API Key，状态圆点变绿即可开始</span></div>
+      <div class="tut-tip"><span class="tut-tip-icon">📐</span><span><strong>输出尺寸</strong>：发抖音选 9:16 竖屏，发小红书选 3:4 或 1:1，横屏内容选 16:9</span></div>
+      <div class="tut-tip"><span class="tut-tip-icon">✏️</span><span><strong>提示词可编辑</strong>：每张卡片的「图像提示词」可手动修改后单独重新生图，精细调整每个场景</span></div>
+      <div class="tut-tip"><span class="tut-tip-icon">🖼</span><span><strong>图片 / 视频切换</strong>：视频生成后，点卡片右下角小按钮可切换查看原图或视频</span></div>
+    </div>
+  </div>`;
+}
+
 // ─── RENDER CARDS ─────────────────────────────────────────────
 function renderCards() {
   const area = document.getElementById('cardsArea');
   document.getElementById('sceneCountBadge').textContent = `${scenes.length} 个场景`;
 
   if (!scenes.length) {
-    area.innerHTML = `<div class="empty-state"><div class="ei">🎬</div><p>暂无场景</p></div>`;
+    area.innerHTML = tutorialHtml();
     return;
   }
 
@@ -793,6 +853,7 @@ function refreshCard(id) {
 
 // ─── INIT ─────────────────────────────────────────────────────
 updateStatusDot();
+document.getElementById('tutorialPlaceholder').outerHTML = tutorialHtml();
 </script>
 </body>
 </html>
