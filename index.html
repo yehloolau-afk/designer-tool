@@ -246,7 +246,7 @@ select.modal-input{-webkit-appearance:none;appearance:none;cursor:pointer;backgr
 // ─── ENV ──────────────────────────────────────────────────────
 const IS_LOCAL   = location.hostname === 'localhost';
 const IS_NETLIFY = location.hostname.includes('netlify');
-const PROXY_BASE = IS_LOCAL ? '' : (IS_NETLIFY ? '' : 'https://7-ai-station.netlify.app');
+const PROXY_BASE = IS_LOCAL ? '' : (IS_NETLIFY ? '' : 'https://wanhuatong-a.netlify.app');
 const IMG_URL  = IS_LOCAL ? 'http://localhost:8766/images/generations'         : `${PROXY_BASE}/.netlify/functions/volc-img`;
 const VID_URL  = IS_LOCAL ? 'http://localhost:8766/contents/generations/tasks' : `${PROXY_BASE}/.netlify/functions/volc-vid`;
 const pollUrl  = id => IS_LOCAL
