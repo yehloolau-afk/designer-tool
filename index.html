@@ -430,10 +430,11 @@ async function enhancePromptsWithLLM(scenes, style, sizeKey) {
 画面风格：${styleDesc}
 输出比例：${sizeLabel}
 
-要求：
-- 描述具体的视觉画面（人物、场景、光线、色彩、氛围）
-- 融入指定风格特征
-- 每条 60-100 字
+核心要求：
+- 必须忠实还原场景片段的具体内容（地点、人物、光线、氛围等），不得偏离原意
+- 在原意基础上补充视觉细节（色彩、光影、构图、材质）
+- 融入指定画面风格
+- 每条 80-120 字
 - 返回纯 JSON，格式：{"prompts":["提示词1","提示词2",...]}，不要任何其他文字
 
 场景列表：
@@ -446,10 +447,10 @@ ${scenes.map((s, i) => `${i + 1}. ${s.scene_cn}`).join('\n')}`;
       body: JSON.stringify({
         model: cfg.txtModel,
         messages: [
-          { role: 'system', content: '你是专业的 AI 图像提示词工程师，擅长为火山引擎 Seedream 模型生成中文提示词。只返回 JSON，不输出任何解释文字。' },
+          { role: 'system', content: '你是专业的 AI 图像提示词工程师，为火山引擎 Seedream 模型生成中文提示词。核心原则：必须忠实还原场景原文的具体内容，在此基础上补充视觉细节。只返回 JSON，不输出任何解释文字。' },
           { role: 'user', content: userMsg },
         ],
-        temperature: 0.7,
+        temperature: 0.5,
       }),
     });
     const data = await res.json();
@@ -669,13 +670,16 @@ async function genImage(id) {
   const sizeKey = getSelectedSize();
   const sizeInfo = SIZE_MAP[sizeKey] || SIZE_MAP['9:16'];
 
+  // 合并场景描述 + 图像提示词，让生成内容与分镜强关联
+  const finalPrompt = [s.scene_cn, s.prompt_en].filter(p => p && p.trim()).join('，');
+
   try {
     const res = await fetch(IMG_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${cfg.volcKey}` },
       body: JSON.stringify({
         model: cfg.imgModel,
-        prompt: s.prompt_en,
+        prompt: finalPrompt,
         size: sizeInfo.size,
         response_format: 'b64_json',
         watermark: false,
