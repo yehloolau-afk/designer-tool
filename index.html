@@ -80,6 +80,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','SF Pro Text',sa
 .card-meta{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
 .card-num{font-size:10px;font-weight:700;color:#fff;background:var(--pr);border-radius:5px;padding:1px 6px}
 .card-dur,.card-motion{font-size:10px;color:var(--t3);background:var(--bg);border-radius:4px;padding:2px 7px}
+.card-sel{font-size:10px;color:var(--t3);background:var(--bg);border-radius:4px;padding:2px 5px;border:none;outline:none;font-family:inherit;cursor:pointer;-webkit-appearance:none;appearance:none;height:20px}
+.card-sel:hover{background:var(--sep)}
+.thumb-dl{position:absolute;top:7px;right:7px;width:26px;height:26px;border:none;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .15s;z-index:2;padding:0}
+.thumb-dl:hover{background:rgba(0,0,0,.85)}
 .card-del{margin-left:auto;width:20px;height:20px;border:none;background:none;cursor:pointer;color:var(--t4);font-size:14px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .15s;padding:0}
 .card-del:hover{background:rgba(255,59,48,.1);color:#FF3B30}
 .thumb-toggle{position:absolute;bottom:7px;right:7px;width:28px;height:28px;border:none;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .15s;z-index:2;padding:0}
@@ -578,39 +582,58 @@ function renderCards() {
 }
 
 function cardHtml(s) {
+  const busy = s.state === 'generating_img' || s.state === 'generating_vid';
+  const showImg = !!s.showImage;
+  const hasVid = !!s.videoUrl;
+  const hasImg = !!s.imageSrc;
+
+  // ── download button (top-right of thumb) ──
+  let dlBtn = '';
+  if (hasImg || hasVid) {
+    const showingVid = hasVid && !showImg;
+    const dlFn = showingVid ? `dlVideo(${s.id})` : `dlImage(${s.id})`;
+    dlBtn = `<button class="thumb-dl" onclick="${dlFn}" title="${showingVid ? '下载视频' : '下载图片'}">⬇</button>`;
+  }
+
+  // ── thumbnail ──
   let thumbHtml = '';
   if (s.state === 'generating_img') {
     thumbHtml = `<div class="card-thumb"><div class="card-gen-overlay"><div class="spinner"></div><span>生成中…</span></div></div>`;
   } else if (s.state === 'generating_vid') {
-    thumbHtml = `<div class="card-thumb">${s.imageSrc ? `<img src="${esc(s.imageSrc)}" style="opacity:.5"/>` : ''}<div class="card-gen-overlay"><div class="spinner"></div><span>视频生成中…</span></div></div>`;
-  } else if (s.videoUrl && s.imageSrc) {
-    const showImg = !!s.showImage;
+    thumbHtml = `<div class="card-thumb">${hasImg ? `<img src="${esc(s.imageSrc)}" style="opacity:.5"/>` : ''}<div class="card-gen-overlay"><div class="spinner"></div><span>视频生成中…</span></div></div>`;
+  } else if (hasVid && hasImg) {
     const media = showImg
       ? `<img src="${esc(s.imageSrc)}"/>`
       : `<video src="${esc(s.videoUrl)}" loop muted autoplay playsinline style="width:100%;height:100%;object-fit:cover"></video>`;
-    thumbHtml = `<div class="card-thumb">${media}<button class="thumb-toggle" onclick="toggleThumb(${s.id})" title="${showImg ? '查看视频' : '查看图片'}">${showImg ? '🎬' : '🖼'}</button></div>`;
-  } else if (s.videoUrl) {
-    thumbHtml = `<div class="card-thumb"><video src="${esc(s.videoUrl)}" loop muted autoplay playsinline style="width:100%;height:100%;object-fit:cover"></video></div>`;
-  } else if (s.imageSrc) {
-    thumbHtml = `<div class="card-thumb"><img src="${esc(s.imageSrc)}"/></div>`;
+    thumbHtml = `<div class="card-thumb">${media}${dlBtn}<button class="thumb-toggle" onclick="toggleThumb(${s.id})" title="${showImg ? '查看视频' : '查看图片'}">${showImg ? '🎬' : '🖼'}</button></div>`;
+  } else if (hasVid) {
+    thumbHtml = `<div class="card-thumb"><video src="${esc(s.videoUrl)}" loop muted autoplay playsinline style="width:100%;height:100%;object-fit:cover"></video>${dlBtn}</div>`;
+  } else if (hasImg) {
+    thumbHtml = `<div class="card-thumb"><img src="${esc(s.imageSrc)}"/>${dlBtn}</div>`;
   } else {
     thumbHtml = `<div class="card-thumb"><div class="card-thumb-empty"><div class="num">${s.id}</div><span>待生成</span></div></div>`;
   }
 
+  // ── duration select ──
+  const durOpts = [3,4,5,6,8].map(v =>
+    `<option value="${v}" ${s.duration===v?'selected':''}>${v}s</option>`).join('');
+
+  // ── motion select ──
+  const motionOpts = Object.entries(MOTION_LABELS).map(([k,v]) =>
+    `<option value="${k}" ${s.motion===k?'selected':''}>${v}</option>`).join('');
+
   const statusHtml = s.statusMsg
     ? `<div class="card-status ${s.statusType || ''}">${esc(s.statusMsg)}</div>` : '';
 
-  const busy = s.state === 'generating_img' || s.state === 'generating_vid';
-  const canVid = s.imageSrc && s.state === 'idle';
-  const canDl = !!s.videoUrl;
+  const canVid = hasImg && s.state === 'idle';
 
   return `<div class="scene-card" id="card-${s.id}">
     ${thumbHtml}
     <div class="card-body">
       <div class="card-meta">
         <span class="card-num">场景 ${s.id}</span>
-        <span class="card-dur">⏱ ${s.duration}s</span>
-        <span class="card-motion">${MOTION_LABELS[s.motion] || s.motion}</span>
+        <select class="card-sel" title="时长" onchange="updateScene(${s.id},'duration',+this.value)">${durOpts}</select>
+        <select class="card-sel" title="镜头运动" onchange="updateScene(${s.id},'motion',this.value)">${motionOpts}</select>
         <button class="card-del" onclick="deleteScene(${s.id})" title="删除">×</button>
       </div>
       <div class="card-field">
@@ -623,7 +646,6 @@ function cardHtml(s) {
       <div class="card-actions">
         <button class="btn-card img" onclick="genImage(${s.id})" ${busy ? 'disabled' : ''}>🖼 生图</button>
         <button class="btn-card vid" onclick="genVideo(${s.id})" ${!canVid ? 'disabled' : ''}>🎬 视频</button>
-        ${canDl ? `<button class="btn-card" onclick="dlVideo(${s.id})">⬇</button>` : ''}
       </div>
       ${statusHtml}
     </div>
@@ -856,6 +878,15 @@ async function batchGenVideos() {
 }
 
 // ─── DOWNLOAD ─────────────────────────────────────────────────
+function dlImage(id) {
+  const s = scenes.find(s => s.id === id);
+  if (!s?.imageSrc) return;
+  const a = document.createElement('a');
+  a.href = s.imageSrc;
+  a.download = `scene_${String(id).padStart(2,'0')}.png`;
+  a.click();
+}
+
 function dlVideo(id) {
   const s = scenes.find(s => s.id === id);
   if (!s?.videoUrl) return;
