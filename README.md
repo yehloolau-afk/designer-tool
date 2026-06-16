@@ -18,20 +18,6 @@ Built for my team at DiDi. Now open to everyone.
 
 ---
 
-## 🎨 Wanhuatong · 万花筒
-
-**Live →** [yehloolau-afk.github.io/designer-tool](https://yehloolau-afk.github.io/designer-tool/)
-
-A text-to-video automation pipeline for Chinese elementary school language lessons.
-
-**Workflow:** Lesson text → storyboard → AI image generation → AI video generation → download assets
-
-**Powered by:** Volcengine Seedream (image) · Volcengine Seedance (video) · Claude (storyboard parsing)
-
-Bring your own API key. Everything runs in the browser.
-
----
-
 ## How it's built
 
 - Single HTML files — one file per tool, open and use
