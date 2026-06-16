@@ -111,7 +111,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','SF Pro Text',sa
 .tutorial-hd h2{font-size:18px;font-weight:700;color:var(--t1);margin:0 0 6px}
 .tutorial-hd p{font-size:13px;color:var(--t3);margin:0}
 .tut-flow{display:flex;align-items:stretch;justify-content:flex-start;gap:0;margin-bottom:28px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}
-.tut-step{display:flex;flex-direction:column;align-items:center;gap:6px;width:90px;min-width:90px;flex-shrink:0}
+.tut-step{display:flex;flex-direction:column;align-items:center;gap:6px;width:98px;min-width:98px;flex-shrink:0}
 .tut-num{width:24px;height:24px;border-radius:50%;background:var(--t1);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .tut-card{background:var(--bg2);border:1px solid var(--sep);border-radius:10px;padding:12px 8px 10px;text-align:center;width:100%;box-shadow:var(--sh);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
 .tut-emoji{font-size:18px;height:24px;display:flex;align-items:center;justify-content:center;margin-bottom:5px;flex-shrink:0}
@@ -672,17 +672,17 @@ function tutorialHtml() {
       <p>粘贴任意文本，自动生成分镜 · 图片 · 视频，一键下载素材</p>
     </div>
     <div class="tut-flow">
-      ${step(1,'📋','粘贴文本','课文、诗词、故事<br>粘贴到左侧输入框')}
+      ${step(1,'📋','粘贴文本','课文、诗词<br>粘贴到左侧')}
       ${arrow}
       ${step(2,'⚙️','配置参数','选风格、尺寸<br>和场景数量')}
       ${arrow}
-      ${step(3,'✨','解析分镜','AI 生成场景分割<br>和中文图像提示词')}
+      ${step(3,'✨','解析分镜','AI 提取画面<br>生成提示词')}
       ${arrow}
-      ${step(4,'🖼','批量生图','点顶部按钮<br>一键生成所有图片')}
+      ${step(4,'🖼','批量生图','点顶部按钮<br>批量生成图片')}
       ${arrow}
-      ${step(5,'🎬','批量生视频','图片全部完成后<br>一键生成视频片段')}
+      ${step(5,'🎬','批量生视频','图片完成后<br>批量生成视频')}
       ${arrow}
-      ${step(6,'⬇','下载素材','下载全部视频<br>导入 AE / 剪映')}
+      ${step(6,'⬇','下载素材','下载视频素材<br>导入剪映合成')}
     </div>
     <div class="tut-tips">
       <div class="tut-tips-title">使用须知</div>
