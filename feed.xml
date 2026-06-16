@@ -5,7 +5,7 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 16 Jun 2026 16:03:14 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 16 Jun 2026 19:50:15 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>鸿蒙智行全面引入电池二供，国轩高科将上车问界｜36氪独家</title>
@@ -36,6 +36,14 @@
       <pubDate>Tue, 16 Jun 2026 17:30:00 +0800</pubDate>
       <guid isPermaLink="true">https://sspai.com/post/111030</guid>
       <source url="https://sspai.com/post/111030">少数派</source>
+    </item>
+    <item>
+      <title>为什么 Tejal Patwardhan 不再低估模特 - 第 21 集</title>
+      <link>https://www.youtube.com/watch?v=CFqjjKp9Y-Q</link>
+      <description>The old tests are getting too easy. Tejal Patwardhan leads OpenAI’s frontier evals team, which is finding new ways to measure and forecast progress as models become more capable. She and host Andrew Mayne discuss why evals matter for research, how benchmarks can break or get gamed, and what models n</description>
+      <pubDate>Tue, 16 Jun 2026 17:00:02 +0000</pubDate>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=CFqjjKp9Y-Q</guid>
+      <source url="https://www.youtube.com/watch?v=CFqjjKp9Y-Q">OpenAI</source>
     </item>
     <item>
       <title>社区速递 145 | 尝鲜激进傻快新系统、告别「电流麦」与平价人体工学椅</title>
@@ -74,7 +82,7 @@
       <source url="https://36kr.com/p/3853918856696834?f=rss">36Kr</source>
     </item>
     <item>
-      <title>克劳德人工智能知道的比它告诉你的更多</title>
+      <title>他们深入了解了克劳德人工智能的思维。事情变得很奇怪</title>
       <link>https://www.youtube.com/watch?v=l72ufA-4SzE</link>
       <description>❤️ Check out Lambda here and sign up for their GPU Cloud: https://lambda.ai/papers
 
@@ -194,14 +202,6 @@ https://transformer-circuits.pub/2026/nla/index.html
       <pubDate>Tue, 16 Jun 2026 04:52:23 +0000</pubDate>
       <guid isPermaLink="true">https://www.ifanr.com/1669079?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</guid>
       <source url="https://www.ifanr.com/1669079?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=">爱范儿</source>
-    </item>
-    <item>
-      <title>三连发！阿里发布首个具身大模型Qwen-Robot系列</title>
-      <link>https://www.qbitai.com/2026/06/435873.html</link>
-      <description>边走、边看、边思考</description>
-      <pubDate>Tue, 16 Jun 2026 04:39:39 +0000</pubDate>
-      <guid isPermaLink="true">https://www.qbitai.com/2026/06/435873.html</guid>
-      <source url="https://www.qbitai.com/2026/06/435873.html">量子位</source>
     </item>
   </channel>
 </rss>
