@@ -5,7 +5,7 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 17 Jun 2026 18:27:31 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jun 2026 21:15:38 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>氪星晚报｜菜鸟将在荷兰建设欧洲供应链履约中心；有道词典笔获2026 EdTech Breakthrough Award年度K-12教育科技应用大奖；国务院：深入实施“人工智能+”行动，探索人机协同的新型工作形态</title>
@@ -39,6 +39,14 @@
       <pubDate>Wed, 17 Jun 2026 18:02:07 +0800</pubDate>
       <guid isPermaLink="true">https://36kr.com/p/3857051317359622?f=rss</guid>
       <source url="https://36kr.com/p/3857051317359622?f=rss">36Kr</source>
+    </item>
+    <item>
+      <title>无需离开 Codex 即可构建和测试 iOS 应用程序！</title>
+      <link>https://www.youtube.com/shorts/rOLKQJMLBHI</link>
+      <description>The Build iOS Apps plugin lets Codex view and test your iOS app in the in-app browser, open SwiftUI previews, and hot reload edits without leaving Codex.</description>
+      <pubDate>Wed, 17 Jun 2026 18:01:46 +0000</pubDate>
+      <guid isPermaLink="true">https://www.youtube.com/shorts/rOLKQJMLBHI</guid>
+      <source url="https://www.youtube.com/shorts/rOLKQJMLBHI">OpenAI</source>
     </item>
     <item>
       <title>浙大系创业者冲港股IPO，仙工智能招股书五大看点</title>
@@ -198,24 +206,6 @@
       <pubDate>Wed, 17 Jun 2026 09:00:00 +0800</pubDate>
       <guid isPermaLink="true">https://36kr.com/p/3826129009234824?f=rss</guid>
       <source url="https://36kr.com/p/3826129009234824?f=rss">36Kr</source>
-    </item>
-    <item>
-      <title>8点1氪丨连涨3天，SpaceX超越亚马逊跻身全球前五；支付宝启动史上最大改版；微信支付“AI专属卡”最快本周内上线</title>
-      <link>https://36kr.com/p/3856525981275138?f=rss</link>
-      <description>今日热点导览
-  
-   山姆中国变更董事长
-   海康威视7月1日上调硬盘价
-   5月份全球纯电和插电式混动汽车销量连续三个月增长
-   美国零售经纪商处的SpaceX投资者每人至少分得一股IPO股票
-   传苹果首款折叠屏将延期发布，产业链人士：假的
-  
-  TOP 3 大新闻
-  连涨3天，SpaceX超越亚马逊跻身全球前五
-  6月16日，SpaceX开盘迅速拉升，涨幅一度扩大至17%，市值一度超越微软，盘中总市值触及2.94万亿美元，跃居世界第四大市值公司，而第三名的苹果市值为4.37万亿美元。截至收盘，SpaceX股价收涨4.8%，市值达到2.65万亿美元，较亚马逊高出约80亿</description>
-      <pubDate>Wed, 17 Jun 2026 08:22:06 +0800</pubDate>
-      <guid isPermaLink="true">https://36kr.com/p/3856525981275138?f=rss</guid>
-      <source url="https://36kr.com/p/3856525981275138?f=rss">36Kr</source>
     </item>
   </channel>
 </rss>
