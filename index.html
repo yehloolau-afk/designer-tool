@@ -443,9 +443,7 @@ function getCfg() {
 function getImgUrl() {
   const custom = LS.get('wht_img_proxy');
   if (custom) return custom.replace(/\/$/, '');
-  if (IS_LOCAL) return 'http://localhost:8766/images/generations';
-  // Try direct API call — works if Volcengine supports CORS; falls back to proxy otherwise
-  return 'https://ark.cn-beijing.volces.com/api/v3/images/generations';
+  return IS_LOCAL ? 'http://localhost:8766/images/generations' : `${PROXY_BASE}/.netlify/functions/volc-img`;
 }
 
 function updateStatusDot() {
