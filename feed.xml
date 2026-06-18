@@ -5,7 +5,7 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 18 Jun 2026 16:43:27 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 18 Jun 2026 19:36:36 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>科氪 | 两轮电动车没有天花板，爱玛黑翼要用AI与硬核科技赢得年轻男性的心</title>
@@ -51,6 +51,30 @@
       <pubDate>Thu, 18 Jun 2026 20:20:28 +0800</pubDate>
       <guid isPermaLink="true">https://36kr.com/p/3858329994875908?f=rss</guid>
       <source url="https://36kr.com/p/3858329994875908?f=rss">36Kr</source>
+    </item>
+    <item>
+      <title>提高 ChatGPT 中的健康智能</title>
+      <link>https://www.youtube.com/watch?v=UxY8zJKRrHU</link>
+      <description>Health is one of the most meaningful ways people use ChatGPT. 
+
+Every week, more than 230 million people turn to ChatGPT for help with health and wellness questions: making sense of health information, understanding lab results, preparing for appointments, navigating insurance, building healthier ha</description>
+      <pubDate>Thu, 18 Jun 2026 19:10:18 +0000</pubDate>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=UxY8zJKRrHU</guid>
+      <source url="https://www.youtube.com/watch?v=UxY8zJKRrHU">OpenAI</source>
+    </item>
+    <item>
+      <title>在 Codex 中录制和重放</title>
+      <link>https://www.youtube.com/watch?v=ZK3JhU73W18</link>
+      <description>Show Codex a workflow once. Reuse it as a skill.
+
+Record &amp; Replay lets you show Codex a recurring task, like filing an expense report or submitting a time-off request.
+
+Codex turns that demo into an inspectable, editable skill. 
+
+You control when recording starts and stops.</description>
+      <pubDate>Thu, 18 Jun 2026 18:57:34 +0000</pubDate>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=ZK3JhU73W18</guid>
+      <source url="https://www.youtube.com/watch?v=ZK3JhU73W18">OpenAI</source>
     </item>
     <item>
       <title>新玩意 244｜少数派的编辑们最近买了啥？</title>
@@ -182,28 +206,6 @@
       <pubDate>Thu, 18 Jun 2026 09:12:09 +0000</pubDate>
       <guid isPermaLink="true">https://www.qbitai.com/2026/06/436518.html</guid>
       <source url="https://www.qbitai.com/2026/06/436518.html">量子位</source>
-    </item>
-    <item>
-      <title>36氪「2026最具价值成长企业100」正式发布</title>
-      <link>https://36kr.com/p/3857980507919622?f=rss</link>
-      <description>&amp;nbsp;
-  &amp;nbsp;
-  时代从不被旁观者定义，它只发生在那些正在成长的人身上。
-  今天，当人们讨论华为、字节跳动、大疆、Tesla或OpenAI时，很容易忽略这样一个事实：在成为行业领导者之前，它们都曾是一家成长中的创业公司。
-  在初期，没有天然的市场地位，没有成熟的商业体系，也未必被所有人看好。但通过持续的技术突破和产品迭代，它们一步步从“挑战者”变成了“定义者”。
-  商业史本质上是一部成长史。那些最终改变产业格局的公司，往往不是起点最高的公司，而是在漫长竞争中不断积累技术、组织和市场能力的公司。
-  当前，新一轮的技术浪潮正催生更多新赛道与新格局。基于此，今年4月，36氪</description>
-      <pubDate>Thu, 18 Jun 2026 09:09:18 +0800</pubDate>
-      <guid isPermaLink="true">https://36kr.com/p/3857980507919622?f=rss</guid>
-      <source url="https://36kr.com/p/3857980507919622?f=rss">36Kr</source>
-    </item>
-    <item>
-      <title>18年前不让你苦修PS的美图，这次不让你苦修AI了</title>
-      <link>https://www.qbitai.com/2026/06/436517.html</link>
-      <description>用八款产品，讲一个变化</description>
-      <pubDate>Thu, 18 Jun 2026 09:07:51 +0000</pubDate>
-      <guid isPermaLink="true">https://www.qbitai.com/2026/06/436517.html</guid>
-      <source url="https://www.qbitai.com/2026/06/436517.html">量子位</source>
     </item>
   </channel>
 </rss>
