@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Project — Yehloo</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0a;--bg2:#111;--bg3:#1a1a1a;--bg4:#222;
+  --bd:rgba(255,255,255,.08);--bd2:rgba(255,255,255,.14);
+  --t1:#f0f0f0;--t2:#999;--t3:#666;
+  --acc:#007AFF;--acc2:#0a84ff;
+  --r:14px;
+}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);padding:0 24px;height:52px;display:flex;align-items:center;gap:12px}
+.nav-back{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--t2);text-decoration:none;transition:color .15s}
+.nav-back:hover{color:var(--t1)}
+.nav-back svg{width:16px;height:16px;opacity:.6}
+.nav-title{font-size:14px;font-weight:600;color:var(--t2);margin-left:auto;margin-right:auto}
+
+/* HERO */
+.hero{padding:72px 24px 56px;max-width:720px;margin:0 auto;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);background:rgba(0,122,255,.1);border:1px solid rgba(0,122,255,.2);border-radius:20px;padding:4px 12px;margin-bottom:20px}
+.hero-badge.live{color:#34C759;background:rgba(52,199,89,.1);border-color:rgba(52,199,89,.2)}
+.hero-badge.wip{color:#FF9500;background:rgba(255,149,0,.1);border-color:rgba(255,149,0,.2)}
+.hero-emoji{font-size:48px;margin-bottom:16px;display:block}
+.hero-title{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:12px}
+.hero-sub{font-size:16px;color:var(--t2);line-height:1.6;max-width:500px;margin:0 auto 32px}
+.hero-cta{display:inline-flex;align-items:center;gap:8px;background:var(--acc);color:#fff;font-size:15px;font-weight:600;padding:12px 28px;border-radius:50px;text-decoration:none;transition:opacity .15s}
+.hero-cta:hover{opacity:.85}
+.hero-cta.disabled{background:var(--bg3);color:var(--t3);cursor:default;pointer-events:none}
+
+/* FEATURES */
+.section{max-width:720px;margin:0 auto;padding:0 24px 64px}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:24px}
+.features{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.feat{background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r);padding:20px}
+.feat-icon{font-size:22px;margin-bottom:10px}
+.feat-name{font-size:14px;font-weight:600;color:var(--t1);margin-bottom:4px}
+.feat-desc{font-size:13px;color:var(--t2);line-height:1.5}
+
+/* DIVIDER */
+.divider{max-width:720px;margin:0 auto 48px;padding:0 24px}
+.divider hr{border:none;border-top:1px solid var(--bd)}
+
+/* RATING */
+.rating-wrap{max-width:720px;margin:0 auto;padding:0 24px 80px}
+.rating-box{background:var(--bg2);border:1px solid var(--bd);border-radius:20px;padding:36px 32px}
+.rating-title{font-size:20px;font-weight:700;margin-bottom:6px}
+.rating-sub{font-size:14px;color:var(--t2);margin-bottom:28px}
+.stars{display:flex;gap:8px;margin-bottom:24px}
+.stars input{display:none}
+.stars label{font-size:32px;cursor:pointer;filter:grayscale(1) opacity(.3);transition:filter .15s, transform .15s}
+.stars label:hover,.stars label:hover ~ label{filter:none;opacity:1}
+.stars input:checked ~ label{filter:grayscale(1) opacity(.3)}
+.stars input:checked + label,.stars:has(input:checked) label:hover{filter:none}
+
+/* Star rating — right-to-left trick */
+.stars{flex-direction:row-reverse;justify-content:flex-start}
+.stars label:hover,.stars label:hover ~ label,.stars input:checked ~ label{filter:none;opacity:1}
+.stars input:checked ~ label{filter:grayscale(1) opacity(.3)}
+.stars:has(:nth-child(2):checked) label:nth-child(n+2),
+.stars:has(:nth-child(4):checked) label:nth-child(n+4),
+.stars:has(:nth-child(6):checked) label:nth-child(n+6),
+.stars:has(:nth-child(8):checked) label:nth-child(n+8),
+.stars:has(:nth-child(10):checked) label:nth-child(n+10){filter:grayscale(1) opacity(.3)}
+
+.comment{width:100%;background:var(--bg3);border:1px solid var(--bd2);border-radius:10px;padding:12px 14px;font-size:14px;color:var(--t1);font-family:inherit;resize:vertical;min-height:90px;margin-bottom:20px;outline:none;transition:border-color .15s}
+.comment:focus{border-color:var(--acc)}
+.comment::placeholder{color:var(--t3)}
+.submit-btn{background:var(--acc);color:#fff;font-size:15px;font-weight:600;padding:12px 32px;border:none;border-radius:50px;cursor:pointer;font-family:inherit;transition:opacity .15s}
+.submit-btn:hover{opacity:.85}
+.success-msg{display:none;text-align:center;padding:24px;color:#34C759;font-weight:600;font-size:15px}
+.success-msg.show{display:block}
+
+/* FOOTER */
+footer{text-align:center;padding:32px 24px;color:var(--t3);font-size:13px;border-top:1px solid var(--bd)}
+footer a{color:var(--t2);text-decoration:none}
+footer a:hover{color:var(--t1)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-back" href="https://github.com/yehloolau-afk">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 12L6 8l4-4"/></svg>
+    yehloolau-afk
+  </a>
+  <span class="nav-title" id="nav-title"></span>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge" id="hero-badge"></div>
+  <span class="hero-emoji" id="hero-emoji"></span>
+  <h1 class="hero-title" id="hero-title"></h1>
+  <p class="hero-sub" id="hero-sub"></p>
+  <a class="hero-cta" id="hero-cta" href="#" target="_blank">Open project →</a>
+</div>
+
+<div class="section">
+  <div class="section-label">What it does</div>
+  <div class="features" id="features"></div>
+</div>
+
+<div class="divider"><hr></div>
+
+<div class="rating-wrap">
+  <div class="rating-box">
+    <div class="rating-title">Rate this project</div>
+    <div class="rating-sub">How useful is this to you? Takes 10 seconds.</div>
+    <form id="rating-form" netlify name="project-rating" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="project-rating"/>
+      <input type="hidden" name="project" id="form-project"/>
+      <div class="stars">
+        <input type="radio" name="rating" id="s5" value="5"/><label for="s5" title="5">⭐</label>
+        <input type="radio" name="rating" id="s4" value="4"/><label for="s4" title="4">⭐</label>
+        <input type="radio" name="rating" id="s3" value="3"/><label for="s3" title="3">⭐</label>
+        <input type="radio" name="rating" id="s2" value="2"/><label for="s2" title="2">⭐</label>
+        <input type="radio" name="rating" id="s1" value="1"/><label for="s1" title="1">⭐</label>
+      </div>
+      <textarea class="comment" name="comment" placeholder="What do you think? Any suggestions? (optional)"></textarea>
+      <button class="submit-btn" type="submit">Send rating</button>
+    </form>
+    <div class="success-msg" id="success-msg">Thanks for your feedback! 🙌</div>
+  </div>
+</div>
+
+<footer>
+  Built by <a href="https://github.com/yehloolau-afk">@yehloolau-afk</a> · No framework, no backend, just HTML.
+</footer>
+
+<script>
+const PROJECTS = {
+  'ai-station': {
+    emoji: '🗞️',
+    title: 'AI News Station',
+    status: 'live',
+    statusLabel: 'Live',
+    sub: '7-channel AI news aggregator for design teams. Pulls from 20+ Chinese and English sources, auto-translates, updates hourly.',
+    url: 'https://7-ai-station.netlify.app/',
+    features: [
+      { icon: '📡', name: '20+ Sources', desc: 'Quantum Bit, ifanr, Geek Park, The Verge, TechCrunch, OpenAI, Anthropic and more.' },
+      { icon: '🔄', name: 'Hourly updates', desc: 'GitHub Actions fetches and processes new articles every hour automatically.' },
+      { icon: '🌐', name: '7 Channels', desc: 'Featured · All · Official · Launches · Design · Video · Daily digest.' },
+      { icon: '🤖', name: 'Auto-translate', desc: 'Chinese and English sources unified in one feed with AI translation.' },
+    ]
+  },
+  'designer-hub': {
+    emoji: '📚',
+    title: 'College of Design',
+    status: 'wip',
+    statusLabel: 'Coming Soon',
+    sub: 'A knowledge platform for designers. Three tracks: UX Design / AIGC / Design Growth. Single HTML file, no backend.',
+    url: null,
+    features: [
+      { icon: '🎓', name: 'Three tracks', desc: 'UX Design fundamentals, AIGC for designers, and Design career growth.' },
+      { icon: '📖', name: 'Curated content', desc: 'Hand-picked resources, tools, and case studies for each learning track.' },
+      { icon: '⚡', name: 'Single file', desc: 'Zero backend, zero dependencies. Open the HTML and start learning.' },
+      { icon: '🏗️', name: 'In progress', desc: 'Core platform is built. Content and polish ongoing.' },
+    ]
+  },
+  'wanhuatong': {
+    emoji: '🎨',
+    title: 'WanHuaTong',
+    status: 'live',
+    statusLabel: 'Live',
+    sub: 'Chinese elementary school text-to-video automation. Lesson text → storyboard → AI image → AI video, end to end.',
+    url: 'https://wanhuatong-a.netlify.app/',
+    features: [
+      { icon: '📝', name: 'Text input', desc: 'Paste any Chinese elementary school lesson text to get started.' },
+      { icon: '🎬', name: 'Auto storyboard', desc: 'Local JS parses the text and generates scene-by-scene visual descriptions.' },
+      { icon: '🖼️', name: 'AI image gen', desc: 'Batch generates illustrations via Seedream 5.0 for each scene.' },
+      { icon: '🎥', name: 'AI video gen', desc: 'Turns each image into a short video clip using Seedance 1.5 Pro.' },
+    ]
+  },
+  'shaonian-hua': {
+    emoji: '🎬',
+    title: 'Shaonian Hua',
+    status: 'wip',
+    statusLabel: 'In Progress',
+    sub: 'Viral children\'s English video planning tool. Pick a format, theme, age range and hook — get a full content plan instantly.',
+    url: null,
+    features: [
+      { icon: '🎯', name: 'Format selector', desc: 'Choose from story / song / roleplay / explainer and more content formats.' },
+      { icon: '🔀', name: 'Idea blender', desc: 'Mix topic + age + hook combinations to find high-potential video angles.' },
+      { icon: '📋', name: 'Content plan', desc: 'AI generates a full script framework, storyboard outline and visual notes.' },
+      { icon: '📚', name: 'Topic library', desc: 'Growing library of proven viral topics for children\'s English content.' },
+    ]
+  },
+  'little-scholar': {
+    emoji: '📖',
+    title: 'Little Scholar',
+    status: 'live',
+    statusLabel: 'Live',
+    sub: 'Science animation for elementary school kids. Makes hard concepts visual and fun through HTML canvas animations.',
+    url: null,
+    features: [
+      { icon: '🔬', name: 'Science topics', desc: 'Covers physics, biology, astronomy and chemistry at elementary level.' },
+      { icon: '🎭', name: 'Animated visuals', desc: 'Each concept is explained through a purpose-built HTML canvas animation.' },
+      { icon: '👦', name: 'Kid-friendly', desc: 'Designed for ages 6–12. Simple language, bright visuals, short runtime.' },
+      { icon: '📁', name: 'Single file', desc: 'Each episode is a standalone HTML file — no app install needed.' },
+    ]
+  }
+};
+
+function init() {
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id') || 'ai-station';
+  const p = PROJECTS[id];
+  if (!p) { document.body.innerHTML = '<p style="padding:40px;color:#999">Project not found.</p>'; return; }
+
+  document.title = p.title + ' — Yehloo';
+  document.getElementById('nav-title').textContent = p.title;
+  document.getElementById('hero-emoji').textContent = p.emoji;
+  document.getElementById('hero-title').textContent = p.title;
+  document.getElementById('hero-sub').textContent = p.sub;
+  document.getElementById('form-project').value = p.title;
+
+  const badge = document.getElementById('hero-badge');
+  badge.textContent = p.statusLabel;
+  badge.className = 'hero-badge ' + p.status;
+
+  const cta = document.getElementById('hero-cta');
+  if (p.url) { cta.href = p.url; }
+  else { cta.className = 'hero-cta disabled'; cta.textContent = 'Not deployed yet'; }
+
+  const feats = document.getElementById('features');
+  feats.innerHTML = p.features.map(f =>
+    `<div class="feat"><div class="feat-icon">${f.icon}</div><div class="feat-name">${f.name}</div><div class="feat-desc">${f.desc}</div></div>`
+  ).join('');
+
+  document.getElementById('rating-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(data).toString() });
+    e.target.style.display = 'none';
+    document.getElementById('success-msg').classList.add('show');
+  });
+}
+
+init();
+</script>
+</body>
+</html>
