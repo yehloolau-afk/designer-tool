@@ -5,8 +5,25 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 19 Jun 2026 07:15:44 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 19 Jun 2026 12:14:27 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>硬氪首发|moody前高管搭档大疆骨干入局陪伴机器人，锦秋领投，融资数千万</title>
+      <link>https://36kr.com/p/3859926114161665?f=rss</link>
+      <description>硬氪获悉，AI-Native科技潮玩品牌ZuzuZoos查无此园（杭州多蓝艾梦智能科技旗下）近日完成数千万元Pre-A轮融资，锦秋领投、上海复容跟投。此次融资将主要AI大模型迭代、硬件产品扩建、IP生态深化、全球市场拓展、核心团队扩容。
+  ZuzuZoos成立于2025年，聚焦“AI陪伴机器人+AI潮玩”。创始人董晓楠是前摩根士丹利投资银行分析师，曾任新消费独角兽企业moody事业部总经理，任职期间拉动GMV从2亿元增长至10亿元。硬件负责人是前大疆清扫机器人机械结构负责人，深耕机器人及智能硬件领域15余年，主导多款机器人研发与落地。IP设计团队来自泡泡玛特、迪士尼等IP大厂，AI团队来自智</description>
+      <pubDate>Fri, 19 Jun 2026 18:01:25 +0800</pubDate>
+      <guid isPermaLink="true">https://36kr.com/p/3859926114161665?f=rss</guid>
+      <source url="https://36kr.com/p/3859926114161665?f=rss">36Kr</source>
+    </item>
+    <item>
+      <title>本周看什么 | 最近值得一看的 8 部作品</title>
+      <link>https://sspai.com/post/111216</link>
+      <description>📅本周新预告《攻壳机动队THEGHOSTINTHESHELL》正式预告6月16日，TV动画《攻壳机动队THEGHOSTINTHESHELL》发布了正式预告，宣布坂本真绫、山路和弘、安元洋贵、中村悠一配 ...查看全文</description>
+      <pubDate>Fri, 19 Jun 2026 17:30:00 +0800</pubDate>
+      <guid isPermaLink="true">https://sspai.com/post/111216</guid>
+      <source url="https://sspai.com/post/111216">少数派</source>
+    </item>
     <item>
       <title>安踏发布“折纸科技”，试图从结构设计寻找跑鞋缓震新方向</title>
       <link>https://36kr.com/p/3859469888508933?f=rss</link>
@@ -17,6 +34,14 @@
       <pubDate>Fri, 19 Jun 2026 10:16:23 +0800</pubDate>
       <guid isPermaLink="true">https://36kr.com/p/3859469888508933?f=rss</guid>
       <source url="https://36kr.com/p/3859469888508933?f=rss">36Kr</source>
+    </item>
+    <item>
+      <title>我把昨晚的梦输入AI，它居然直接把我拉进去玩儿了一把？！</title>
+      <link>https://www.qbitai.com/2026/06/436864.html</link>
+      <description>创作者的终极玩具来了</description>
+      <pubDate>Fri, 19 Jun 2026 08:42:04 +0000</pubDate>
+      <guid isPermaLink="true">https://www.qbitai.com/2026/06/436864.html</guid>
+      <source url="https://www.qbitai.com/2026/06/436864.html">量子位</source>
     </item>
     <item>
       <title>GPT发AI原创新成果了</title>
@@ -160,32 +185,6 @@ Abstract: We study cross-lingual transfer by fine-tuning seven large language mo
       <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
       <guid isPermaLink="true">https://arxiv.org/abs/2606.19346</guid>
       <source url="https://arxiv.org/abs/2606.19346">ArXiv NLP</source>
-    </item>
-    <item>
-      <title>法学硕士如何在硬件设计的 RTL 编码中失败并泛化？</title>
-      <link>https://arxiv.org/abs/2606.19347</link>
-      <description>arXiv:2606.19347v1 Announce Type: new 
-Abstract: Translating sequential programming priors into the parallel temporal logic of hardware design remains a crucial bottleneck for large language models(LLM). To investigate this, we introduce a new error taxonomy grounded in problem solvability, inspired</description>
-      <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19347</guid>
-      <source url="https://arxiv.org/abs/2606.19347">ArXiv NLP</source>
-    </item>
-    <item>
-      <title>DeepSeek-V4：迈向高效的百万代币上下文智能</title>
-      <link>https://arxiv.org/abs/2606.19348</link>
-      <description>arXiv:2606.19348v1 Announce Type: new 
-Abstract: We present a preview version of DeepSeek-V4 series, including two strong Mixture-of-Experts (MoE) language models -- DeepSeek-V4-Pro with 1.6T parameters (49B activated) and DeepSeek-V4-Flash with 284B parameters (13B activated) -- both supporting a c</description>
-      <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19348</guid>
-      <source url="https://arxiv.org/abs/2606.19348">ArXiv NLP</source>
-    </item>
-    <item>
-      <title>科氪 | 两轮电动车没有天花板，爱玛黑翼要用AI与硬核科技赢得年轻男性的心</title>
-      <link>https://36kr.com/p/3858803016881154?f=rss</link>
-      <description>国内两轮电动车市场正悄然迎来一场深层次的“基因突变”。长期以来，大众对两轮电动车的认知被牢牢框定在“代步工具”与“大众精品”的传统叙事里。然而，在四川省体育馆的一场发布会上，爱玛正式发布了旗下专为年轻男性打造的极速运动品类品牌——“爱玛黑翼”（AIMA BLACK WING）。首位中国F1车手周冠宇化身“全速领航员”在线助力，爱玛黑翼S360电竞版、爱玛黑翼S360赛道版以及爱玛黑翼S790赛博版三款硬核新品集结亮相。这场动作透露出的创投信号再明显不过：在女性和基础通勤赛道筑牢绝对壁垒后，传统头部巨头爱玛正以一种颠覆性的姿态，正式向年轻男性性能与运动电摩赛道发起总攻。36氪通过与爱玛科技集团三</description>
-      <pubDate>Thu, 18 Jun 2026 22:57:40 +0800</pubDate>
-      <guid isPermaLink="true">https://36kr.com/p/3858803016881154?f=rss</guid>
-      <source url="https://36kr.com/p/3858803016881154?f=rss">36Kr</source>
     </item>
   </channel>
 </rss>
