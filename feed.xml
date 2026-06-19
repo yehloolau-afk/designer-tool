@@ -5,8 +5,24 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 19 Jun 2026 20:46:03 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 19 Jun 2026 22:11:20 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>使用 ChatGPT 进行计划</title>
+      <link>https://www.youtube.com/watch?v=YPNOjXTDP9c</link>
+      <description></description>
+      <pubDate>Fri, 19 Jun 2026 21:22:26 +0000</pubDate>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=YPNOjXTDP9c</guid>
+      <source url="https://www.youtube.com/watch?v=YPNOjXTDP9c">OpenAI</source>
+    </item>
+    <item>
+      <title>使用 ChatGPT 评分</title>
+      <link>https://www.youtube.com/watch?v=5sDfhQq_g8A</link>
+      <description></description>
+      <pubDate>Fri, 19 Jun 2026 21:20:04 +0000</pubDate>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=5sDfhQq_g8A</guid>
+      <source url="https://www.youtube.com/watch?v=5sDfhQq_g8A">OpenAI</source>
+    </item>
     <item>
       <title>硬氪首发|moody前高管搭档大疆骨干入局陪伴机器人，锦秋领投，融资数千万</title>
       <link>https://36kr.com/p/3859926114161665?f=rss</link>
@@ -173,24 +189,6 @@ Abstract: Diffusion models have become essential for high-fidelity 3D MRI synthe
       <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
       <guid isPermaLink="true">https://arxiv.org/abs/2606.19365</guid>
       <source url="https://arxiv.org/abs/2606.19365">ArXiv ML</source>
-    </item>
-    <item>
-      <title>信息格学习作为概率图模型结构学习</title>
-      <link>https://arxiv.org/abs/2606.19366</link>
-      <description>arXiv:2606.19366v1 Announce Type: new 
-Abstract: Information lattice learning (ILL) learns interpretable rules of a signal by alternately projecting the signal onto a partition lattice that encodes a hierarchy of abstractions and lifting selected rules back to the signal domain. When the signal is a</description>
-      <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19366</guid>
-      <source url="https://arxiv.org/abs/2606.19366">ArXiv ML</source>
-    </item>
-    <item>
-      <title>揭露未言明的事情：通过随机路径聚合可视化隐藏的 LLM 偏差</title>
-      <link>https://arxiv.org/abs/2606.19344</link>
-      <description>arXiv:2606.19344v1 Announce Type: new 
-Abstract: Large Language Models (LLMs) exhibit representational and syntactic biases that are difficult to evaluate due to the stochastic nature of text generation. Standard auditing methods rely on a single output inspection or static automated metrics. These </description>
-      <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19344</guid>
-      <source url="https://arxiv.org/abs/2606.19344">ArXiv NLP</source>
     </item>
   </channel>
 </rss>
