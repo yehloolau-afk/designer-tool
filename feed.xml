@@ -5,7 +5,7 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 19 Jun 2026 12:14:27 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 19 Jun 2026 16:12:23 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>硬氪首发|moody前高管搭档大疆骨干入局陪伴机器人，锦秋领投，融资数千万</title>
@@ -23,6 +23,30 @@
       <pubDate>Fri, 19 Jun 2026 17:30:00 +0800</pubDate>
       <guid isPermaLink="true">https://sspai.com/post/111216</guid>
       <source url="https://sspai.com/post/111216">少数派</source>
+    </item>
+    <item>
+      <title>这是 OpenClaw 的类固醇</title>
+      <link>https://www.youtube.com/watch?v=dUmT0OIGoqE</link>
+      <description>❤️ Check out Weights &amp; Biases and sign up for a free demo here: https://wandb.me/papers
+
+📝 The paper  is available here:
+https://recursivemas.github.io/
+https://github.com/RecursiveMAS/RecursiveMAS
+
+Brain reading video: https://www.youtube.com/watch?v=IUg-t609byg
+
+🙏 We would like to thank our genero</description>
+      <pubDate>Fri, 19 Jun 2026 14:06:00 +0000</pubDate>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=dUmT0OIGoqE</guid>
+      <source url="https://www.youtube.com/watch?v=dUmT0OIGoqE">Two Minute Papers</source>
+    </item>
+    <item>
+      <title>刚刚，Codex 大更新，你在电脑的操作正在成为 AI 经验包</title>
+      <link>https://www.ifanr.com/1669204?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</link>
+      <description>人类操作软件的经验，正在变成 AI 技能#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。</description>
+      <pubDate>Fri, 19 Jun 2026 13:28:07 +0000</pubDate>
+      <guid isPermaLink="true">https://www.ifanr.com/1669204?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</guid>
+      <source url="https://www.ifanr.com/1669204?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=">爱范儿</source>
     </item>
     <item>
       <title>安踏发布“折纸科技”，试图从结构设计寻找跑鞋缓震新方向</title>
@@ -167,24 +191,6 @@ Abstract: Large Language Models (LLMs) exhibit representational and syntactic bi
       <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
       <guid isPermaLink="true">https://arxiv.org/abs/2606.19344</guid>
       <source url="https://arxiv.org/abs/2606.19344">ArXiv NLP</source>
-    </item>
-    <item>
-      <title>用于根据摘要识别 PubMed 中 EQ-5D 研究的大型语言模型集成</title>
-      <link>https://arxiv.org/abs/2606.19345</link>
-      <description>arXiv:2606.19345v1 Announce Type: new 
-Abstract: The rapid increase in scientific publications leads to the fact that manual study screening in systematic literature reviews (SLRs) is increasingly resource consuming, inefficient, and inconsistent. Classifying studies that clearly report health-relat</description>
-      <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19345</guid>
-      <source url="https://arxiv.org/abs/2606.19345">ArXiv NLP</source>
-    </item>
-    <item>
-      <title>将跨语言迁移中的语言相关性与任务对齐分开</title>
-      <link>https://arxiv.org/abs/2606.19346</link>
-      <description>arXiv:2606.19346v1 Announce Type: new 
-Abstract: We study cross-lingual transfer by fine-tuning seven large language models (4B--671B parameters) on Arabic and evaluating zero-shot reading comprehension on Semitic languages and non-Semitic controls. Across dense and Mixture-of-Experts architectures,</description>
-      <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19346</guid>
-      <source url="https://arxiv.org/abs/2606.19346">ArXiv NLP</source>
     </item>
   </channel>
 </rss>
