@@ -5,8 +5,24 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 20 Jun 2026 12:03:18 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jun 2026 14:30:50 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>英伟达开始搞机器人自己研究机器人那套了…</title>
+      <link>https://www.qbitai.com/2026/06/437041.html</link>
+      <description>为了让你烧token，英伟达已经卷到机器人身上了</description>
+      <pubDate>Sat, 20 Jun 2026 12:06:20 +0000</pubDate>
+      <guid isPermaLink="true">https://www.qbitai.com/2026/06/437041.html</guid>
+      <source url="https://www.qbitai.com/2026/06/437041.html">量子位</source>
+    </item>
+    <item>
+      <title>陶哲轩12年前的预言，现在AI帮他兑现了</title>
+      <link>https://www.qbitai.com/2026/06/437023.html</link>
+      <description>全球最聪明的人之一，成了AI最狂热的布道者</description>
+      <pubDate>Sat, 20 Jun 2026 11:56:57 +0000</pubDate>
+      <guid isPermaLink="true">https://www.qbitai.com/2026/06/437023.html</guid>
+      <source url="https://www.qbitai.com/2026/06/437023.html">量子位</source>
+    </item>
     <item>
       <title>撸猫撸出SOTA！3个00后2个月，造出史上最快流式音视频社交模型</title>
       <link>https://www.qbitai.com/2026/06/436996.html</link>
@@ -169,22 +185,6 @@ Brain reading video: https://www.youtube.com/watch?v=IUg-t609byg
       <pubDate>Fri, 19 Jun 2026 08:42:04 +0000</pubDate>
       <guid isPermaLink="true">https://www.qbitai.com/2026/06/436864.html</guid>
       <source url="https://www.qbitai.com/2026/06/436864.html">量子位</source>
-    </item>
-    <item>
-      <title>GPT发AI原创新成果了</title>
-      <link>https://www.qbitai.com/2026/06/436842.html</link>
-      <description>AI实现药物全自动研发，还远吗？</description>
-      <pubDate>Fri, 19 Jun 2026 03:34:23 +0000</pubDate>
-      <guid isPermaLink="true">https://www.qbitai.com/2026/06/436842.html</guid>
-      <source url="https://www.qbitai.com/2026/06/436842.html">量子位</source>
-    </item>
-    <item>
-      <title>全球首个人形机器人通用小脑来了！全球最大规模2万小时人类动作数据，实现零样本泛化</title>
-      <link>https://www.qbitai.com/2026/06/436813.html</link>
-      <description>人形机器人正式迈入“GPT时代”</description>
-      <pubDate>Fri, 19 Jun 2026 03:28:37 +0000</pubDate>
-      <guid isPermaLink="true">https://www.qbitai.com/2026/06/436813.html</guid>
-      <source url="https://www.qbitai.com/2026/06/436813.html">量子位</source>
     </item>
   </channel>
 </rss>
