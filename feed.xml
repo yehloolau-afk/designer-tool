@@ -5,8 +5,18 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 19 Jun 2026 22:11:20 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jun 2026 00:17:26 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Codex 为 NTT 数据解锁了什么</title>
+      <link>https://www.youtube.com/watch?v=0JIbgZ544wU</link>
+      <description>After introducing Codex, it grew to more than 10,000 active users and became one of the largest internal community in just a few months."
+
+We chatted with Hiroaki Sato, Head of the AI CoE at NTT DATA who gave us insight into all of the new ways his technical and non-tech teams are leveraging Codex. </description>
+      <pubDate>Fri, 19 Jun 2026 22:57:58 +0000</pubDate>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=0JIbgZ544wU</guid>
+      <source url="https://www.youtube.com/watch?v=0JIbgZ544wU">OpenAI</source>
+    </item>
     <item>
       <title>使用 ChatGPT 进行计划</title>
       <link>https://www.youtube.com/watch?v=YPNOjXTDP9c</link>
@@ -180,15 +190,6 @@ Abstract: The prefill stage of Large Language Model (LLM) inference is a growing
       <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
       <guid isPermaLink="true">https://arxiv.org/abs/2606.19364</guid>
       <source url="https://arxiv.org/abs/2606.19364">ArXiv ML</source>
-    </item>
-    <item>
-      <title>跨 GPU 架构的 3D 生成扩散模型的性能分析和优化</title>
-      <link>https://arxiv.org/abs/2606.19365</link>
-      <description>arXiv:2606.19365v1 Announce Type: new 
-Abstract: Diffusion models have become essential for high-fidelity 3D MRI synthesis, yet their deployment remains constrained by substantial GPU resource demands arising from hundreds of U-Net evaluations per sample and a highly heterogeneous kernel behavior. T</description>
-      <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19365</guid>
-      <source url="https://arxiv.org/abs/2606.19365">ArXiv ML</source>
     </item>
   </channel>
 </rss>
