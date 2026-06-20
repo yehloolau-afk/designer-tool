@@ -5,8 +5,53 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 20 Jun 2026 00:17:26 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jun 2026 05:22:27 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>代理人工智能系统运行时治理的道义策略</title>
+      <link>https://arxiv.org/abs/2606.19464</link>
+      <description>arXiv:2606.19464v1 Announce Type: new 
+Abstract: Autonomous agentic AI systems driven by Large Language Models (LLMs) introduce a new class of security, privacy, and compliance challenges: an agent that can invoke tools, manipulate data, install software, and coordinate with peer agents across organ</description>
+      <pubDate>Sat, 20 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.19464</guid>
+      <source url="https://arxiv.org/abs/2606.19464">ArXiv AI</source>
+    </item>
+    <item>
+      <title>衡量主题覆盖范围、能力和认知深度的课程一致性：应用于 CS2013 和 CS2023 的纵向框架</title>
+      <link>https://arxiv.org/abs/2606.19469</link>
+      <description>arXiv:2606.19469v1 Announce Type: new 
+Abstract: Undergraduate computer science is governed by international curricular guidelines revised about once a decade, yet programs lack a reliable, reproducible way to measure how completely they cover the current guidelines and how that coverage shifts when</description>
+      <pubDate>Sat, 20 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.19469</guid>
+      <source url="https://arxiv.org/abs/2606.19469">ArXiv AI</source>
+    </item>
+    <item>
+      <title>扩散语言模型：实验分析</title>
+      <link>https://arxiv.org/abs/2606.19475</link>
+      <description>arXiv:2606.19475v1 Announce Type: new 
+Abstract: Large Language Models (LLMs) have revolutionized language modeling through autoregressive generation, enabling strong performance across a wide range of tasks. Recently, Diffusion Language Models (DLMs) have emerged as an alternative paradigm that gen</description>
+      <pubDate>Sat, 20 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.19475</guid>
+      <source url="https://arxiv.org/abs/2606.19475">ArXiv AI</source>
+    </item>
+    <item>
+      <title>多代理法学硕士审议中的隐藏锚点</title>
+      <link>https://arxiv.org/abs/2606.19494</link>
+      <description>arXiv:2606.19494v1 Announce Type: new 
+Abstract: Multi-agent LLM deliberation, where agents exchange and revise answers over several rounds, is increasingly used to improve reasoning and accuracy, yet how and why it works is rarely modelled. Such deliberation mirrors how humans reach decisions. As s</description>
+      <pubDate>Sat, 20 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.19494</guid>
+      <source url="https://arxiv.org/abs/2606.19494">ArXiv AI</source>
+    </item>
+    <item>
+      <title>DeXposure-Claw：一款 DeFi 风险监管代理系统</title>
+      <link>https://arxiv.org/abs/2606.19501</link>
+      <description>arXiv:2606.19501v1 Announce Type: new 
+Abstract: Decentralized finance exposes supervisors to fast-moving, networked credit risks. General-purpose LLM agents fit this setting poorly: they over-read weak evidence and recommend high-stakes interventions, while existing evaluations offer no regulator-a</description>
+      <pubDate>Sat, 20 Jun 2026 00:00:00 -0400</pubDate>
+      <guid isPermaLink="true">https://arxiv.org/abs/2606.19501</guid>
+      <source url="https://arxiv.org/abs/2606.19501">ArXiv AI</source>
+    </item>
     <item>
       <title>Codex 为 NTT 数据解锁了什么</title>
       <link>https://www.youtube.com/watch?v=0JIbgZ544wU</link>
@@ -120,76 +165,36 @@ Brain reading video: https://www.youtube.com/watch?v=IUg-t609byg
       <source url="https://www.ifanr.com/1669442?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=">爱范儿</source>
     </item>
     <item>
-      <title>代理人工智能系统运行时治理的道义策略</title>
-      <link>https://arxiv.org/abs/2606.19464</link>
-      <description>arXiv:2606.19464v1 Announce Type: new 
-Abstract: Autonomous agentic AI systems driven by Large Language Models (LLMs) introduce a new class of security, privacy, and compliance challenges: an agent that can invoke tools, manipulate data, install software, and coordinate with peer agents across organ</description>
-      <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19464</guid>
-      <source url="https://arxiv.org/abs/2606.19464">ArXiv AI</source>
+      <title>科氪 | 两轮电动车没有天花板，爱玛黑翼要用AI与硬核科技赢得年轻男性的心</title>
+      <link>https://36kr.com/p/3858803016881154?f=rss</link>
+      <description>国内两轮电动车市场正悄然迎来一场深层次的“基因突变”。长期以来，大众对两轮电动车的认知被牢牢框定在“代步工具”与“大众精品”的传统叙事里。然而，在四川省体育馆的一场发布会上，爱玛正式发布了旗下专为年轻男性打造的极速运动品类品牌——“爱玛黑翼”（AIMA BLACK WING）。首位中国F1车手周冠宇化身“全速领航员”在线助力，爱玛黑翼S360电竞版、爱玛黑翼S360赛道版以及爱玛黑翼S790赛博版三款硬核新品集结亮相。这场动作透露出的创投信号再明显不过：在女性和基础通勤赛道筑牢绝对壁垒后，传统头部巨头爱玛正以一种颠覆性的姿态，正式向年轻男性性能与运动电摩赛道发起总攻。36氪通过与爱玛科技集团三</description>
+      <pubDate>Thu, 18 Jun 2026 22:57:40 +0800</pubDate>
+      <guid isPermaLink="true">https://36kr.com/p/3858803016881154?f=rss</guid>
+      <source url="https://36kr.com/p/3858803016881154?f=rss">36Kr</source>
     </item>
     <item>
-      <title>衡量主题覆盖范围、能力和认知深度的课程一致性：应用于 CS2013 和 CS2023 的纵向框架</title>
-      <link>https://arxiv.org/abs/2606.19469</link>
-      <description>arXiv:2606.19469v1 Announce Type: new 
-Abstract: Undergraduate computer science is governed by international curricular guidelines revised about once a decade, yet programs lack a reliable, reproducible way to measure how completely they cover the current guidelines and how that coverage shifts when</description>
-      <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19469</guid>
-      <source url="https://arxiv.org/abs/2606.19469">ArXiv AI</source>
+      <title>科氪 | 纯粹热爱的城市探索玩家而来 ，爱玛黑翼三大新车集结亮相</title>
+      <link>https://36kr.com/p/3858676671599881?f=rss</link>
+      <description>6月17日，爱玛黑翼品牌战略发布会在四川省体育馆盛大开启。体育馆化身爱玛黑翼玩家街区，潮流青年齐聚现场。爱玛黑翼以“全速热爱”为品牌主张，携爱玛黑翼S360电竞版、爱玛黑翼S360赛道版、爱玛黑翼S790赛博版三款车型重磅亮相，首位中国F1车手周冠宇以爱玛黑翼“全速领航员”身份在线助力品牌发布。爱玛黑翼的登场，标志着爱玛电动车在男性出行科技领域树立起全新坐标，正式构建起“他硬核”增长格局，向“时尚科技年轻品牌”全速进阶。
+  
+  官方图片
+  运动产品线全新品类品牌 爱玛黑翼正式亮相
+  爱玛黑翼是爱玛旗下专为年轻男性打造的极速运动产品线品类品牌，为“纯粹热爱的城市探索玩家”而来，倡导“全速</description>
+      <pubDate>Thu, 18 Jun 2026 20:49:01 +0800</pubDate>
+      <guid isPermaLink="true">https://36kr.com/p/3858676671599881?f=rss</guid>
+      <source url="https://36kr.com/p/3858676671599881?f=rss">36Kr</source>
     </item>
     <item>
-      <title>扩散语言模型：实验分析</title>
-      <link>https://arxiv.org/abs/2606.19475</link>
-      <description>arXiv:2606.19475v1 Announce Type: new 
-Abstract: Large Language Models (LLMs) have revolutionized language modeling through autoregressive generation, enabling strong performance across a wide range of tasks. Recently, Diffusion Language Models (DLMs) have emerged as an alternative paradigm that gen</description>
-      <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19475</guid>
-      <source url="https://arxiv.org/abs/2606.19475">ArXiv AI</source>
-    </item>
-    <item>
-      <title>多代理法学硕士审议中的隐藏锚点</title>
-      <link>https://arxiv.org/abs/2606.19494</link>
-      <description>arXiv:2606.19494v1 Announce Type: new 
-Abstract: Multi-agent LLM deliberation, where agents exchange and revise answers over several rounds, is increasingly used to improve reasoning and accuracy, yet how and why it works is rarely modelled. Such deliberation mirrors how humans reach decisions. As s</description>
-      <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19494</guid>
-      <source url="https://arxiv.org/abs/2606.19494">ArXiv AI</source>
-    </item>
-    <item>
-      <title>DeXposure-Claw：一款 DeFi 风险监管代理系统</title>
-      <link>https://arxiv.org/abs/2606.19501</link>
-      <description>arXiv:2606.19501v1 Announce Type: new 
-Abstract: Decentralized finance exposes supervisors to fast-moving, networked credit risks. General-purpose LLM agents fit this setting poorly: they over-read weak evidence and recommend high-stakes interventions, while existing evaluations offer no regulator-a</description>
-      <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19501</guid>
-      <source url="https://arxiv.org/abs/2606.19501">ArXiv AI</source>
-    </item>
-    <item>
-      <title>计算可识别性</title>
-      <link>https://arxiv.org/abs/2606.19361</link>
-      <description>arXiv:2606.19361v1 Announce Type: new 
-Abstract: Identification conditions describe the computability of a target query or parameter of interest as a function of the type and amount of information available. In causal identification, this information is often expressed in the form of a causal graph,</description>
-      <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19361</guid>
-      <source url="https://arxiv.org/abs/2606.19361">ArXiv ML</source>
-    </item>
-    <item>
-      <title>何时信任，如何提炼：轻量级、稳健的科学时间序列预测的多基础模型指南</title>
-      <link>https://arxiv.org/abs/2606.19363</link>
-      <description>arXiv:2606.19363v1 Announce Type: new 
-Abstract: The deployment of Time-Series Foundation Models (TSFMs) in physical sciences is hindered by a critical trade-off: while these models encode rich, universal temporal dynamics, they suffer from severe distributional misalignment when applied zero-shot t</description>
-      <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19363</guid>
-      <source url="https://arxiv.org/abs/2606.19363">ArXiv ML</source>
-    </item>
-    <item>
-      <title>缩小社会语义差距：云 LLM 推理中基于边缘的提示压缩的 SPSD</title>
-      <link>https://arxiv.org/abs/2606.19364</link>
-      <description>arXiv:2606.19364v1 Announce Type: new 
-Abstract: The prefill stage of Large Language Model (LLM) inference is a growing contributor to cloud-scale energy cost. Many consumer-support and conversational prompts contain social scaffolding: politeness markers, apologetic preamble, repetition, and rappor</description>
-      <pubDate>Fri, 19 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19364</guid>
-      <source url="https://arxiv.org/abs/2606.19364">ArXiv ML</source>
+      <title>氪星晚报｜BilibiliWorld 2026成国内首个海外售票的综合性ACG展会；让AI走进千家万户，17项举措推进“人工智能+消费”发展；快舟十一号遥十三运载火箭发射成功</title>
+      <link>https://36kr.com/p/3858015526704129?f=rss</link>
+      <description>大公司：
+  滴滴自动驾驶参加伦敦MOVE 2026大会
+  6月17至18日，MOVE 2026大会在英国伦敦召开，滴滴自动驾驶在会上分享了来自中国的自动驾驶落地实践。在AI技术方面，滴滴自动驾驶已实现L4级全栈核心技术的自主可控；硬件方面，与广汽埃安联合打造的新一代Robotaxi车型R2已于今年1月交付，正持续在广州和北京等地开展道路测试；在场景应用上，自去年四季度在广州、北京部分示范应用区域开启全天候载客测试以来，滴滴自动驾驶始终保持安全稳定的运行表现。
+  菜鸟：未来4个月将在全球交付4座大型攀爬机器人仓库
+  36氪获悉，6月18日，菜鸟副总裁、物流科技事业部总经理毕江华表示，菜鸟</description>
+      <pubDate>Thu, 18 Jun 2026 20:47:44 +0800</pubDate>
+      <guid isPermaLink="true">https://36kr.com/p/3858015526704129?f=rss</guid>
+      <source url="https://36kr.com/p/3858015526704129?f=rss">36Kr</source>
     </item>
   </channel>
 </rss>
