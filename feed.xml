@@ -5,8 +5,24 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 21 Jun 2026 00:13:29 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 21 Jun 2026 06:11:48 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>AI 工作流实践：100% Vibe Coding 完成 Game Jam 游戏开发</title>
+      <link>https://sspai.com/post/110972</link>
+      <description>Agent 和人一样离不开闭环。查看全文</description>
+      <pubDate>Sun, 21 Jun 2026 10:30:10 +0800</pubDate>
+      <guid isPermaLink="true">https://sspai.com/post/110972</guid>
+      <source url="https://sspai.com/post/110972">少数派</source>
+    </item>
+    <item>
+      <title>2026年，1800个DeepSeek跟我一起守护艾泽拉斯</title>
+      <link>https://www.qbitai.com/2026/06/437141.html</link>
+      <description>一个月只要340块</description>
+      <pubDate>Sun, 21 Jun 2026 04:46:07 +0000</pubDate>
+      <guid isPermaLink="true">https://www.qbitai.com/2026/06/437141.html</guid>
+      <source url="https://www.qbitai.com/2026/06/437141.html">量子位</source>
+    </item>
     <item>
       <title>英伟达开始搞机器人自己研究机器人那套了…</title>
       <link>https://www.qbitai.com/2026/06/437041.html</link>
@@ -54,51 +70,6 @@
       <pubDate>Sat, 20 Jun 2026 05:25:30 +0000</pubDate>
       <guid isPermaLink="true">https://www.ifanr.com/1669460?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</guid>
       <source url="https://www.ifanr.com/1669460?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=">爱范儿</source>
-    </item>
-    <item>
-      <title>代理人工智能系统运行时治理的道义策略</title>
-      <link>https://arxiv.org/abs/2606.19464</link>
-      <description>arXiv:2606.19464v1 Announce Type: new 
-Abstract: Autonomous agentic AI systems driven by Large Language Models (LLMs) introduce a new class of security, privacy, and compliance challenges: an agent that can invoke tools, manipulate data, install software, and coordinate with peer agents across organ</description>
-      <pubDate>Sat, 20 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19464</guid>
-      <source url="https://arxiv.org/abs/2606.19464">ArXiv AI</source>
-    </item>
-    <item>
-      <title>衡量主题覆盖范围、能力和认知深度的课程一致性：应用于 CS2013 和 CS2023 的纵向框架</title>
-      <link>https://arxiv.org/abs/2606.19469</link>
-      <description>arXiv:2606.19469v1 Announce Type: new 
-Abstract: Undergraduate computer science is governed by international curricular guidelines revised about once a decade, yet programs lack a reliable, reproducible way to measure how completely they cover the current guidelines and how that coverage shifts when</description>
-      <pubDate>Sat, 20 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19469</guid>
-      <source url="https://arxiv.org/abs/2606.19469">ArXiv AI</source>
-    </item>
-    <item>
-      <title>扩散语言模型：实验分析</title>
-      <link>https://arxiv.org/abs/2606.19475</link>
-      <description>arXiv:2606.19475v1 Announce Type: new 
-Abstract: Large Language Models (LLMs) have revolutionized language modeling through autoregressive generation, enabling strong performance across a wide range of tasks. Recently, Diffusion Language Models (DLMs) have emerged as an alternative paradigm that gen</description>
-      <pubDate>Sat, 20 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19475</guid>
-      <source url="https://arxiv.org/abs/2606.19475">ArXiv AI</source>
-    </item>
-    <item>
-      <title>多代理法学硕士审议中的隐藏锚点</title>
-      <link>https://arxiv.org/abs/2606.19494</link>
-      <description>arXiv:2606.19494v1 Announce Type: new 
-Abstract: Multi-agent LLM deliberation, where agents exchange and revise answers over several rounds, is increasingly used to improve reasoning and accuracy, yet how and why it works is rarely modelled. Such deliberation mirrors how humans reach decisions. As s</description>
-      <pubDate>Sat, 20 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19494</guid>
-      <source url="https://arxiv.org/abs/2606.19494">ArXiv AI</source>
-    </item>
-    <item>
-      <title>DeXposure-Claw：一款 DeFi 风险监管代理系统</title>
-      <link>https://arxiv.org/abs/2606.19501</link>
-      <description>arXiv:2606.19501v1 Announce Type: new 
-Abstract: Decentralized finance exposes supervisors to fast-moving, networked credit risks. General-purpose LLM agents fit this setting poorly: they over-read weak evidence and recommend high-stakes interventions, while existing evaluations offer no regulator-a</description>
-      <pubDate>Sat, 20 Jun 2026 00:00:00 -0400</pubDate>
-      <guid isPermaLink="true">https://arxiv.org/abs/2606.19501</guid>
-      <source url="https://arxiv.org/abs/2606.19501">ArXiv AI</source>
     </item>
     <item>
       <title>Codex 为 NTT 数据解锁了什么</title>
@@ -185,6 +156,32 @@ Brain reading video: https://www.youtube.com/watch?v=IUg-t609byg
       <pubDate>Fri, 19 Jun 2026 08:42:04 +0000</pubDate>
       <guid isPermaLink="true">https://www.qbitai.com/2026/06/436864.html</guid>
       <source url="https://www.qbitai.com/2026/06/436864.html">量子位</source>
+    </item>
+    <item>
+      <title>GPT发AI原创新成果了</title>
+      <link>https://www.qbitai.com/2026/06/436842.html</link>
+      <description>AI实现药物全自动研发，还远吗？</description>
+      <pubDate>Fri, 19 Jun 2026 03:34:23 +0000</pubDate>
+      <guid isPermaLink="true">https://www.qbitai.com/2026/06/436842.html</guid>
+      <source url="https://www.qbitai.com/2026/06/436842.html">量子位</source>
+    </item>
+    <item>
+      <title>全球首个人形机器人通用小脑来了！全球最大规模2万小时人类动作数据，实现零样本泛化</title>
+      <link>https://www.qbitai.com/2026/06/436813.html</link>
+      <description>人形机器人正式迈入“GPT时代”</description>
+      <pubDate>Fri, 19 Jun 2026 03:28:37 +0000</pubDate>
+      <guid isPermaLink="true">https://www.qbitai.com/2026/06/436813.html</guid>
+      <source url="https://www.qbitai.com/2026/06/436813.html">量子位</source>
+    </item>
+    <item>
+      <title>早报｜追觅组织调整，取消未落地业务/DeepSeek识图模式上线/《GTA6》预购时间官宣</title>
+      <link>https://www.ifanr.com/1669442?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</link>
+      <description>· Counterpoint：第 20 周全球手机销量同比下降 8%，华为逆势增长 23%
+· 曹操出行宣布 RoboX 战略，2030 年部署 10 万辆 Robotaxi
+· ChatGPT 推出定时任务功能#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。</description>
+      <pubDate>Fri, 19 Jun 2026 00:08:37 +0000</pubDate>
+      <guid isPermaLink="true">https://www.ifanr.com/1669442?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</guid>
+      <source url="https://www.ifanr.com/1669442?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=">爱范儿</source>
     </item>
   </channel>
 </rss>
