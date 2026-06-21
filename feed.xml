@@ -5,7 +5,7 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 21 Jun 2026 06:11:48 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 21 Jun 2026 10:39:34 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>AI 工作流实践：100% Vibe Coding 完成 Game Jam 游戏开发</title>
@@ -14,6 +14,14 @@
       <pubDate>Sun, 21 Jun 2026 10:30:10 +0800</pubDate>
       <guid isPermaLink="true">https://sspai.com/post/110972</guid>
       <source url="https://sspai.com/post/110972">少数派</source>
+    </item>
+    <item>
+      <title>具身赛道现状素描：脑子灵，模型好，不是百亿，就是独角</title>
+      <link>https://www.qbitai.com/2026/06/437198.html</link>
+      <description>2026年还没过半，具身智能的融资就快要超过去年全年了，超过一半的钱都流入了机器人的“大脑”。</description>
+      <pubDate>Sun, 21 Jun 2026 09:18:12 +0000</pubDate>
+      <guid isPermaLink="true">https://www.qbitai.com/2026/06/437198.html</guid>
+      <source url="https://www.qbitai.com/2026/06/437198.html">量子位</source>
     </item>
     <item>
       <title>2026年，1800个DeepSeek跟我一起守护艾泽拉斯</title>
@@ -172,16 +180,6 @@ Brain reading video: https://www.youtube.com/watch?v=IUg-t609byg
       <pubDate>Fri, 19 Jun 2026 03:28:37 +0000</pubDate>
       <guid isPermaLink="true">https://www.qbitai.com/2026/06/436813.html</guid>
       <source url="https://www.qbitai.com/2026/06/436813.html">量子位</source>
-    </item>
-    <item>
-      <title>早报｜追觅组织调整，取消未落地业务/DeepSeek识图模式上线/《GTA6》预购时间官宣</title>
-      <link>https://www.ifanr.com/1669442?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</link>
-      <description>· Counterpoint：第 20 周全球手机销量同比下降 8%，华为逆势增长 23%
-· 曹操出行宣布 RoboX 战略，2030 年部署 10 万辆 Robotaxi
-· ChatGPT 推出定时任务功能#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。</description>
-      <pubDate>Fri, 19 Jun 2026 00:08:37 +0000</pubDate>
-      <guid isPermaLink="true">https://www.ifanr.com/1669442?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</guid>
-      <source url="https://www.ifanr.com/1669442?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=">爱范儿</source>
     </item>
   </channel>
 </rss>
