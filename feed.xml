@@ -5,7 +5,7 @@
     <link>https://yehloolau-afk.github.io/designer-tool/ai-station.html</link>
     <description>每 2 小时自动更新的 AI 行业精选资讯</description>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 23 Jun 2026 15:54:16 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 23 Jun 2026 18:04:23 +0000</lastBuildDate>
     <atom:link href="https://yehloolau-afk.github.io/designer-tool/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>圆桌论坛：比共识更早一步 AI 创投的真实棋局 | 2026WAVES</title>
@@ -128,6 +128,14 @@
       <source url="https://36kr.com/p/3865480064504835?f=rss">36Kr</source>
     </item>
     <item>
+      <title>当数百万人工智能体相遇时</title>
+      <link>https://www.youtube.com/watch?v=V04bm-3d6EQ</link>
+      <description>The conversation of the moment is focused on one topic: AI agents. Unlike traditional language models that simply respond to a prompt, autonomous agents can execute multi-step plans and perform complex tasks on your behalf. But what happens when millions of these agents are not just working for us, </description>
+      <pubDate>Tue, 23 Jun 2026 15:48:06 +0000</pubDate>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=V04bm-3d6EQ</guid>
+      <source url="https://www.youtube.com/watch?v=V04bm-3d6EQ">DeepMind</source>
+    </item>
+    <item>
       <title>运行在 macOS 中的「超采样」：HiDPI 与 Mac 显示溯源</title>
       <link>https://sspai.com/post/111261</link>
       <description>2026 年让我们再谈 macOS 的画面缩放机制。查看全文</description>
@@ -215,14 +223,6 @@ In this customer story, Omio shares how it's using ChatGPT, Codex, and the OpenA
       <pubDate>Tue, 23 Jun 2026 09:37:39 +0000</pubDate>
       <guid isPermaLink="true">https://www.ifanr.com/1669249?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</guid>
       <source url="https://www.ifanr.com/1669249?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=">爱范儿</source>
-    </item>
-    <item>
-      <title>刚刚，Seedance 2.5 正式发布，国产视频模型再次捅破天花板</title>
-      <link>https://www.ifanr.com/1669752?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</link>
-      <description>既 SOTA，也划算#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。</description>
-      <pubDate>Tue, 23 Jun 2026 09:36:00 +0000</pubDate>
-      <guid isPermaLink="true">https://www.ifanr.com/1669752?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=</guid>
-      <source url="https://www.ifanr.com/1669752?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=">爱范儿</source>
     </item>
   </channel>
 </rss>
